@@ -31,9 +31,10 @@ router.put('/:id', (req, res, next) => {
   Superpower.update(req.body, {
     where: {
       id: req.params.id
-    }
+    },
+    returning: true
   })
-  .then(superpower => res.json(superpower))
+  .then(superpower => res.status(201).json(superpower[1][0]))
   .catch(next);
 });
 

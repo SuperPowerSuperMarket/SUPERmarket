@@ -1,5 +1,6 @@
 const User = require('./user')
 const Review = require('./review')
+const Superpower = require('./superpowers')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -18,5 +19,6 @@ const Review = require('./review')
 Review.belongsTo({ User: { as: 'author' } })
 
 module.exports = {
-  User
+  User,
+  Superpower
 }
