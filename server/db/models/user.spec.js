@@ -15,8 +15,13 @@ xdescribe('User model', () => {
 
       beforeEach(() => {
         return User.create({
+          firstName: 'Cody',
+          lastName: 'Guy',
           email: 'cody@puppybook.com',
-          password: 'bones'
+          password: 'bones',
+          mailingAddress: '123 Fake St',
+          billingAddress: '123 Fake St',
+          phone: 1234567890
         })
           .then(user => {
             cody = user
