@@ -3,6 +3,7 @@
 const {expect} = require('chai')
 const db = require('../index')
 const Sequelize = require('sequelize')
+const Promise = require('bluebird')
 const User = db.model('user')
 const Review = db.model('review')
 
@@ -16,9 +17,8 @@ describe('Review model', () => {
 
   //make a review instance before each spec
   beforeEach(function(){
-    let review = Review.build({
+    review = Review.build({
         stars: 4,
-        dateCreated: '2018-02-15',
         content: 'Superpowers are the coolest!'
       })
   })
@@ -34,9 +34,8 @@ describe('Review model', () => {
 
       return review.save()
       .then(function (savedReview) {
-        expect(savedReview.stars).to.equal(4);
-        expect(savedReview.dateCreated).to.equal('2018-02-15')
-        expect(savedReview.content).to.equal('Superpowers are the coolest!');
+        expect(savedReview.stars).to.equal(4)
+        expect(savedReview.content).to.equal('Superpowers are the coolest!')
       })
 
     })
@@ -57,30 +56,35 @@ describe('Review model', () => {
 
     it('belongs to a user, who is the review\'s author', function() {
 
-      var newUser = User.create({ name: 'Unsatisfied Customer'});
-      var newReview = Review.create({
-        stars: 1,
-        content: 'I ordered this flying superpower to see the sights of the city. I was very disappointed when I was only able to get five feet off the ground at any given moment. Would not recommend.'
-      })
+      var creatingUser = User.create({
+          firstName: 'Unsatisfied',
+          lastName: 'Customer',
+          email: 'unhappy@sad.com',
+          mailingAddress: '324 Unhappy Lane',
+          billingAddress: '324 Unhappy Lane',
+          phone: 123455683
+      });
 
-      return Promise.all([newUser, newReview])
+      var creatingReview = Review.create({
+        stars: 1
+      });
+
+      return Promise.all([creatingUser, creatingReview])
       .spread(function(createdUser, createdReview) {
-        return createdReview.setAuthor(createdUser);
+        return createdReview.setUser(createdUser);
       })
       .then(function() {
         return Review.findOne({
-          where: { content: 'I ordered the flying superpower but was only ever able to get five feet off the ground at any given moment. Would not recommend.' },
-          include: { model: User, as: 'author' }
+          where: { stars: 1 },
+          include: [{ model: User}]
         });
       })
       .then(function(foundReview){
-        expect(foundReview.author).to.exist; // eslint-disable-line no-unused-expressions
-        expect(foundReview.author.name).to.equal('Unsatisfied Customer');
-      })
+        expect(foundReview.user).to.exist; // eslint-disable-line no-unused-expressions
+        expect(foundReview.user.firstName).to.equal('Unsatisfied');
+      });
 
     })
-
-
   })
 })
 

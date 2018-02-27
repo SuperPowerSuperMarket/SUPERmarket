@@ -16,9 +16,10 @@ const Superpower = require('./superpowers')
  * instead of: const User = require('../db/models/user')
  */
 
-Review.belongsTo({ User: { as: 'author' } })
+Review.belongsTo(User: { as: 'author' })
 
 module.exports = {
   User,
-  Superpower
+  Superpower,
+  Review
 }
