@@ -19,8 +19,8 @@ describe('User model', () => {
           lastName: 'Guy',
           email: 'cody@puppybook.com',
           password: 'bones',
-          mailingAdress: '123 Fake St',
-          billingAdress: '123 Fake St',
+          mailingAddress: '123 Fake St',
+          billingAddress: '123 Fake St',
           phone: 1234567890
         })
           .then(user => {
