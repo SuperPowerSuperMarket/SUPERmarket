@@ -37,4 +37,6 @@ Superpower.findByTag = (tag) => {
   })
 }
 
+module.exports = Superpower
+
 // Superpower.prototype.findSimilar = () => {}
