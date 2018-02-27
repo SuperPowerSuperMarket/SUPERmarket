@@ -3,10 +3,10 @@
 const {expect} = require('chai')
 const db = require('../index')
 const Sequelize = require('sequelize')
-// const User = db.model('user')
-// const Review = db.model('review')
+const User = db.model('user')
+const Review = db.model('review')
 
-xdescribe('Review model', () => {
+describe('Review model', () => {
   let review
 
   //clear the database before making any instances
