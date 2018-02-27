@@ -1,4 +1,5 @@
 const User = require('./user')
+const Review = require('./review')
 const Superpower = require('./superpowers')
 
 /**
@@ -14,7 +15,11 @@ const Superpower = require('./superpowers')
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
+
+Review.belongsTo(User)
+
 module.exports = {
   User,
-  Superpower
+  Superpower,
+  Review
 }
