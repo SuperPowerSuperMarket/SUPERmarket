@@ -16,7 +16,13 @@ xdescribe('User routes', () => {
 
     beforeEach(() => {
       return User.create({
-        email: codysEmail
+        firstName: 'Cody',
+        lastName: 'Guy',
+        email: codysEmail,
+        password: 'bones',
+        mailingAddress: '123 Fake St',
+        billingAddress: '123 Fake St',
+        phone: 1234567890
       })
     })
 
