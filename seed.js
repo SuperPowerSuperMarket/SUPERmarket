@@ -1,4 +1,4 @@
-const db = require('./server/db/models')
+const db = require('./server/db/db')
 const User = require('./server/db/models/user')
 const Superpower = require('./server/db/models/superpowers')
 const Review = require('./server/db/models/review')
@@ -46,22 +46,30 @@ const users = [{
   firstName: 'Sarah',
   lastName: 'Laine',
   email: 'sarah@gmail.com',
-  imageUrl: ''
+  mailingAddress: '123 Hello Lane',
+  billingAddress: '123 Hello Lane',
+  phone: 1234445555
 }, {
   firstName: 'Connor',
   lastName: 'Kirkwood',
   email: 'connor@gmail.com',
-  imageUrl: ''
+  mailingAddress: '123 Fullstack Ave',
+  billingAddress: '123 Fullstack Ave',
+  phone: 1234442233
 }, {
   firstName: 'Sunny',
   lastName: 'Kim',
   email: 'sunny@gmail.com',
-  imageUrl: ''
+  mailingAddress: '5 Hanover Court',
+  billingAddress: '5 Hanover Court',
+  phone: 1239586934
 }, {
   firstName: 'Luis',
   lastName: 'Rincon',
   email: 'luis@gmail.com',
-  imageUrl: ''
+  mailingAddress: '44 Review Drive',
+  billingAddress: '44 Review Drive',
+  phone: 1239907788
 }]
 
 
