@@ -19,7 +19,7 @@ router.post('/', (req, res, next) => {
   Superpower.findById(req.body.superpowerId)
     .then((power) => {
       superpower = power;
-      return Order.create()
+      return Order.create(req.body)
     })
     .then(order => {
       order.addSuperpower(superpower, { through: {quantity: req.body.quantity }})

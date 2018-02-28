@@ -3,6 +3,10 @@ const db = require('../db');
 const OrderQuantity = require('./order-quantity')
 
 const Order = db.define('order', {
+  status: {
+    type: Sequelize.STRING,
+    defaultValue: 'active'
+  },
   orderedOn: {
     type: Sequelize.DATE,
   },
