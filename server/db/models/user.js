@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Order = require('./order')
 
 const User = db.define('user', {
   firstName: {
@@ -57,6 +58,16 @@ const User = db.define('user', {
 
 module.exports = User
 
+/*Lifecycle Method*/
+
+User.beforeDestroy((userInstance) => {
+  return Order.destroy({
+    where: {
+      userId: userInstance.id
+    }
+  })
+})
+
 /**
  * instanceMethods
  */
@@ -91,3 +102,5 @@ const setSaltAndPassword = user => {
 
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
+
+
