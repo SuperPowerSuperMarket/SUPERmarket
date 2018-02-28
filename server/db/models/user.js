@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
-const Order = require('./order')
+// const Order = require('./order')
 
 const User = db.define('user', {
   firstName: {
@@ -60,13 +60,13 @@ module.exports = User
 
 /*Lifecycle Method*/
 
-User.beforeDestroy((userInstance) => {
-  return Order.destroy({
-    where: {
-      userId: userInstance.id
-    }
-  })
-})
+// User.beforeDestroy((userInstance) => {
+//   return Order.destroy({
+//     where: {
+//       userId: userInstance.id
+//     }
+//   })
+// })
 
 /**
  * instanceMethods
