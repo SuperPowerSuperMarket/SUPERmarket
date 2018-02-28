@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import { Card, Image } from 'semantic-ui-react'
+import { Grid, Card, Image } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 const mapStateToProps = (state) => {
@@ -11,27 +11,40 @@ const mapStateToProps = (state) => {
 }
 
 const AllSuperpowers = (props) => {
+//   return (
+//     <div>
+//   {props.superpowers.superpowers.map((superpower) => {
+//     return (
+//       <Card key={superpower.id}>
+//         <Image src={superpower.imageUrl} />
+//         <Card.Content>
+//           <Card.Header>
+//             {superpower.name}
+//           </Card.Header>
+//           <Card.Meta>
+//             {/* {superpower.price} */}
+//           </Card.Meta>
+//           <Card.Description>
+//             {superpower.description}
+//           </Card.Description>
+//         </Card.Content>
+//       </Card>
+//     )}
+//   )}
+//   </div>
+// )}
   return (
-    <div>
+  <Grid columns={3} divided>
   {props.superpowers.superpowers.map((superpower) => {
     return (
-      <Card key={superpower.id}>
+      <Grid.Column key={superpower.id}>
         <Image src={superpower.imageUrl} />
-        <Card.Content>
-          <Card.Header>
-            {superpower.name}
-          </Card.Header>
-          <Card.Meta>
-            {superpower.price}
-          </Card.Meta>
-          <Card.Description>
-            {superpower.description}
-          </Card.Description>
-        </Card.Content>
-      </Card>
+        <h2>{superpower.name}</h2>
+        <h2>{superpower.description}</h2>
+      </Grid.Column>
     )}
   )}
-  </div>
+  </Grid>
 )}
 
 const AllSuperpowersContainer = withRouter(connect(mapStateToProps)(AllSuperpowers))
