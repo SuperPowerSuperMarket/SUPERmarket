@@ -5,32 +5,8 @@ import { withRouter, NavLink } from 'react-router-dom'
 
 const AllSuperpowers = (props) => {
   return (
-<<<<<<< HEAD
-=======
-//     <div>
-//   {props.superpowers.superpowers.map((superpower) => {
-//     return (
-//       <Card key={superpower.id}>
-//         <Image src={superpower.imageUrl} />
-//         <Card.Content>
-//           <Card.Header>
-//             {superpower.name}
-//           </Card.Header>
-//           <Card.Meta>
-//             {/* {superpower.price} */}
-//           </Card.Meta>
-//           <Card.Description>
-//             {superpower.description}
-//           </Card.Description>
-//         </Card.Content>
-//       </Card>
-//     )}
-//   )}
-//   </div>
-// )}
->>>>>>> master
   <Grid columns={3} divided>
-  {props.superpowers.superpowers.map((superpower) => {
+  {props.superpowers.map((superpower) => {
     return (
       <Grid.Column key={superpower.id}>
       <NavLink to={`/single-superpower/${superpower.id}`}>
