@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import { Grid, Image } from 'semantic-ui-react'
-import { withRouter } from 'react-router-dom'
+import { Grid, Card, Image } from 'semantic-ui-react'
+import { withRouter, NavLink } from 'react-router-dom'
 
 const mapStateToProps = (state) => {
   return {
@@ -37,10 +37,12 @@ const AllSuperpowers = (props) => {
   {props.superpowers.superpowers.map((superpower) => {
     return (
       <Grid.Column key={superpower.id}>
-        <Image src={superpower.imageUrl} />
-        <h2>{superpower.name}</h2>
-        <h2>{superpower.description}</h2>
-      </Grid.Column>
+      <NavLink to={`/single-superpower/${superpower.id}`}>
+          <Image src={superpower.imageUrl} />
+          <h2>{superpower.name}</h2>
+          <h2>{superpower.description}</h2>
+          </NavLink>
+        </Grid.Column>
     )}
   )}
   </Grid>
