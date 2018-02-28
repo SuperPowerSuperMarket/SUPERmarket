@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import { Grid, Card, Image } from 'semantic-ui-react'
+import { Grid, Image } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 }
 
 const AllSuperpowers = (props) => {
-//   return (
+  return (
 //     <div>
 //   {props.superpowers.superpowers.map((superpower) => {
 //     return (
@@ -33,7 +33,6 @@ const AllSuperpowers = (props) => {
 //   )}
 //   </div>
 // )}
-  return (
   <Grid columns={3} divided>
   {props.superpowers.superpowers.map((superpower) => {
     return (
