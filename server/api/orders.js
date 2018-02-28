@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Order, Superpower } = require('../db/models')
+const { Order, Superpower, OrderQuantity } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -30,8 +30,24 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:id', (req, res, next) => {
-  Order.findById(req.params.id)
-    .then(order => order.update(req.body))
+  let superpower;
+  let order;
+  let items;
+  Promise.all([Superpower.findById(req.body.superpowerId), Order.findById(req.params.id), OrderQuantity.findAll({where: {orderId: req.params.id}})])
+    .then(values => {
+      superpower = values[0];
+      order = values[1];
+      items = values[2];
+    })
+    .then(() => {
+      const found = items.find(item => {
+        return item.superpowerId === superpower.id
+      });
+      return found ?
+        found.update({quantity: req.body.quantity})
+        : order.addSuperpower(superpower, { through: {quantity: req.body.quantity }})
+    })
+    .then(() => order.update(req.body))
     .then(updated => res.json(updated))
     .catch(next);
 });
@@ -41,3 +57,4 @@ router.delete('/:id', (req, res, next) => {
     .then(() => res.status(204).json('order deleted'))
     .catch(next);
 });
+

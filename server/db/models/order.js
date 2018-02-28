@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
+const OrderQuantity = require('./order-quantity')
 
 const Order = db.define('order', {
   orderedOn: {
@@ -13,5 +14,10 @@ const Order = db.define('order', {
   }
 });
 
+Order.beforeDestroy(order => {
+  OrderQuantity.destroy({
+    where: {orderId: order.id}
+  })
+})
 module.exports = Order;
 
