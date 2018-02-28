@@ -7,6 +7,10 @@ const Superpower = db.define('superpower', {
     unique: true,
     allowNull: false
   },
+  price: {
+    type: Sequelize.DECIMAL,
+    allowNull: false
+  },
   // duration: {
   //   type: Sequelize.ARRAY(Sequelize.INTEGER)
   // },
