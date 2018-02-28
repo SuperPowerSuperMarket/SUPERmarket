@@ -34,7 +34,7 @@ const AllSuperpowers = (props) => {
 //   </div>
 // )}
   <Grid columns={3} divided>
-  {props.superpowers.superpowers.map((superpower) => {
+  {props.superpowers.map((superpower) => {
     return (
       <Grid.Column key={superpower.id}>
       <NavLink to={`/single-superpower/${superpower.id}`}>

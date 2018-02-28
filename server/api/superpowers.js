@@ -13,7 +13,7 @@ router.get('/:id', (req, res, next) => {
     // include: [{model: Review}],
     where: {
       id: req.params.id
-    }
+    }, include: {all: true}
   })
   .then(superpower => res.json(superpower))
   .catch(next);

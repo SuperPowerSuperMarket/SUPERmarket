@@ -34,10 +34,10 @@ export const fetchSuperpowers = () =>
 /**
  * REDUCER
  */
-export default function (state = initialState, action) {
+export default function (state = [], action) {
   switch (action.type) {
     case GET_SUPERPOWERS:
-      return Object.assign({}, state, {superpowers: action.superpowers})
+      return action.superpowers
     default:
       return state
   }

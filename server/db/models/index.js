@@ -9,8 +9,15 @@ User.hasMany(Order);
 Order.belongsToMany(Superpower, {through: OrderQuantity })
 Superpower.belongsToMany(Order, {through: OrderQuantity })
 
+// You can also do:
+//
+// Order.hasMany(OrderQuantity)
+// OrderQuantity.belongsTo(Order)
 
 Review.belongsTo(User)
+Review.belongsTo(Superpower)
+Superpower.hasMany(Review)
+
 module.exports = {
   User,
   Superpower,
