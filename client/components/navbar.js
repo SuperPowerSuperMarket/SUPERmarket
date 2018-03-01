@@ -1,32 +1,52 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../store";
+import {
+  Button,
+  Container,
+  Divider,
+  Dropdown,
+  Grid,
+  Header,
+  Image,
+  List,
+  Menu,
+  Segment
+} from "semantic-ui-react";
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-    <h1>SUPER-Market</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
-    </nav>
-    <hr />
+    <Menu fixed="top" inverted>
+      <Container>
+        <Menu.Item as="a" header>
+          SUPERmarket
+        </Menu.Item>
+        <Menu.Item as="a">Home</Menu.Item>
+        {isLoggedIn ? (
+          <Menu.Item as="a" position="right">
+            {/* The navbar will show these links after you log in */}
+            <Link to="/home">Home</Link>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </Menu.Item>
+        ) : (
+          <Menu.Item as="a" position="right">
+            {/* The navbar will show these links before you log in */}
+            <Link to="/login">
+              <Button>Login</Button>
+            </Link>
+            <Link to="/signup">
+              <Button>Sign Up</Button>
+            </Link>
+          </Menu.Item>
+        )}
+      </Container>
+    </Menu>
   </div>
-)
+);
 
 /**
  * CONTAINER
@@ -34,18 +54,18 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id
-  }
-}
+  };
+};
 
 const mapDispatch = dispatch => {
   return {
     handleClick() {
-      dispatch(logout())
+      dispatch(logout());
     }
-  }
-}
+  };
+};
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar);
 
 /**
  * PROP TYPES
@@ -53,4 +73,4 @@ export default connect(mapState, mapDispatch)(Navbar)
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
-}
+};

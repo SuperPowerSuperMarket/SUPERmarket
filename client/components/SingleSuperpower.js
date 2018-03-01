@@ -18,7 +18,7 @@ const SingleSuperpower = (props) => {
                 </Card.Header>
                 <Card.Meta>
                     <span className='date'>
-                        
+
                     </span>
                 </Card.Meta>
                 <Card.Description>
