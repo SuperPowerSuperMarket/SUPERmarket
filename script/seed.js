@@ -46,6 +46,7 @@ const users = [{
   firstName: 'Sarah',
   lastName: 'Laine',
   email: 'sarah@gmail.com',
+  password: '123',
   mailingAddress: '123 Hello Lane',
   billingAddress: '123 Hello Lane',
   phone: 1234445555
@@ -53,6 +54,7 @@ const users = [{
   firstName: 'Connor',
   lastName: 'Kirkwood',
   email: 'connor@gmail.com',
+  password: '123',
   mailingAddress: '123 Fullstack Ave',
   billingAddress: '123 Fullstack Ave',
   phone: 1234442233
@@ -60,6 +62,7 @@ const users = [{
   firstName: 'Sunny',
   lastName: 'Kim',
   email: 'sunny@gmail.com',
+  password: '123',
   mailingAddress: '5 Hanover Court',
   billingAddress: '5 Hanover Court',
   phone: 1239586934
@@ -67,6 +70,7 @@ const users = [{
   firstName: 'Luis',
   lastName: 'Rincon',
   email: 'luis@gmail.com',
+  password: '123',
   mailingAddress: '44 Review Drive',
   billingAddress: '44 Review Drive',
   phone: 1239907788

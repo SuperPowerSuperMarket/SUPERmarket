@@ -10,25 +10,30 @@ const SingleSuperpower = (props) => {
     const singlePower = props.superpowers.find(superpower => superpower.id === currentSuperpowerId)
     return (
         props.superpowers.length &&
-        <Card>
-            <Image src={singlePower.imageUrl} />
-            <Card.Content>
-                <Card.Header>
-                    {singlePower.name}
-                </Card.Header>
-                <Card.Meta>
-                    <span className='date'>
+        <div text style={{ marginTop: '7em' }} className='ui center aligned grid'>
+            <Card>
+                <Image src={singlePower.imageUrl} />
+                <Card.Content>
+                    <Card.Header>
+                        {singlePower.name}
+                    </Card.Header>
+                    <Card.Meta>
+                        <span className='date'>
 
-                    </span>
-                </Card.Meta>
-                <Card.Description>
-                    {singlePower.description}
-                </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-            </Card.Content>
-        </Card>
-        // <h1>yo</h1>
+                        </span>
+                    </Card.Meta>
+                    <Card.Description>
+                        {singlePower.description}
+                    </Card.Description>
+                </Card.Content>
+                <Card.Content extra>
+                    <a>
+                        <Icon />
+                        {'$' + singlePower.price}
+                    </a>
+                </Card.Content>
+            </Card>
+        </div>
     )
 }
 
