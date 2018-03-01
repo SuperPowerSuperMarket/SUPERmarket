@@ -1,5 +1,10 @@
 {
-  presets: ['react', 'env', 'stage-2']
+  presets: [
+    'react',
+    ['env', {
+      exclude: ['transform-regenerator']
+    }],
+    'stage-2']
   /*
     Babel uses these "presets" to know how to transpile your Javascript code. Here's what we're saying with these:
 
