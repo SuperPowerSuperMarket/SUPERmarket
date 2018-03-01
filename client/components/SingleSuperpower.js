@@ -1,8 +1,9 @@
 import React from 'react'
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Icon, Image, Input, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { fetchSuperpower } from '../store/superpowers';
+import CardContent from 'semantic-ui-react/dist/commonjs/views/Card/CardContent';
 
 
 const SingleSuperpower = (props) => {
@@ -20,24 +21,53 @@ const SingleSuperpower = (props) => {
                     <Card.Meta>
                         <span className='date'>
 
-                        </span>
-                    </Card.Meta>
-                    <Card.Description>
-                        {singlePower.description}
-                    </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                    <a>
-                        <Icon />
-                        {'$' + singlePower.price}
-                    </a>
-                </Card.Content>
-            </Card>
+
+                    </span>
+                </Card.Meta>
+                <Card.Description>
+                    {singlePower.description}
+                </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+            <a>
+            <Icon />
+            {'$' + singlePower.price}
+        </a>
+            </Card.Content>
+            <Card.Content>
+                <Input label="Quantity" type="number" min="0" />
+            </Card.Content>
+            <Card.Content>
+                <Button animated='vertical'>
+                    <Button.Content hidden>Add</Button.Content>
+                    <Button.Content visible>
+                        <Icon name='shop' />
+                    </Button.Content>
+                </Button>
+            </Card.Content>
+        </Card>
         </div>
+        // <h1>yo</h1>
+//=======
+//                         </span>
+//                     </Card.Meta>
+//                     <Card.Description>
+//                         {singlePower.description}
+//                     </Card.Description>
+//                 </Card.Content>
+//                 <Card.Content extra>
+//                     <a>
+//                         <Icon />
+//                         {'$' + singlePower.price}
+//                     </a>
+//                 </Card.Content>
+//             </Card>
+//         </div>
+// >>>>>>> master
     )
 }
 
-const mapStateToProps = state => ({superpowers: state.superpowers})
+const mapStateToProps = state => ({ superpowers: state.superpowers })
 
 const SingleSuperpowerContainer = connect(mapStateToProps)(SingleSuperpower)
 export default SingleSuperpowerContainer;
