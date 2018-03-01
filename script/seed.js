@@ -6,36 +6,42 @@ const { User
 
 const superpowers = [{
   name: 'Lightning Speed',
+  price: 700,
   description: 'will make you fast as lightning',
   imageUrl: 'https://openclipart.org/download/257626/Lightning-Bolt-1.svg',
   stock: 4,
   tags: ['travel', 'speed', 'weather']
 }, {
   name: 'X-Ray Vision',
+  price: 400,
   description: 'Allows you to see through walls!',
   imageUrl: 'https://s3.amazonaws.com/mno.products/36834/9cd315b2ee50f658c0186b51ddd95a6a.jpg',
   stock: 2,
   tags: ['vision', 'spying', 'creepy']
 }, {
   name: 'Teleportation',
+  price: 500,
   description: 'Allows you to get from one place to the next in no time. Literally.',
   imageUrl: 'https://themerkle.com/wp-content/uploads/2017/02/shutterstock_324439487.jpg',
   stock: 10,
   tags: ['travel', 'speed']
 }, {
   name: 'Invisibility',
+  price: 400,
   description: 'Not everyone wants to be seen.',
   imageUrl: 'https://wtvox.com/wp-content/uploads/2016/03/invisibility-is-now-possible.jpg',
   stock: 3,
   tags: ['travel', 'privacy', 'spying', 'creepy', 'transformation']
 }, {
   name: 'Shapeshifting',
+  price: 400,
   description: 'You can be whatever you want!',
   imageUrl: 'https://vignette.wikia.nocookie.net/powerlisting/images/0/0b/Xmen-mystique-by-kev-walker.png/revision/latest?cb=20101001173250',
   stock: 7,
   tags: ['transformation', 'travel']
 }, {
   name: 'Time Travel',
+  price: 800,
   description: 'Travel to another era, past or future.',
   imageUrl: 'https://cdn.images.express.co.uk/img/dynamic/151/590x/time-707642.jpg',
   stock: 5,

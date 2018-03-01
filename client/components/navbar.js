@@ -47,7 +47,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </Menu.Item>
         )}
         <Menu.Item>
-          <Icon className="shopping cart big icon" />
+          <Link to="/cart">
+            <Icon className="shopping cart big icon" />
+          </Link>
         </Menu.Item>
       </Container>
     </Menu>
