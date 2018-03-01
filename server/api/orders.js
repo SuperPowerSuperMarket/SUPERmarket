@@ -4,28 +4,29 @@ module.exports = router
 
 // Cart middleware:
 //   guarantees that req.cart exists after it runs.
-async function withCart(req, res, next) {
-  if (req.session.orderId) {
-    req.cart = await Order.findById(req.session.orderId)
-    // Q: What if this cart isn't in state: cart?
-    //   (maybe create a cart?)
-    // Q: What if this cart is owned by someone other than req.user?
-    //   (maybe repudiation?) (maybe isn't a problem.)
-    // Q: What if this cart is owned by NULL and req.user isn't null?
-    //   (maybe adoption?)
-    next()
-    return
-  }
+
+// async function withCart(req, res, next) {
+//   if (req.session.orderId) {
+//     req.cart = await Order.findById(req.session.orderId)
+//     // Q: What if this cart isn't in state: cart?
+//     //   (maybe create a cart?)
+//     // Q: What if this cart is owned by someone other than req.user?
+//     //   (maybe repudiation?) (maybe isn't a problem.)
+//     // Q: What if this cart is owned by NULL and req.user isn't null?
+//     //   (maybe adoption?)
+//     next()
+//     return
+//   }
 
   // If we get here, there isn't an orderId on session.
   // So, create one.
-  const cart = await Order.create({
-    userId: req.user ? req.user.id : null
-  })
-  req.session.orderId = cart.id
-  req.cart = await Order.findById(req.session.orderId)    
-  next()
-}
+//   const cart = await Order.create({
+//     userId: req.user ? req.user.id : null
+//   })
+//   req.session.orderId = cart.id
+//   req.cart = await Order.findById(req.session.orderId)    
+//   next()
+// }
 
 
 // router.post('/cart/buy')
@@ -64,29 +65,29 @@ router.put('/:id', (req, res, next) => {
   }).then(line => line.update({quantity: req.body.quantity}))
 
 
-  let superpower;
-  let order;
-  let items;
-  Promise.all([
-    Superpower.findById(req.body.superpowerId),
-    Order.findById(req.params.id),
-    OrderQuantity.findAll({where: {orderId: req.params.id}})])
-    .then(values => {
-      superpower = values[0];
-      order = values[1];
-      items = values[2];
-    })
-    .then(() => {
-      const found = items.find(item => {
-        return item.superpowerId === superpower.id
-      });
-      return found ?
-        found.update({quantity: req.body.quantity})
-        : order.addSuperpower(superpower, { through: {quantity: req.body.quantity }})
-    })
-    .then(() => order.update(req.body))
-    .then(updated => res.json(updated))
-    .catch(next);
+//   let superpower;
+//   let order;
+//   let items;
+//   Promise.all([
+//     Superpower.findById(req.body.superpowerId),
+//     Order.findById(req.params.id),
+//     OrderQuantity.findAll({where: {orderId: req.params.id}})])
+//     .then(values => {
+//       superpower = values[0];
+//       order = values[1];
+//       items = values[2];
+//     })
+//     .then(() => {
+//       const found = items.find(item => {
+//         return item.superpowerId === superpower.id
+//       });
+//       return found ?
+//         found.update({quantity: req.body.quantity})
+//         : order.addSuperpower(superpower, { through: {quantity: req.body.quantity }})
+//     })
+//     .then(() => order.update(req.body))
+//     .then(updated => res.json(updated))
+//     .catch(next);
 });
 
 router.delete('/:id', (req, res, next) => {
