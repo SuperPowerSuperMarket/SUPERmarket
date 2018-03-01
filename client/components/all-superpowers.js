@@ -5,19 +5,21 @@ import { withRouter, NavLink } from 'react-router-dom'
 
 const AllSuperpowers = (props) => {
   return (
-  <Grid columns={3} divided>
-  {props.superpowers.map((superpower) => {
-    return (
-      <Grid.Column key={superpower.id}>
-      <NavLink to={`/single-superpower/${superpower.id}`}>
-          <Image src={superpower.imageUrl} />
-          <h2>{superpower.name}</h2>
-          <h2>{superpower.description}</h2>
+  <div text style={{ marginTop: '5.5em' }}>
+    <Grid columns={3} divided>
+    {props.superpowers.map((superpower) => {
+      return (
+        <Grid.Column key={superpower.id}>
+          <NavLink to={`/single-superpower/${superpower.id}`}>
+            <Image src={superpower.imageUrl} />
+              <h2>{superpower.name}</h2>
+              <h2>{superpower.description}</h2>
           </NavLink>
         </Grid.Column>
+      )}
     )}
-  )}
-  </Grid>
+    </Grid>
+  </div>
 )}
 
 const mapStateToProps = (state) => {

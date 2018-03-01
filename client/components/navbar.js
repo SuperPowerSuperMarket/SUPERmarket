@@ -21,7 +21,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     <Menu fixed="top" inverted>
       <Container>
         <Menu.Item as="a" header>
-          SUPERmarket
+          <Link to={'/all-superpowers'}>
+            SUPERmarket
+          </Link>
         </Menu.Item>
         <Menu.Item as="a">Home</Menu.Item>
         {isLoggedIn ? (
