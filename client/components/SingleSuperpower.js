@@ -47,23 +47,6 @@ const SingleSuperpower = (props) => {
             </Card.Content>
         </Card>
         </div>
-        // <h1>yo</h1>
-//=======
-//                         </span>
-//                     </Card.Meta>
-//                     <Card.Description>
-//                         {singlePower.description}
-//                     </Card.Description>
-//                 </Card.Content>
-//                 <Card.Content extra>
-//                     <a>
-//                         <Icon />
-//                         {'$' + singlePower.price}
-//                     </a>
-//                 </Card.Content>
-//             </Card>
-//         </div>
-// >>>>>>> master
     )
 }
 
