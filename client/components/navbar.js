@@ -21,14 +21,14 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
     <Menu fixed="top" inverted>
       <Container>
-        <Menu.Item as="a" header>
+        <Menu.Item header>
           <Link to={'/all-superpowers'}>
             SUPERmarket
           </Link>
         </Menu.Item>
         <Menu.Item as="a">Home</Menu.Item>
         {isLoggedIn ? (
-          <Menu.Item as="a" position="right">
+          <Menu.Item position="right">
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
             <a href="#" onClick={handleClick}>
@@ -36,7 +36,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             </a>
           </Menu.Item>
         ) : (
-          <Menu.Item as="a" position="right">
+          <Menu.Item position="right">
             {/* The navbar will show these links before you log in */}
             <Link to="/login">
               <Button>Login</Button>
@@ -47,7 +47,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </Menu.Item>
         )}
         <Menu.Item>
-          <Icon className="shopping cart big icon" />
+          <Link to="/cart">
+            <Icon className="shopping cart big icon" />
+          </Link>
         </Menu.Item>
       </Container>
     </Menu>

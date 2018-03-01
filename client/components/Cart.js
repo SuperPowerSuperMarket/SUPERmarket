@@ -1,25 +1,27 @@
 import React from 'react'
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 
 
 const Cart = (props) => {
 
     return (
-        <Card>
-            <Card.Content>
-                <Card.Header>
-                    Hello Header
-                </Card.Header>
-                <Card.Meta>
-                  Card Meta
-                </Card.Meta>
-                <Card.Description>
-                    Card Description
-                </Card.Description>
-            </Card.Content>
-            <Card.Content extra />
-        </Card>
+        <div className="ui center aligned grid">
+          <Card>
+              <Card.Content>
+                  <Card.Header>
+                      Your Cart
+                  </Card.Header>
+                  <Card.Meta>
+                    <Icon className="shopping cart huge icon" />
+                  </Card.Meta>
+                  <Card.Description>
+                      Your cart is currently empty.
+                  </Card.Description>
+              </Card.Content>
+              <Card.Content extra />
+          </Card>
+        </div>
     )
 }
 

@@ -11,7 +11,7 @@ const SingleSuperpower = (props) => {
     const singlePower = props.superpowers.find(superpower => superpower.id === currentSuperpowerId)
     return (
         props.superpowers.length &&
-        <div text style={{ marginTop: '7em' }} className='ui center aligned grid'>
+        <div className='ui center aligned grid'>
             <Card>
                 <Image src={singlePower.imageUrl} />
                 <Card.Content>
