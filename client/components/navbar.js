@@ -13,7 +13,8 @@ import {
   Image,
   List,
   Menu,
-  Segment
+  Segment,
+  Icon
 } from "semantic-ui-react";
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
@@ -43,6 +44,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             </Link>
           </Menu.Item>
         )}
+        <Menu.Item>
+          <Icon className="shopping cart big icon" />
+        </Menu.Item>
       </Container>
     </Menu>
   </div>
