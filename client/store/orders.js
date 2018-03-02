@@ -6,12 +6,8 @@ import superpowers from './superpowers';
 
 //Action Types
 const GET_ORDERS = 'GET_ORDERS';
-<<<<<<< HEAD
 const ADD_ORDER = 'ADD_ORDER';
 const EDIT_ORDER = 'EDIT_ORDER';
-=======
-// const GET_ORDER = 'GET_ORDER';
->>>>>>> master
 
 //Action Creators
 export const getOrders = orders => {

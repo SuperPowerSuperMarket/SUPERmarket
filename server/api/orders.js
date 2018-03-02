@@ -3,9 +3,6 @@ const { Order, Superpower, OrderQuantity } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-<<<<<<< HEAD
-  Order.findAll({include: [{all: true}]})
-=======
   // console.log('body', req.body)
   // console.log('session', req.session.id)
   // console.log(req.user)
@@ -22,7 +19,6 @@ router.get('/', (req, res, next) => {
     },
     include: [{ all: true }]
   })
->>>>>>> master
     .then(orders => res.json(orders))
     .catch(next);
 });
