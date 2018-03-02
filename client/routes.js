@@ -16,12 +16,9 @@ class Routes extends Component {
     const superpowersThunk = fetchSuperpowers()
     const getOrdersThunk = fetchOrders()
     store.dispatch(superpowersThunk)
-<<<<<<< HEAD
     const reviewsThunk = fetchReviews()
     store.dispatch(reviewsThunk)
-=======
     store.dispatch(getOrdersThunk)
->>>>>>> master
     this.props.loadInitialData()
   }
 
