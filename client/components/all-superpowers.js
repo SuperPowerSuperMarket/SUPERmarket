@@ -5,13 +5,13 @@ import { withRouter, NavLink } from 'react-router-dom'
 
 const AllSuperpowers = (props) => {
   return (
-  <div text style={{ marginTop: '5.5em' }}>
+  <div style={{ marginTop: '5.5em' }}>
     <Grid columns={3} divided>
     {props.superpowers.map((superpower) => {
       return (
         <Grid.Column key={superpower.id}>
           <NavLink to={`/single-superpower/${superpower.id}`}>
-            <Image src={superpower.imageUrl} />
+            <Image src={superpower.imageUrl} width="auto" height="75%" />
               <h2>{superpower.name}</h2>
               <h2>{superpower.description}</h2>
           </NavLink>

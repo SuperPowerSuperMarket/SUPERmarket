@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, AllSuperpowers, SingleSuperpower, Cart} from './components'
 import store, {me} from './store'
 import { fetchSuperpowers } from './store/superpowers';
+import { fetchReviews } from './store/reviews'
 
 /**
  * COMPONENT
@@ -13,6 +14,8 @@ class Routes extends Component {
   componentDidMount () {
     const superpowersThunk = fetchSuperpowers()
     store.dispatch(superpowersThunk)
+    const reviewsThunk = fetchReviews()
+    store.dispatch(reviewsThunk)
     this.props.loadInitialData()
   }
 
