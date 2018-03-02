@@ -3,7 +3,7 @@ const { Order, Superpower, OrderQuantity } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  Order.findAll()
+  Order.findAll({include: [{all: true}]})
     .then(orders => res.json(orders))
     .catch(next);
 });
@@ -16,12 +16,12 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const order = await Order.create(req.body, {
-    include: { all: true }
+    include: [{ all: true }]
   })
-  const { superpowerId, quantity } = req.body
+  const { userId, superpowerId, quantity } = req.body
   await OrderQuantity.create({
     orderId: order.id,
-    superpowerId, quantity
+    userId, superpowerId, quantity
   }).catch(next)
   await order.reload()
   res.send(order)
@@ -35,12 +35,13 @@ router.put('/:id', (req, res, next) => {
     where: {
       orderId: req.params.id,
       superpowerId: req.body.superpowerId
-    }
+    },
+    defaults: {quantity: req.body.quantity}
   }).spread((item, created) => {
     if (!created) {
       return item.update(req.body)
         .then(updated => Order.findById(updated.orderId, {
-          include: { all: true }
+          include: [{ all: true }]
         }))
         .then(order => {
           res.json(order)
@@ -48,7 +49,7 @@ router.put('/:id', (req, res, next) => {
     }
     else {
       res.json(Order.findById(item.orderId, {
-        include: { all: true }
+        include: [{ all: true }]
       }));
     }
   })
