@@ -1,5 +1,8 @@
 import axios from 'axios'
 
+//Initial State
+const defaultCart = {}
+
 //Action Types
 const GET_ORDERS = 'GET_ORDERS';
 
@@ -10,3 +13,19 @@ export const getOrders = orders => {
 }
 
 //Thunk Creators
+export const fetchOrders = () =>
+  dispatch =>
+    axios.get('/api/orders')
+      .then(res => res.data)
+      .then(orders => dispatch(getOrders(orders)))
+
+export default function (state = defaultCart, action) {
+  switch (action.type) {
+
+    case GET_ORDERS:
+      return action.orders
+
+    default:
+      return state
+  }
+}
