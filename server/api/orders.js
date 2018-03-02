@@ -51,11 +51,8 @@ router.put('/:id', (req, res, next) => {
       orderId: req.params.id,
       superpowerId: req.body.superpowerId
     },
-<<<<<<< HEAD
-    defaults: {quantity: req.body.quantity}
-=======
+    defaults: {quantity: req.body.quantity},
     include: [{ all: true }]
->>>>>>> master
   }).spread((item, created) => {
     if (!created) {
       return item.update(req.body)
