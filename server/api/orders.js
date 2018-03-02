@@ -65,9 +65,9 @@ router.put('/:id', (req, res, next) => {
         })
     }
     else {
-      res.json(Order.findById(item.orderId, {
+      Order.findById(item.orderId, {
         include: [{ all: true }]
-      }));
+      }).then(order => res.json(order));
     }
   })
 })

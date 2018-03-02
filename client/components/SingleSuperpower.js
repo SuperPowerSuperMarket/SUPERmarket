@@ -17,8 +17,10 @@ class SingleSuperpower extends Component {
         const user = this.props.user
         const superpower = +this.props.match.params.superpowerId
         const quantity = +event.target.quant.value
-        const foundOrder = user.orders.find(order => order.status === 'active')
-        if (!user.orders.length || !foundOrder) {
+        const orders = this.props.orders
+        const foundOrder = orders.find(order => order.status === 'active')
+        if (!orders.length || !foundOrder) {
+            console.log(foundOrder)
             this.props.postOrder(+user.id, superpower, quantity)
         } else {
             this.props.updateOrder(+user.id, superpower, quantity, foundOrder.id)
@@ -76,14 +78,14 @@ class SingleSuperpower extends Component {
         )
     }
     }
-const mapStateToProps = state => ({ superpowers: state.superpowers, user: state.user })
+const mapStateToProps = state => ({ superpowers: state.superpowers, user: state.user, orders: state.orders })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     postOrder: (userId, superpower, quantity) => dispatch(postOrder(userId, superpower, quantity, ownProps.history)),
     updateOrder: (userId, superpower, quantity, orderId) => dispatch(updateOrder(userId, superpower, quantity, orderId, ownProps.history))
 })
 
-const SingleSuperpowerContainer = connect(mapStateToProps, mapDispatchToProps)(SingleSuperpower)
+const SingleSuperpowerContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleSuperpower))
 export default SingleSuperpowerContainer;
 
 
