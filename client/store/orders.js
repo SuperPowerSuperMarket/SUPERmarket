@@ -42,7 +42,6 @@ export const postOrder = (userId, superpowerId, quantity, history) => dispatch =
 export const updateOrder = (userId, superpowerId, quantity, orderId, history) => dispatch =>
     axios.put(`/api/orders/${orderId}`, {userId, superpowerId, quantity})
       .then(res => {
-        console.log(res.data)
         dispatch(editOrder(res.data))
         history.push('/cart');
       })
@@ -58,7 +57,8 @@ export default function (state = [], action) {
     
     case EDIT_ORDER:
       return state.map(order => {
-        return order.id === action.order.id ?
+        console.log(action.order)
+        return order.id === +action.order.id ?
         action.order
         : order
       })
