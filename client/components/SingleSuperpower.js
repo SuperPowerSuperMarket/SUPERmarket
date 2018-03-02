@@ -7,6 +7,7 @@ import CardContent from 'semantic-ui-react/dist/commonjs/views/Card/CardContent'
 
 
 const SingleSuperpower = (props) => {
+    console.log(props.history)
     const currentSuperpowerId = +props.match.params.superpowerId;
     const singlePower = props.superpowers.find(superpower => superpower.id === currentSuperpowerId)
     return (

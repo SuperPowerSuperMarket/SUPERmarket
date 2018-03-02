@@ -3,6 +3,7 @@ const {Superpower} = require('../db/models');
 module.exports = router;
 
 router.get('/', (req, res, next) => {
+  console.log('sessionId', req.session.id)
   Superpower.findAll()
     .then(superpowers => res.json(superpowers))
     .catch(next);
