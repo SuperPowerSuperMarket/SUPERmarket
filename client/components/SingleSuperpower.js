@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Icon, Image, Input, Button } from 'semantic-ui-react'
+import { Card, Icon, Image, Input, Button, Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { fetchSuperpower, postOrder, updateOrder } from '../store';
@@ -24,7 +24,6 @@ class SingleSuperpower extends Component {
         } else {
             this.props.updateOrder(+user.id, superpower, quantity, foundOrder.id)
         }
-
     }
 
 
@@ -38,6 +37,7 @@ class SingleSuperpower extends Component {
         return (
             this.props.superpowers.length &&
             <div className='ui center aligned grid'>
+                <Grid column={2}>
                 <form onSubmit={this.handleSubmit}>
                     <Card>
                         <Image src={singlePower.imageUrl} />
@@ -74,6 +74,7 @@ class SingleSuperpower extends Component {
                         </Card.Content>
                         </Card>
                 </form>
+                <SubmitReview />
                 {reviews && reviews.length ? reviews.map((review) => (
           <div key={review.id}>
           <div className="star-ratings-sprite">
@@ -84,7 +85,7 @@ class SingleSuperpower extends Component {
           :
           <h2>No reviews found</h2>
         }
-            <SubmitReview />
+        </Grid>
             </div>
         )
     }

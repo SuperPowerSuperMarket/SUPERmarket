@@ -5,6 +5,7 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_REVIEWS = 'GET_REVIEWS'
+const ADD_REVIEW = 'ADD_REVIEW'
 const REMOVE_SUPERPOWER = 'REMOVE_SUPERPOWER'
 // const GET_SUPERPOWER = 'GET_SUPERPOWER'
 
@@ -16,8 +17,13 @@ const REMOVE_SUPERPOWER = 'REMOVE_SUPERPOWER'
 /**
  * ACTION CREATORS
  */
-export function getReviews(reviews) {
+function getReviews(reviews) {
   const action = {type: GET_REVIEWS, reviews}
+  return action
+}
+
+function addReview(review){
+  const action = {type: ADD_REVIEW, review}
   return action
 }
 
@@ -35,11 +41,11 @@ export const fetchReviews = () =>
       .then(res => res.data)
       .then(reviews => dispatch(getReviews(reviews)))
 
-// export const fetchSuperpower = (superpowerId) =>
-//   dispatch =>
-//     axios.get(`/api/superpowers/${superpowerId}`)
-//     .then(res => res.data)
-//     .then(dispatch(getSuperpower(superpowerId)))
+export const postReview = () =>
+  dispatch =>
+    axios.post('/api/reviews')
+    .then(res => res.data)
+    .then(review => dispatch(addReview(review)))
 
 
 /**
@@ -49,6 +55,8 @@ export default function (state = [], action) {
   switch (action.type) {
     case GET_REVIEWS:
       return action.reviews
+    case ADD_REVIEW:
+      return action.review
     default:
       return state
   }

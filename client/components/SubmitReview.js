@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, Rating, TextArea } from "semantic-ui-react";
+import { postReview } from '../store/reviews'
 
 export default class SubmitReview extends Component {
   constructor() {
