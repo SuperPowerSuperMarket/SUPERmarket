@@ -33,10 +33,10 @@ router.post('/', async (req, res, next) => {
   const order = await Order.create(req.body, {
     include: [{ all: true }]
   })
-  const { superpowerId, quantity } = req.body
+  const { userId, superpowerId, quantity } = req.body
   await OrderQuantity.create({
     orderId: order.id,
-    superpowerId, quantity
+    userId, superpowerId, quantity
   }).catch(next)
   await order.reload()
   res.send(order)
@@ -51,7 +51,11 @@ router.put('/:id', (req, res, next) => {
       orderId: req.params.id,
       superpowerId: req.body.superpowerId
     },
+<<<<<<< HEAD
+    defaults: {quantity: req.body.quantity}
+=======
     include: [{ all: true }]
+>>>>>>> master
   }).spread((item, created) => {
     if (!created) {
       return item.update(req.body)
