@@ -1,10 +1,11 @@
 import axios from 'axios'
 
 //Initial State
-const defaultCart = {}
+// const defaultCart = []
 
 //Action Types
 const GET_ORDERS = 'GET_ORDERS';
+// const GET_ORDER = 'GET_ORDER';
 
 //Action Creators
 export const getOrders = orders => {
@@ -19,7 +20,7 @@ export const fetchOrders = () =>
       .then(res => res.data)
       .then(orders => dispatch(getOrders(orders)))
 
-export default function (state = defaultCart, action) {
+export default function (state = [], action) {
   switch (action.type) {
 
     case GET_ORDERS:
