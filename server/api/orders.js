@@ -7,6 +7,7 @@ router.get('/', (req, res, next) => {
   // console.log('session', req.session.id)
   // console.log(req.user)
   let currentId
+  console.log(req.user.id)
   if (req.user.id) {
     currentId = req.user.id
   } else {
@@ -17,7 +18,7 @@ router.get('/', (req, res, next) => {
     where: {
       userId: currentId
     },
-    include: [{ all: true }]
+    include: [{ all: true, nested: true }]
   })
     .then(orders => res.json(orders))
     .catch(next);
