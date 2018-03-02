@@ -6,6 +6,7 @@ const OrderQuantity = require('./order-quantity')
 
 User.hasMany(Order);
 Superpower.hasMany(Review)
+Order.belongsTo(User);
 
 Order.belongsToMany(Superpower, {through: OrderQuantity })
 Superpower.belongsToMany(Order, {through: OrderQuantity })

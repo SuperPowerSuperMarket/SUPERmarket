@@ -4,6 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, AllSuperpowers, SingleSuperpower, Cart} from './components'
 import store, {me} from './store'
+import {fetchOrders} from './store/orders'
 import { fetchSuperpowers } from './store/superpowers';
 import { fetchReviews } from './store/reviews'
 
@@ -13,9 +14,14 @@ import { fetchReviews } from './store/reviews'
 class Routes extends Component {
   componentDidMount () {
     const superpowersThunk = fetchSuperpowers()
+    const getOrdersThunk = fetchOrders()
     store.dispatch(superpowersThunk)
+<<<<<<< HEAD
     const reviewsThunk = fetchReviews()
     store.dispatch(reviewsThunk)
+=======
+    store.dispatch(getOrdersThunk)
+>>>>>>> master
     this.props.loadInitialData()
   }
 
