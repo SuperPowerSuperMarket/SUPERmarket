@@ -2,12 +2,16 @@ import axios from 'axios'
 import superpowers from './superpowers';
 
 //Initial State
-const defaultCart = {}
+// const defaultCart = []
 
 //Action Types
 const GET_ORDERS = 'GET_ORDERS';
+<<<<<<< HEAD
 const ADD_ORDER = 'ADD_ORDER';
 const EDIT_ORDER = 'EDIT_ORDER';
+=======
+// const GET_ORDER = 'GET_ORDER';
+>>>>>>> master
 
 //Action Creators
 export const getOrders = orders => {
