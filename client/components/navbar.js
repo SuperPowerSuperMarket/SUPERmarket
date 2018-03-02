@@ -26,11 +26,14 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             SUPERmarket
           </Link>
         </Menu.Item>
-        <Menu.Item as="a">Home</Menu.Item>
+        <Menu.Item>
+          <Link to={'/home'}>
+            Home
+          </Link>
+        </Menu.Item>
         {isLoggedIn ? (
           <Menu.Item position="right">
             {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
             <a href="#" onClick={handleClick}>
               Logout
             </a>
