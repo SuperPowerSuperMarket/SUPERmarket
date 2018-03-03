@@ -3,21 +3,20 @@ const { Order, Superpower, OrderQuantity } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  // console.log('body', req.body)
-  // console.log('session', req.session.id)
-  // console.log(req.user)
+
   let currentId
+
   if (req.user.id) {
     currentId = req.user.id
   } else {
     currentId = req.session.id
   }
-  console.log(currentId)
+
   Order.findAll({
     where: {
       userId: currentId
     },
-    include: [{ all: true }]
+    include: [{ all: true, nested: true }]
   })
     .then(orders => res.json(orders))
     .catch(next);
@@ -64,9 +63,9 @@ router.put('/:id', (req, res, next) => {
         })
     }
     else {
-      res.json(Order.findById(item.orderId, {
+      Order.findById(item.orderId, {
         include: [{ all: true }]
-      }));
+      }).then(order => res.json(order));
     }
   })
 })

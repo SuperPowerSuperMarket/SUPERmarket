@@ -1,11 +1,8 @@
 import axios from 'axios'
 import superpowers from './superpowers';
 
-//Initial State
-// const defaultCart = []
-
 //Action Types
-const GET_ORDERS = 'GET_ORDERS';
+export const GET_ORDERS = 'GET_ORDERS';
 const ADD_ORDER = 'ADD_ORDER';
 const EDIT_ORDER = 'EDIT_ORDER';
 
@@ -26,23 +23,22 @@ export const editOrder = order => {
 }
 
 //Thunk Creators
-export const fetchOrders = (userId, sessionId) =>
+export const fetchOrders = () =>
   dispatch =>
-    axios.get('/api/orders', sessionId)
+    axios.get('/api/orders')
       .then(res => res.data)
       .then(orders => dispatch(getOrders(orders)))
-  
-export const postOrder = (userId, superpowerId, quantity, history) => dispatch => 
+
+export const postOrder = (userId, superpowerId, quantity, history) => dispatch =>
     axios.post('/api/orders', {userId, superpowerId, quantity})
       .then(res => {
         dispatch(addOrder(res.data))
         history.push('/cart');
       })
-  
+
 export const updateOrder = (userId, superpowerId, quantity, orderId, history) => dispatch =>
     axios.put(`/api/orders/${orderId}`, {userId, superpowerId, quantity})
       .then(res => {
-        console.log(res.data)
         dispatch(editOrder(res.data))
         history.push('/cart');
       })
@@ -51,14 +47,14 @@ export default function (state = [], action) {
   switch (action.type) {
 
     case GET_ORDERS:
-      return action.orders
+      return action.orders || []
 
     case ADD_ORDER:
       return [...state, action.order]
-    
+
     case EDIT_ORDER:
       return state.map(order => {
-        return order.id === action.order.id ?
+        return order.id === +action.order.id ?
         action.order
         : order
       })

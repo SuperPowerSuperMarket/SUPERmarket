@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Icon } from 'semantic-ui-react'
+import { Card, Icon, Feed, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 
@@ -9,7 +9,16 @@ const Cart = (props) => {
     // } else {
     //   console.log('get cart by session')
     // }
-    console.log(props)
+    const activeOrder = props.orders.find(order => order.status === 'active')
+    // let totals
+
+    // activeOrder ?
+    // totals = activeOrder.superpowers.map(superpower => superpower['order-quantity'].quantity * superpower.price) :
+
+
+    // totals ? const totalPrice = totals.reduce((accu, value) => accu + value)
+    // console.log(activeOrder)
+    // console.log(props.orders)
 
     //if the orders array is empty, tell the logged in user that the cart is empty
     //if the orders array is not, if orders.find by status 'active' render the items in the active order
@@ -19,15 +28,48 @@ const Cart = (props) => {
         <Card>
             <Card.Content>
                 <Card.Header>
-                    {props.user.firstName ? `${props.user.firstName},  your cart is empty.` : `Your cart is empty`}
+
+                    {activeOrder && activeOrder.superpowers.length ? `${props.user.firstName},  this is your cart.` : `Your cart is empty`}
                 </Card.Header>
                 <Card.Meta>
                   <Icon className="shopping cart huge icon" />
                 </Card.Meta>
                 <Card.Description>
-                    Your cart is currently empty.
+                    {
+                        activeOrder &&
+                        activeOrder.superpowers.map(superpower => {
+                            return (
+                            <Feed key={superpower.id}>
+                                <Feed.Event>
+                                    <Feed.Label image={superpower.imageUrl} />
+                                    <Feed.Content>
+                                        <Feed.Date content='SUPERpower' />
+                                        <Feed.Summary>
+                                            {superpower.name}
+                                            <br />
+                                            {'Quantity' + ': ' + superpower['order-quantity'].quantity}
+                                            <br />
+                                            {'Total: $' + superpower['order-quantity'].quantity * superpower.price}
+                                        </Feed.Summary>
+                                    </Feed.Content>
+                                </Feed.Event>
+                            </Feed>
+                            )
+                        })
+                    }
+
                 </Card.Description>
             </Card.Content>
+            <div className="ui center aligned grid" text style={{marginTop: '1em', marginBottom: '1.5em'}}>
+                <Button positive animated='fade'>
+                    <Button.Content visible>
+                        Checkout
+                    </Button.Content>
+                    <Button.Content hidden>
+                        {'$'}
+                    </Button.Content>
+                </Button>
+            </div>
             <Card.Content extra />
         </Card>
       </div>
@@ -38,7 +80,7 @@ const mapStateToProps = state => ({superpowers: state.superpowers, user: state.u
 
 // const mapDispatchToProps = dispatch => {
 //   return {
-//     handleCartOrder: 
+//     handleCartOrder:
 //   }
 // }
 
