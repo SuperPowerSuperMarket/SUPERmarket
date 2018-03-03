@@ -57,7 +57,7 @@ const Cart = (props) => {
                             )
                         })
                     }
-                    
+
                 </Card.Description>
             </Card.Content>
             <div className="ui center aligned grid" text style={{marginTop: '1em', marginBottom: '1.5em'}}>
@@ -80,7 +80,7 @@ const mapStateToProps = state => ({superpowers: state.superpowers, user: state.u
 
 // const mapDispatchToProps = dispatch => {
 //   return {
-//     handleCartOrder: 
+//     handleCartOrder:
 //   }
 // }
 
