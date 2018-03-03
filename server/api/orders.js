@@ -3,17 +3,15 @@ const { Order, Superpower, OrderQuantity } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  // console.log('body', req.body)
-  // console.log('session', req.session.id)
-  // console.log(req.user)
+
   let currentId
-  console.log(req.user.id)
+
   if (req.user.id) {
     currentId = req.user.id
   } else {
     currentId = req.session.id
   }
-  console.log(currentId)
+
   Order.findAll({
     where: {
       userId: currentId
