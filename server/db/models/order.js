@@ -16,9 +16,9 @@ const Order = db.define('order', {
   arrivedOn: {
     type: Sequelize.DATE,
   },
-  // sessionId: {
-  //   type: 
-  // }
+  sessionId: {
+    type: Sequelize.INTEGER
+  }
 });
 
 Order.beforeDestroy(order => {

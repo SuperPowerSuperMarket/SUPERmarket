@@ -7,7 +7,6 @@ router.get('/', (req, res, next) => {
   // console.log('session', req.session.id)
   // console.log(req.user)
   let currentId
-  console.log(req.user.id)
   if (req.user.id) {
     currentId = req.user.id
   } else {
@@ -31,10 +30,11 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-  const order = await Order.create(req.body, {
+  const { userId, superpowerId, quantity } = req.body
+  let order;
+  await Order.create(req.body, {
     include: [{ all: true }]
   })
-  const { userId, superpowerId, quantity } = req.body
   await OrderQuantity.create({
     orderId: order.id,
     userId, superpowerId, quantity
