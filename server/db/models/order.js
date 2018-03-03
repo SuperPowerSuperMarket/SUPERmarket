@@ -17,7 +17,7 @@ const Order = db.define('order', {
     type: Sequelize.DATE,
   },
   sessionId: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   }
 });
 
