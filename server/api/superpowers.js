@@ -29,14 +29,12 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:id', (req, res, next) => {
-  Superpower.update(req.body, {
-    where: {
-      id: req.params.id
-    },
-    returning: true
-  })
-  .then(superpower => res.status(201).json(superpower[1][0]))
-  .catch(next);
+  Superpower.findById(req.params.id)
+    .then(superpower => {
+      console.log('req.body', req.body)
+      superpower.update(req.body)
+      .then(updatedPower => res.send(updatedPower))
+    })
 });
 
 router.delete('/:id', (req, res, next) => {

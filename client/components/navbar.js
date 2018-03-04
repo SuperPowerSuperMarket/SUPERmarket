@@ -18,7 +18,7 @@ import {
 } from "semantic-ui-react";
 
 const Navbar = ({ handleClick, isLoggedIn, user }) => {
-  console.log(user)
+
   return (
     <div>
       <Menu fixed="top" inverted>
@@ -54,7 +54,7 @@ const Navbar = ({ handleClick, isLoggedIn, user }) => {
           )}
           <Menu.Item>
             <Link to="/cart">
-              <Icon className="shopping cart big icon" text style={{marginRight: '1em'}}/>
+              <Icon className="shopping cart big icon" text style={{marginRight: '1em'}} />
             </Link>
             <Link to={'/home'}>
               Account

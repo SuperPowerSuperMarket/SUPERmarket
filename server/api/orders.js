@@ -4,24 +4,23 @@ module.exports = router
 
 router.get('/', (req, res, next) => {
   // console.log('body', req.body)
-  // console.log('session', req.session.id)
+  console.log('session', req.session)
   // console.log(req.user)
   let currentId
-  console.log(req.user.id)
-  if (req.user.id) {
+  if (req.user) {
     currentId = req.user.id
   } else {
     currentId = req.session.id
   }
-  console.log(currentId)
-  Order.findAll({
-    where: {
-      userId: currentId
-    },
-    include: [{ all: true, nested: true }]
-  })
-    .then(orders => res.json(orders))
-    .catch(next);
+  // console.log(currentId)
+  // Order.findAll({
+  //   where: {
+  //     // userId: currentId
+  //   },
+  //   include: [{ all: true, nested: true }]
+  // })
+  //   .then(orders => res.json(orders))
+  //   .catch(next);
 });
 
 router.get('/:id', (req, res, next) => {

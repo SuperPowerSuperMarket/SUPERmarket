@@ -55,7 +55,8 @@ const users = [{
   password: '123',
   mailingAddress: '123 Hello Lane',
   billingAddress: '123 Hello Lane',
-  phone: 1234445555
+  phone: 1234445555,
+  isAdmin: true
 }, {
   firstName: 'Connor',
   lastName: 'Kirkwood',
