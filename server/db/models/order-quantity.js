@@ -12,21 +12,23 @@ const OrderQuantity = db.define('order-quantity', {
   //     return Superpower.findById(this.superpowerId)
   //   }
   // }
-}, {
-  getterMethods: {
-    totalPrice: function() {
-      const quantity = this.quantity
+}, 
+// {
+//   getterMethods: {
+//     totalPrice: function() {
+//       const quantity = this.quantity
 
-      return Superpower.findById(this.superpowerId)
-      .then(superpower => superpower.dataValues.price * quantity)
+//       return Superpower.findById(this.superpowerId)
+//       .then(superpower => superpower.dataValues.price * quantity)
 
-    //   // console.log({superpower})
-    //   const price = superpower.dataValues.price
-    //   // console.log({quantity})
-    //   console.log({price, quantity})
-    //   return price * quantity
-    }
-  }
-});
+//     //   // console.log({superpower})
+//     //   const price = superpower.dataValues.price
+//     //   // console.log({quantity})
+//     //   console.log({price, quantity})
+//     //   return price * quantity
+//     }
+//   }
+// }
+);
 
 module.exports = OrderQuantity;
