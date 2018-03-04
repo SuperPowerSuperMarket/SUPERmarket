@@ -61,6 +61,12 @@ class SingleSuperpower extends Component {
                             {singlePower.description}
                         </Card.Description>
                     </Card.Content>
+                    <Card.Content>
+                      <p>
+                        Tags:
+                      </p>
+                      {singlePower.tags.map(tag => <div key={tag}><a>{tag}</a><br /></div>)}
+                    </Card.Content>
                     <Card.Content extra>
                         <a>
                             <Icon />
@@ -71,12 +77,12 @@ class SingleSuperpower extends Component {
                         <Input name="quant" label="Quantity" type="number" min="0" />
                     </Card.Content>
                     <Card.Content>
-                    <Button animated='vertical' type="submit">
-                            <Button.Content hidden>Add</Button.Content>
-                            <Button.Content visible>
-                                <Icon name='shop' />
-                            </Button.Content>
-                        </Button>
+                      <Button animated='vertical' type="submit">
+                        <Button.Content hidden>Add</Button.Content>
+                        <Button.Content visible>
+                            <Icon name='shop' />
+                        </Button.Content>
+                      </Button>
                     </Card.Content>
                     </Card>
                 </form>
