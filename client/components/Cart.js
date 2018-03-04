@@ -29,7 +29,7 @@ const Cart = (props) => {
             <Card.Content>
                 <Card.Header>
 
-                    {activeOrder && activeOrder.id ? `${props.user.firstName},  this is your cart.` : `Your cart is empty`}
+                    {activeOrder && activeOrder.superpowers ? `${props.user.firstName},  this is your cart.` : `Your cart is empty`}
                 </Card.Header>
                 <Card.Meta>
                   <Icon className="shopping cart huge icon" />
@@ -37,7 +37,7 @@ const Cart = (props) => {
                 <Card.Description>
                     {
                         activeOrder &&
-                        activeOrder.id &&
+                        activeOrder.superpowers &&
                         activeOrder.superpowers.map(superpower => {
                             return (
                             <Feed key={superpower.id}>

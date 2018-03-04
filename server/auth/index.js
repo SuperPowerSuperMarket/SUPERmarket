@@ -22,10 +22,15 @@ router.post('/login', (req, res, next) => {
       const cart = user.orders.find(order => order.status === 'active')
       OrderQuantity.update(
         { orderId: cart.id },
-        { where: { orderId: req.session.orderId}}
+        { where: { orderId: req.session.orderId},
+        returning: true
+      }
       )
+      //return  Order.destroy({where: {id: req.session.orderId}})
     })
-    .spread((affectedCount, affectedRows) => {
+    .then((affectedCount, affectedRows) => {
+      console.log("affectedcount:", affectedCount)
+      console.log("affectedrows:", affectedRows)
       return  Order.destroy({where: {id: req.session.orderId}})
     })
     .then(() => console.log('deleted!'))
