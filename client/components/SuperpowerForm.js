@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import store, { fetchSuperpowers, postSuperpower, putSuperpower } from '../store'
+import store, { fetchSuperpowers, postSuperpower, putSuperpower, destroySuperpower } from '../store'
 import { Button, Form } from 'semantic-ui-react'
 
 
@@ -22,6 +22,7 @@ class superpowerForm extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,14 +46,23 @@ class superpowerForm extends Component {
     const edit = this.props.match.path.indexOf('edit') !== -1
 
     if (edit) {
-      event.preventDefault();
       const putSuperpowerThunk = putSuperpower(this.state, this.props);
       store.dispatch(putSuperpowerThunk);
     } else {
-      event.preventDefault();
       const newSuperpowerThunk = postSuperpower(this.state, this.props);
       store.dispatch(newSuperpowerThunk);
       store.dispatch(fetchSuperpowers());
+    }
+  }
+
+  handleDelete(event) {
+    event.preventDefault()
+    const edit = this.props.match.path.indexOf('edit') !== -1
+    console.log('delete clicked', this.state)
+
+    if (edit) {
+      const deletePowerThunk = destroySuperpower(this.state, this.props)
+      store.dispatch(deletePowerThunk)
     }
   }
 
@@ -107,8 +117,9 @@ class superpowerForm extends Component {
             </Form.Field>
             <br />
             <Button type="submit">Submit</Button>
+            <Button onClick={this.handleDelete} color="red">Delete Superpower</Button>
           </Form>
-        </div>) : (<div>You are not. </div>))
+        </div>) : (<div>You are not authorized to view this page.</div>))
     }
 }
 
