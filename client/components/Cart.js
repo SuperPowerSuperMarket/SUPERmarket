@@ -9,6 +9,7 @@ const Cart = (props) => {
     // } else {
     //   console.log('get cart by session')
     // }
+    if (!props.orders) return <h3>There are no orders is your cart</h3>
     const activeOrder = props.orders.find(order => order.status === 'active')
     // let totals
 
@@ -22,14 +23,13 @@ const Cart = (props) => {
 
     //if the orders array is empty, tell the logged in user that the cart is empty
     //if the orders array is not, if orders.find by status 'active' render the items in the active order
-
     return (
       <div className="ui center aligned grid">
         <Card>
             <Card.Content>
                 <Card.Header>
 
-                    {activeOrder && activeOrder.superpowers.length ? `${props.user.firstName},  this is your cart.` : `Your cart is empty`}
+                    {activeOrder && activeOrder.id ? `${props.user.firstName},  this is your cart.` : `Your cart is empty`}
                 </Card.Header>
                 <Card.Meta>
                   <Icon className="shopping cart huge icon" />
@@ -37,6 +37,7 @@ const Cart = (props) => {
                 <Card.Description>
                     {
                         activeOrder &&
+                        activeOrder.id &&
                         activeOrder.superpowers.map(superpower => {
                             return (
                             <Feed key={superpower.id}>
