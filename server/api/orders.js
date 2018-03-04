@@ -3,37 +3,31 @@ const { Order, Superpower, OrderQuantity } = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
-  const userId = req.user.id
-  const sessionId = req.session.id
   let order;
-  if (userId) {
+  if (req.user) {
+    const userId = req.user.id
     order = await Order.findAll({
       where: {userId},
       include: [{ all: true, nested: true }]
     })
   } else {
     order = await Order.findOrCreate({
-      where: {sessionId},
-      defaults: {sessionId},
-      include: [{ all: true }]
-    }).spread((item) => item)
+      where: {id: +req.session.orderId},
+      include: [{ all: true, nested: true }]
+    }).spread((item, created) => {
+      if (created) {
+        req.session.orderId = item.id
+      }
+      return [item]})
   }
-  await order.reload()
   res.send(order)
 });
-
-// router.get('/:id', (req, res, next) => {
-//   Order.findById(req.params.id, { include: [{ all: true }] })
-//     .then(order => res.json(order))
-//     .catch(next);
-// });
 
 router.post('/', async (req, res, next) => {
   const { userId, superpowerId, quantity } = req.body
   let order
   if (!userId) {
   order = await Order.create({
-    sessionId: req.session.id
   }, {
     include: [{ all: true }]
   })

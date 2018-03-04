@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {getOrders, fetchOrders} from './orders'
 
 /**
  * ACTION TYPES
@@ -26,6 +27,8 @@ export const me = () =>
     axios.get('/auth/me')
       .then(res => {
         dispatch(getUser(res.data || defaultUser))
+        console.log('userObj', res.data.orders)
+        dispatch(fetchOrders())
       })
       .catch(err => console.log(err))
 
@@ -34,6 +37,7 @@ export const auth = (email, password, method) =>
     axios.post(`/auth/${method}`, { email, password })
       .then(res => {
         dispatch(getUser(res.data))
+        dispatch(fetchOrders())
         history.push('/home')
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
         dispatch(getUser({error: authError}))
@@ -45,6 +49,7 @@ export const logout = () =>
     axios.post('/auth/logout')
       .then(_ => {
         dispatch(removeUser())
+        dispatch(fetchOrders())
         history.push('/login')
       })
       .catch(err => console.log(err))
