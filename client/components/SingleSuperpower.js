@@ -8,8 +8,17 @@ import CardContent from 'semantic-ui-react/dist/commonjs/views/Card/CardContent'
 
 class SingleSuperpower extends Component {
     constructor(props) {
-        super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        super(props)
+
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleEdit = this.handleEdit.bind(this)
+    }
+
+    handleEdit(event) {
+      event.preventDefault()
+      console.log(this.props.history)
+      const superpower = +this.props.match.params.superpowerId
+      this.props.history.push(`/single-superpower/${superpower}/edit`)
     }
 
     handleSubmit(event) {
@@ -25,59 +34,65 @@ class SingleSuperpower extends Component {
         } else {
             this.props.updateOrder(+user.id, superpower, quantity, foundOrder.id)
         }
-        
+
     }
 
 
     render() {
         const currentSuperpowerId = +this.props.match.params.superpowerId;
         const singlePower = this.props.superpowers.find(superpower => superpower.id === currentSuperpowerId)
+        const currentUser = this.props.user
 
-       
         return (
             this.props.superpowers.length &&
-            <div className='ui center aligned grid'>
+            <div className="ui center aligned grid">
                 <form onSubmit={this.handleSubmit}>
-                    <Card>
-                        <Image src={singlePower.imageUrl} />
-                        <Card.Content>
-                            <Card.Header>
-                                {singlePower.name}
-                            </Card.Header>
-                            <Card.Meta>
-                                <span className='date'>
-
-
-                                </span>
-                            </Card.Meta>
-                            <Card.Description>
-                                {singlePower.description}
-                            </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra>
-                            <a>
-                                <Icon />
-                                {'$' + singlePower.price}
-                            </a>
-                        </Card.Content>
-                        <Card.Content>
-                            <Input name="quant" label="Quantity" type="number" min="0" />
-                        </Card.Content>
-                        <Card.Content>
-                        <Button animated='vertical' type="submit">
-                                <Button.Content hidden>Add</Button.Content>
-                                <Button.Content visible>
-                                    <Icon name='shop' />
-                                </Button.Content>
-                            </Button>
-                        </Card.Content>
-                        </Card>
-                        
+                  <Card>
+                    <Image src={singlePower.imageUrl} />
+                    <Card.Content>
+                        <Card.Header>
+                          {singlePower.name}
+                        </Card.Header>
+                        <Card.Meta>
+                            <span className="date">
+                            </span>
+                        </Card.Meta>
+                        <Card.Description>
+                            {singlePower.description}
+                        </Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+                        <a>
+                            <Icon />
+                            {'$' + singlePower.price}
+                        </a>
+                    </Card.Content>
+                    <Card.Content>
+                        <Input name="quant" label="Quantity" type="number" min="0" />
+                    </Card.Content>
+                    <Card.Content>
+                    <Button animated='vertical' type="submit">
+                            <Button.Content hidden>Add</Button.Content>
+                            <Button.Content visible>
+                                <Icon name='shop' />
+                            </Button.Content>
+                        </Button>
+                    </Card.Content>
+                    </Card>
                 </form>
+                {currentUser.isAdmin ?
+                  (<div>
+                    <Button onClick={this.handleEdit}>
+                      Edit
+                    </Button>
+                  </div>) :
+                  (null)
+                }
             </div>
         )
     }
-    }
+}
+
 const mapStateToProps = state => ({ superpowers: state.superpowers, user: state.user, orders: state.orders })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
