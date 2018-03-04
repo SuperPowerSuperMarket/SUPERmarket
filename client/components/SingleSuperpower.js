@@ -62,11 +62,16 @@ class SingleSuperpower extends Component {
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <a>
-                            <Icon />
-                            {'$' + singlePower.price}
-                        </a>
+                      <Icon />
+                      {'$' + singlePower.price}
                     </Card.Content>
+                    {(singlePower.stock > 0) ?
+                      (<Card.Content>
+                         {singlePower.stock} in stock
+                       </Card.Content>) :
+                      (<Card.Content>
+                       This superpower is currently unavailable.
+                       </Card.Content>)}
                     <Card.Content>
                         <Input name="quant" label="Quantity" type="number" min="0" />
                     </Card.Content>
