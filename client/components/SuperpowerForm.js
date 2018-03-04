@@ -74,6 +74,7 @@ class superpowerForm extends Component {
             </Form.Field>
             <br />
             <Form.Field>
+              <label>Image Url</label>
               <input
                 name="imageUrl"
                 label="image url"
@@ -94,6 +95,7 @@ class superpowerForm extends Component {
             </Form.Field>
             <br />
             <Form.Field>
+              <label>Number in Stock</label>
               <input
                 name="stock"
                 label="Stock"
