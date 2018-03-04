@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { Card, Icon, Image, Input, Button, Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import { fetchSuperpower, postOrder, updateOrder } from '../store';
+import { postOrder, updateOrder } from '../store';
 import CardContent from 'semantic-ui-react/dist/commonjs/views/Card/CardContent';
-import SubmitReview from "./SubmitReview";
+import SubmitReview from './SubmitReview';
+import DisplayReviews from './DisplayReviews';
 
 
 class SingleSuperpower extends Component {
@@ -49,8 +50,6 @@ class SingleSuperpower extends Component {
                             </Card.Header>
                             <Card.Meta>
                                 <span className='date'>
-
-
                                 </span>
                             </Card.Meta>
                             <Card.Description>
@@ -77,13 +76,14 @@ class SingleSuperpower extends Component {
                         </Card>
                 </form>
                 <SubmitReview />
-                {reviews && reviews.length ? reviews.map((review) => (
+                <DisplayReviews />
+                {/* {reviews && reviews.length ? reviews.map((review) => (
           <div key={review.id}>
           <div className="star-ratings-sprite">
           <span style={{width: `${review.stars/.05}%`}} className="star-ratings-sprite-rating" />
           </div>
           <h2>{review.content}</h2>
-          </div>))
+          </div>)) */}
           :
           <h2>No reviews found</h2>
         }
