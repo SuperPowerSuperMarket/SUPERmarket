@@ -61,6 +61,18 @@ export const putSuperpower = (superpower, props) => {
   }
 }
 
+export const destroySuperpower = (superpower, props) => {
+  return dispatch => {
+    axios.delete(`/api/superpowers/${superpower.id}`)
+      .then(res => res.data)
+      .then(deletedPower => {
+        dispatch(deleteSuperpower(deletedPower))
+        dispatch(fetchSuperpowers())
+        props.history.push(`/all-superpowers`)
+      })
+  }
+}
+
 
 /**
  * REDUCER
@@ -72,6 +84,10 @@ export default function (state = [], action) {
     case EDIT_SUPERPOWER:
       return state.map(superpower => (
         action.superpower.id === superpower.id ? action.superpower : superpower
+      ))
+    case DELETE_SUPERPOWER:
+      return state.filter(superpower => (
+        action.superpower.id !== superpower.id
       ))
     default:
       return state
