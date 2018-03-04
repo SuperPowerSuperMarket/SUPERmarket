@@ -33,7 +33,7 @@ router.put('/:id', (req, res, next) => {
     .then(superpower => {
       console.log('req.body', req.body)
       superpower.update(req.body)
-      .then(updatedPower => res.send(updatedPower))
+      .then(updatedPower => res.send(updatedPower).status(201))
     })
 });
 
