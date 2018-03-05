@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {me} from './user'
 import history from '../history'
 
 const GET_USERS = 'GET_USERS'
@@ -21,8 +22,10 @@ export const putUser = (user, ownProps) =>
         .then(res => res.data)
         .then(updatedUser => {
             dispatch(updateUser(updatedUser))
+            dispatch(fetchUsers())
+            dispatch(me())
         })
-        .then(() => ownProps.history.push('/users-list'))
+        // .then(() => ownProps.history.push('/users-list'))
 
 export const deleteUser = (userId, ownProps) =>
     dispatch =>
