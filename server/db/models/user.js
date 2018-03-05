@@ -54,6 +54,18 @@ const User = db.define('user', {
   googleId: {
     type: Sequelize.STRING
   }
+}, {
+  getterMethods: {
+    fullName() {
+      return this.firstName + ' ' + this.lastName
+    }
+  },
+  // setterMethods: {
+  //   createdAtDate () {
+  //     const date = createdAt
+  //     this.setDataValue('createdAt', )
+  //   }
+  // }
 })
 
 module.exports = User
