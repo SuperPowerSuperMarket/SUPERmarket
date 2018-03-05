@@ -20,6 +20,9 @@ export const AccountInfo = (props) => {
         aligned grid">
           <h4>First Name:</h4>
           <p>{props.user.firstName}</p>
+          <Link to={'/edit-firstname'}>
+
+          </Link>
         </Card.Content>
         <Card.Content className="ui center
         aligned grid">
@@ -48,6 +51,9 @@ export const AccountInfo = (props) => {
         </Card.Content>
         <Card.Content className="ui center
         aligned grid">
+          <Link to={'/edit-account'}>
+            <Button style={{ marginBottom: '1em' }} basic color='green'>Edit Your Account</Button>
+          </Link>
           <Link to="/order-history">
             View Your Order History
           </Link>

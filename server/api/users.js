@@ -15,7 +15,9 @@ router.get('/', (req, res, next) => {
   //   .catch(next)
   // :
     User.findAll()
-      .then(users => res.json(users))
+      .then(users => {
+        res.json(users)
+      })
       .catch(next)
     }
   }
