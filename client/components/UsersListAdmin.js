@@ -4,7 +4,10 @@ import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 
 const UserListAdmin = (props) => {
-    const otherUsers = props.users.filter(user => user.id !== props.currentUser.id)
+    let otherUsers;
+    if (props.users && props.currentUser) {
+        otherUsers = props.users.filter(user => user.id !== props.currentUser.id)
+    }
     if (otherUsers) {
         console.log(otherUsers)
     }

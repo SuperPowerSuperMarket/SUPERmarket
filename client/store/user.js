@@ -39,6 +39,7 @@ export const auth = (email, password, method) =>
       .then(res => {
         dispatch(getUser(res.data))
         dispatch(fetchOrders())
+        dispatch(fetchUsers())
         history.push('/home')
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
         dispatch(getUser({error: authError}))
