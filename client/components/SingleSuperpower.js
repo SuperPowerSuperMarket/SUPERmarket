@@ -87,6 +87,14 @@ class SingleSuperpower extends Component {
                         </Card>
                 </Grid.Row>
                 </form>
+                {currentUser.isAdmin ?
+                          (<div>
+                            <Button onClick={this.handleEdit}>
+                              Edit
+                            </Button>
+                          </div>) :
+                          (null)
+                        }
                 <SubmitReview />
                 </Grid>
                 {reviews && reviews.length ? reviews.map((review) => (
@@ -100,14 +108,6 @@ class SingleSuperpower extends Component {
           :
           <h2>No reviews found</h2>
         }
-        {currentUser.isAdmin ?
-                  (<div>
-                    <Button onClick={this.handleEdit}>
-                      Edit
-                    </Button>
-                  </div>) :
-                  (null)
-                }
             </div>
         )
     }
