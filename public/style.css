@@ -20,6 +20,27 @@ form div {
   display: inline-block;
 }
 
+.listing {
+  position: relative;
+}
+
+.listing:hover {
+  background: #dfe6ee;
+}
+
+.listingName{
+  position: absolute;
+  top: 0;
+  background: white;
+  opacity: .8;
+  color: black;
+}
+
+.listingContent {
+  position: absolute;
+  bottom: 0;
+}
+
 .star-ratings-sprite {
   background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
   font-size: 0;

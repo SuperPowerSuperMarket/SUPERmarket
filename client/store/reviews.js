@@ -40,12 +40,12 @@ export const fetchReviews = () =>
       .then(res => res.data)
       .then(reviews => dispatch(getReviews(reviews)))
 
-export const postReview = (userId, superpowerId, rating, review) =>
+export const postReview = (userId, superpowerId, stars, content) =>
   dispatch =>
-    axios.post('/api/reviews', {userId, superPowerId, rating, review})
+    axios.post('/api/reviews', {userId, superpowerId, stars, content})
     .then(res => res.data)
-    .then(review => {
-      dispatch(addReview(review))
+    .then(reviewToPost => {
+      dispatch(addReview(reviewToPost))
       // history.push(``)
     })
 
