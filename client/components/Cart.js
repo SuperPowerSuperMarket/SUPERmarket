@@ -24,12 +24,12 @@ const Cart = (props) => {
     //if the orders array is empty, tell the logged in user that the cart is empty
     //if the orders array is not, if orders.find by status 'active' render the items in the active order
     return (
+        <form onSubmit={props.handleSubmit}>
       <div className="ui center aligned grid">
         <Card>
             <Card.Content>
                 <Card.Header>
-
-                    {activeOrder && activeOrder.id ? `${props.user.firstName},  this is your cart.` : `Your cart is empty`}
+                    {activeOrder && activeOrder.superpowers ? `${props.user.firstName},  this is your cart.` : `Your cart is empty`}
                 </Card.Header>
                 <Card.Meta>
                   <Icon className="shopping cart huge icon" />
@@ -37,7 +37,7 @@ const Cart = (props) => {
                 <Card.Description>
                     {
                         activeOrder &&
-                        activeOrder.id &&
+                        activeOrder.superpowers &&
                         activeOrder.superpowers.map(superpower => {
                             return (
                             <Feed key={superpower.id}>
@@ -67,23 +67,24 @@ const Cart = (props) => {
                         Checkout
                     </Button.Content>
                     <Button.Content hidden>
-                        {'$'}
+                        {activeOrder ? '$' + activeOrder.subTotal : 'Nothing in cart'}
                     </Button.Content>
                 </Button>
             </div>
             <Card.Content extra />
         </Card>
       </div>
+      </form>
     )
 }
 
 const mapStateToProps = state => ({superpowers: state.superpowers, user: state.user, orders: state.orders})
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     handleCartOrder:
-//   }
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    handleSubmit,
+  }
+}
 
 const CartContainer = connect(mapStateToProps)(Cart)
 export default CartContainer;
