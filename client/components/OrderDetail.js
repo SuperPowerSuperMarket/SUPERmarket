@@ -12,12 +12,15 @@ export const OrderDetail = (props) => {
   const orderQuantities = props.orderQuantities.filter(quant => quant.orderId === orderId)
   const superpowers = props.superpowers
   const orderObjects = orderQuantities.map(quant => {
-              const superpower = superpowers.find(superpower => quant.superpowerId === superpower.id).name
+              const superpower = superpowers.find(superpower => quant.superpowerId === superpower.id)
               const quantity = quant.quantity
               const id = quant.id
               return {superpower, quantity, id}
             })
-  const currentOrder = props.user.orders.find(order => order.id === orderId)
+  let currentOrder
+  if (props.user.orders) {
+    currentOrder = props.user.orders.find(order => order.id === orderId)
+  }
 
   return (
     <div className="ui center aligned grid">
@@ -30,17 +33,23 @@ export const OrderDetail = (props) => {
             Order #{orderId}
           </h2>
         </Card.Content>
-        <Card.Content className="ui center aligned grid">
-          Ordered On: {currentOrder.createdAt.slice(0, 10)}
-          <br />
-          Items: {orderObjects.length}
-        </Card.Content>
+        {  currentOrder ?
+          (<Card.Content className="ui center aligned grid">
+            Ordered On: {currentOrder.createdAt.slice(0, 10)}
+            <br />
+            Items: {orderObjects.length}
+            <br />
+            Status: {currentOrder.status}
+            </Card.Content>) : null
+        }
         <Card.Content>
           {
             orderObjects &&
             orderObjects.map(obj => (<div key={obj.id}>
                                       <h4>
-                                        Superpower: {obj.superpower}
+                                        <Link to={`/single-superpower/${obj.superpower.id}`}>
+                                          Superpower: {obj.superpower.name}
+                                        </Link>
                                         <br />
                                         Quantity: {obj.quantity}
                                       </h4>
