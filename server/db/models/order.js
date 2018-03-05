@@ -15,9 +15,6 @@ const Order = db.define('order', {
   },
   arrivedOn: {
     type: Sequelize.DATE,
-  },
-  sessionId: {
-    type: Sequelize.STRING
   }
 }, {
   getterMethods: {
