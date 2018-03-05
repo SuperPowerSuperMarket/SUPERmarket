@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, AllSuperpowers, SingleSuperpower, Cart, UserListAdmin, UserEditForm, SuperpowerForm, AccountInfo, AccountSpecificInfo, OrderHistory, OrderDetail} from './components'
+import {Login, Signup, UserHome, AllSuperpowers, SingleSuperpower, Cart, UserListAdmin, UserEditForm, SuperpowerForm, AccountInfo, AccountSpecificInfo, OrderHistory, OrderDetail, Checkout} from './components'
 import store, {me} from './store'
 import {fetchOrders} from './store/orders'
 import { fetchSuperpowers } from './store/superpowers'
@@ -41,6 +41,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/cart" component={Cart} />
+        <Route path="/checkout" component={Checkout} />
         <Route path="/single-superpower/:superpowerId/edit" component={SuperpowerForm} />
         <Route path="/my-account" component={AccountInfo} />
         <Route exact path="/order-history" component={OrderHistory} />
