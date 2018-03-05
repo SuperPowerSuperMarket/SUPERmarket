@@ -3,9 +3,8 @@ const { Order, Superpower, OrderQuantity } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-
   OrderQuantity.findAll({
-    include: [{ model: Superpower }]
+    include: [{ all: true }]
   })
   .then(orderquant => res.json(orderquant))
   .catch(next);

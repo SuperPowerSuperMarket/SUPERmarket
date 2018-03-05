@@ -27,7 +27,6 @@ export const me = () =>
     axios.get('/auth/me')
       .then(res => {
         dispatch(getUser(res.data || defaultUser))
-        console.log('userObj', res.data.orders)
         dispatch(fetchOrders())
       })
       .catch(err => console.log(err))

@@ -3,9 +3,6 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import { Card, Icon, Image, Input, Button } from 'semantic-ui-react'
 
-/**
- * COMPONENT
- */
 export const AccountInfo = (props) => {
 
   return (
@@ -60,9 +57,6 @@ export const AccountInfo = (props) => {
   )
 }
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     user: state.user
