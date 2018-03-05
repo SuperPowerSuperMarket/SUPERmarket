@@ -18,7 +18,6 @@ class SingleSuperpower extends Component {
 
     handleEdit(event) {
       event.preventDefault()
-      console.log(this.props.history)
       const superpower = +this.props.match.params.superpowerId
       this.props.history.push(`/single-superpower/${superpower}/edit`)
     }
@@ -31,7 +30,6 @@ class SingleSuperpower extends Component {
         const orders = this.props.orders
         const foundOrder = orders.find(order => order.status === 'active')
         if (!orders.length || !foundOrder) {
-            console.log(foundOrder)
             this.props.postOrder(+user.id, superpower, quantity)
         } else {
             this.props.updateOrder(+user.id, superpower, quantity, foundOrder.id)
