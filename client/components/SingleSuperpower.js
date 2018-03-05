@@ -45,6 +45,7 @@ class SingleSuperpower extends Component {
         )
         const users = this.props.users
         const currentUser = this.props.user
+        console.log(users)
 
         return (
             this.props.superpowers.length &&
