@@ -1,6 +1,8 @@
 import React from 'react'
 import { Card, Icon, Feed, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+//import Checkout from './Checkout';
+import { NavLink } from 'react-router-dom';
 
 
 const Cart = (props) => {
@@ -62,6 +64,7 @@ const Cart = (props) => {
                 </Card.Description>
             </Card.Content>
             <div className="ui center aligned grid" style={{marginTop: '1em', marginBottom: '1.5em'}}>
+                <NavLink to={'/checkout'}>
                 <Button positive animated='fade'>
                     <Button.Content visible>
                         Checkout
@@ -70,6 +73,7 @@ const Cart = (props) => {
                         {activeOrder ? '$' + activeOrder.subTotal : 'Nothing in cart'}
                     </Button.Content>
                 </Button>
+                </NavLink>
             </div>
             <Card.Content extra />
         </Card>

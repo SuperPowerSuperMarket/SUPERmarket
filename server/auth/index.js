@@ -1,7 +1,23 @@
 const router = require('express').Router()
 const { User, Order, OrderQuantity } = require('../db/models')
 
-module.exports = router
+const merger = async (user, req) => {
+  const cart = await Order.findOrCreate({
+    where: { status: 'active', userId: user.id },
+    defaults: { userId: user.id },
+    include: [{ all: true, nested: true }]
+  })
+  await OrderQuantity.update(
+    { orderId: cart[0].id },
+    {
+      where: { orderId: req.session.orderId },
+      returning: true
+    }
+  )
+  await Order.destroy({ where: { id: req.session.orderId } })
+}
+
+module.exports = {router, merger}
 
 router.post('/login', async (req, res, next) => {
   const user = await User.findOne({
@@ -15,19 +31,20 @@ router.post('/login', async (req, res, next) => {
   } else {
     req.login(user, err => (err ? next(err) : res.json(user)))
   }
-  const cart = await Order.findOrCreate({
-    where: {status: 'active', userId: user.id},
-    defaults: {userId: user.id},
-    include: [{all: true, nested: true}]
-  })
-  await OrderQuantity.update(
-    { orderId: cart[0].id },
-    {
-      where: { orderId: req.session.orderId },
-      returning: true
-    }
-  )
-  await Order.destroy({ where: { id: req.session.orderId } })
+    merger(user, req)
+  // const cart = await Order.findOrCreate({
+  //   where: {status: 'active', userId: user.id},
+  //   defaults: {userId: user.id},
+  //   include: [{all: true, nested: true}]
+  // })
+  // await OrderQuantity.update(
+  //   { orderId: cart[0].id },
+  //   {
+  //     where: { orderId: req.session.orderId },
+  //     returning: true
+  //   }
+  // )
+  // await Order.destroy({ where: { id: req.session.orderId } })
 })
 
 router.post('/signup', (req, res, next) => {

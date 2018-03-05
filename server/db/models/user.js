@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
-// const Order = require('./order')
+const Order = require('./order')
 
 const User = db.define('user', {
   firstName: {
@@ -58,15 +58,27 @@ const User = db.define('user', {
 
 module.exports = User
 
-/*Lifecycle Method*/
-
-// User.beforeDestroy((userInstance) => {
-//   return Order.destroy({
-//     where: {
-//       userId: userInstance.id
-//     }
+// User.beforeCreate(async (user) => {
+//   const cart = await Order.create({
+//     userId: user.id
 //   })
+//   await OrderQuantity.update(
+//     { orderId: cart[0].id },
+//     {
+//       where: { orderId: req.session.orderId },
+//       returning: true
+//     }
+//   )
+//   await Order.destroy({ where: { id: req.session.orderId } })
 // })
+
+User.beforeDestroy((userInstance) => {
+  return Order.destroy({
+    where: {
+      userId: userInstance.id
+    }
+  })
+})
 
 /**
  * instanceMethods
