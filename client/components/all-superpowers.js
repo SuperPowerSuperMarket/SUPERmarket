@@ -3,20 +3,6 @@ import {connect} from 'react-redux'
 import { Grid, Image, Form, Button } from 'semantic-ui-react'
 import { withRouter, NavLink } from 'react-router-dom'
 
-<<<<<<< HEAD
-const AllSuperpowers = (props) => {
-  return (
-  <div style={{ marginTop: '5.5em' }}>
-    <Grid columns={3} divided>
-    {props.superpowers.map((superpower) => {
-      return (
-        <Grid.Column key={superpower.id}>
-          <NavLink to={`/single-superpower/${superpower.id}`}>
-            <Image src={superpower.imageUrl} width="auto" height="75%" />
-              <h2>{superpower.name}</h2>
-              <h2>{superpower.description}</h2>
-          </NavLink>
-=======
 class AllSuperpowers extends Component {
   constructor(props) {
     super(props)
@@ -91,7 +77,6 @@ class AllSuperpowers extends Component {
           >
             Clear Tag
           </Button>
->>>>>>> master
         </Grid.Column>
         </Grid>
         <Grid columns={3} divided>
