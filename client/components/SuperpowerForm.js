@@ -13,6 +13,8 @@ class superpowerForm extends Component {
     const edit = (props.match.path.indexOf('edit') !== -1)
     const id = +props.match.params.superpowerId
 
+    this.state = {}
+
     if (edit) {
       const currentPower = props.superpowers.find(superpower => superpower.id === id)
       this.state = currentPower
