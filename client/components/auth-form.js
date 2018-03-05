@@ -13,7 +13,7 @@ const AuthForm = (props) => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <Container text style={{marginTop: "7em" }}>
+    <Container style={{marginTop: "7em" }}>
       <form onSubmit={handleSubmit} name={name}>
       <h1>{displayName} Yo</h1>
         <div>

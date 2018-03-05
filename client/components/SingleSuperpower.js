@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Card, Icon, Image, Input, Button } from 'semantic-ui-react'
+import { Card, Icon, Image, Input, Button, Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import { fetchSuperpower, postOrder, updateOrder } from '../store';
+import { postOrder, updateOrder } from '../store';
 import CardContent from 'semantic-ui-react/dist/commonjs/views/Card/CardContent';
+import SubmitReview from './SubmitReview';
+import DisplayReviews from './DisplayReviews';
 
 
 class SingleSuperpower extends Component {
@@ -32,64 +34,71 @@ class SingleSuperpower extends Component {
         } else {
             this.props.updateOrder(+user.id, superpower, quantity, foundOrder.id)
         }
-
     }
 
 
     render() {
         const currentSuperpowerId = +this.props.match.params.superpowerId;
         const singlePower = this.props.superpowers.find(superpower => superpower.id === currentSuperpowerId)
+        const reviews = this.props.reviews.filter(
+          review => review.superpowerId === currentSuperpowerId
+        )
         const currentUser = this.props.user
 
         return (
             this.props.superpowers.length &&
-            <div className="ui center aligned grid">
+            <div className='ui center aligned grid'>
+                <Grid column={2} divided>
                 <form onSubmit={this.handleSubmit}>
-                  <Card>
-                    <Image src={singlePower.imageUrl} />
-                    <Card.Content>
-                        <Card.Header>
-                          {singlePower.name}
-                        </Card.Header>
-                        <Card.Meta>
-                            <span className="date">
-                            </span>
-                        </Card.Meta>
-                        <Card.Description>
-                            {singlePower.description}
-                        </Card.Description>
-                    </Card.Content>
-                    <Card.Content>
-                      <p>
-                        Tags:
-                      </p>
-                      {singlePower.tags.map(tag => <div key={tag}><a>{tag}</a><br /></div>)}
-                    </Card.Content>
-                    <Card.Content extra>
-                      <Icon />
-                      {'$' + singlePower.price}
-                    </Card.Content>
-                    {(singlePower.stock > 0) ?
-                      (<Card.Content>
-                         {singlePower.stock} in stock
-                       </Card.Content>) :
-                      (<Card.Content>
-                       This superpower is currently unavailable.
-                       </Card.Content>)}
-                    <Card.Content>
-                        <Input name="quant" label="Quantity" type="number" min="0" />
-                    </Card.Content>
-                    <Card.Content>
-                      <Button animated='vertical' type="submit">
-                        <Button.Content hidden>Add</Button.Content>
-                        <Button.Content visible>
-                            <Icon name='shop' />
-                        </Button.Content>
-                      </Button>
-                    </Card.Content>
-                    </Card>
+                <Grid.Row stretched>
+                    <Card>
+                        <Image src={singlePower.imageUrl} />
+                        <Card.Content>
+                            <Card.Header>
+                                {singlePower.name}
+                            </Card.Header>
+                            <Card.Meta>
+                                <span className='date'>
+                                </span>
+                            </Card.Meta>
+                            <Card.Description>
+                                {singlePower.description}
+                            </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
+                            <a>
+                                <Icon />
+                                {'$' + singlePower.price}
+                            </a>
+                        </Card.Content>
+                        <Card.Content>
+                            <Input name="quant" label="Quantity" type="number" min="0" />
+                        </Card.Content>
+                        <Card.Content>
+                        <Button animated='vertical' type="submit">
+                                <Button.Content hidden>Add</Button.Content>
+                                <Button.Content visible>
+                                    <Icon name='shop' />
+                                </Button.Content>
+                            </Button>
+                        </Card.Content>
+                        </Card>
+                </Grid.Row>
                 </form>
-                {currentUser.isAdmin ?
+                <SubmitReview />
+                </Grid>
+                {reviews && reviews.length ? reviews.map((review) => (
+          <div key={review.id}>
+          <div className="star-ratings-sprite">
+          <span style={{width: `${review.stars/.05}%`}} className="star-ratings-sprite-rating" />
+          </div>
+          <h2>By {review.userId}</h2>
+          <h3>{review.content}</h3>
+          </div>))
+          :
+          <h2>No reviews found</h2>
+        }
+        {currentUser.isAdmin ?
                   (<div>
                     <Button onClick={this.handleEdit}>
                       Edit
@@ -100,9 +109,8 @@ class SingleSuperpower extends Component {
             </div>
         )
     }
-}
-
-const mapStateToProps = state => ({ superpowers: state.superpowers, user: state.user, orders: state.orders })
+    }
+const mapStateToProps = state => ({ superpowers: state.superpowers, user: state.user, reviews: state.reviews, orders: state.orders })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     postOrder: (userId, superpower, quantity) => dispatch(postOrder(userId, superpower, quantity, ownProps.history)),

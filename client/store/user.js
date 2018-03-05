@@ -1,6 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 import {getOrders, fetchOrders} from './orders'
+import {fetchUsers} from './users'
 
 /**
  * ACTION TYPES
@@ -28,6 +29,7 @@ export const me = () =>
       .then(res => {
         dispatch(getUser(res.data || defaultUser))
         dispatch(fetchOrders())
+        dispatch(fetchUsers())
       })
       .catch(err => console.log(err))
 
@@ -37,6 +39,7 @@ export const auth = (email, password, method) =>
       .then(res => {
         dispatch(getUser(res.data))
         dispatch(fetchOrders())
+        dispatch(fetchUsers())
         history.push('/home')
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
         dispatch(getUser({error: authError}))
@@ -60,8 +63,10 @@ export default function (state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user
+
     case REMOVE_USER:
       return defaultUser
+
     default:
       return state
   }
