@@ -17,7 +17,10 @@ export const OrderDetail = (props) => {
               const id = quant.id
               return {superpower, quantity, id}
             })
-  const currentOrder = props.user.orders.find(order => order.id === orderId)
+  let currentOrder
+  if (props.user.orders) {
+    currentOrder = props.user.orders.find(order => order.id === orderId)
+  }
 
   return (
     <div className="ui center aligned grid">
@@ -30,11 +33,15 @@ export const OrderDetail = (props) => {
             Order #{orderId}
           </h2>
         </Card.Content>
-        <Card.Content className="ui center aligned grid">
-          Ordered On: {currentOrder.createdAt.slice(0, 10)}
-          <br />
-          Items: {orderObjects.length}
-        </Card.Content>
+        {  currentOrder ?
+          (<Card.Content className="ui center aligned grid">
+            Ordered On: {currentOrder.createdAt.slice(0, 10)}
+            <br />
+            Items: {orderObjects.length}
+            <br />
+            Status: {currentOrder.status}
+            </Card.Content>) : null
+        }
         <Card.Content>
           {
             orderObjects &&

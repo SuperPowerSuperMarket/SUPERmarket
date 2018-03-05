@@ -22,7 +22,7 @@ export const OrderHistory = (props) => {
         </Card.Content>
         <Card.Content>
           {
-            props.user &&
+            props.user && props.user.orders &&
             props.user.orders.filter(order => order.status !== 'active')
             .map(order => (<Link to={`/order-history/${order.id}`} key={order.id}>
                              Order Date:
