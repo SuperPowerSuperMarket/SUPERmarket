@@ -36,17 +36,12 @@ class SingleSuperpower extends Component {
         } else {
             this.props.updateOrder(+user.id, superpower, quantity, foundOrder.id)
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     }
 
 
     render() {
         const currentSuperpowerId = +this.props.match.params.superpowerId;
         const singlePower = this.props.superpowers.find(superpower => superpower.id === currentSuperpowerId)
-<<<<<<< HEAD
         const reviews = this.props.reviews.filter(
           review => review.superpowerId === currentSuperpowerId
         )
@@ -103,63 +98,7 @@ class SingleSuperpower extends Component {
           :
           <h2>No reviews found</h2>
         }
-            </div>
-        )
-    }
-    }
-const mapStateToProps = state => ({ superpowers: state.superpowers, user: state.user, reviews: state.reviews, orders: state.orders })
-=======
-        const currentUser = this.props.user
-
-        return (
-            this.props.superpowers.length &&
-            <div className="ui center aligned grid">
-                <form onSubmit={this.handleSubmit}>
-                  <Card>
-                    <Image src={singlePower.imageUrl} />
-                    <Card.Content>
-                        <Card.Header>
-                          {singlePower.name}
-                        </Card.Header>
-                        <Card.Meta>
-                            <span className="date">
-                            </span>
-                        </Card.Meta>
-                        <Card.Description>
-                            {singlePower.description}
-                        </Card.Description>
-                    </Card.Content>
-                    <Card.Content>
-                      <p>
-                        Tags:
-                      </p>
-                      {singlePower.tags.map(tag => <div key={tag}><a>{tag}</a><br /></div>)}
-                    </Card.Content>
-                    <Card.Content extra>
-                      <Icon />
-                      {'$' + singlePower.price}
-                    </Card.Content>
-                    {(singlePower.stock > 0) ?
-                      (<Card.Content>
-                         {singlePower.stock} in stock
-                       </Card.Content>) :
-                      (<Card.Content>
-                       This superpower is currently unavailable.
-                       </Card.Content>)}
-                    <Card.Content>
-                        <Input name="quant" label="Quantity" type="number" min="0" />
-                    </Card.Content>
-                    <Card.Content>
-                      <Button animated='vertical' type="submit">
-                        <Button.Content hidden>Add</Button.Content>
-                        <Button.Content visible>
-                            <Icon name='shop' />
-                        </Button.Content>
-                      </Button>
-                    </Card.Content>
-                    </Card>
-                </form>
-                {currentUser.isAdmin ?
+        {currentUser.isAdmin ?
                   (<div>
                     <Button onClick={this.handleEdit}>
                       Edit
@@ -170,10 +109,8 @@ const mapStateToProps = state => ({ superpowers: state.superpowers, user: state.
             </div>
         )
     }
-}
-
-const mapStateToProps = state => ({ superpowers: state.superpowers, user: state.user, orders: state.orders })
->>>>>>> master
+    }
+const mapStateToProps = state => ({ superpowers: state.superpowers, user: state.user, reviews: state.reviews, orders: state.orders })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     postOrder: (userId, superpower, quantity) => dispatch(postOrder(userId, superpower, quantity, ownProps.history)),
