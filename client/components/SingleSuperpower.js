@@ -40,8 +40,9 @@ class SingleSuperpower extends Component {
         return (
             this.props.superpowers.length &&
             <div className='ui center aligned grid'>
-                <Grid column={2}>
+                <Grid column={2} divided>
                 <form onSubmit={this.handleSubmit}>
+                <Grid.Row stretched>
                     <Card>
                         <Image src={singlePower.imageUrl} />
                         <Card.Content>
@@ -74,20 +75,20 @@ class SingleSuperpower extends Component {
                             </Button>
                         </Card.Content>
                         </Card>
-                </form>
                 <SubmitReview />
-                <DisplayReviews />
-                {/* {reviews && reviews.length ? reviews.map((review) => (
+                </Grid.Row>
+                </form>
+                </Grid>
+                {reviews && reviews.length ? reviews.map((review) => (
           <div key={review.id}>
           <div className="star-ratings-sprite">
           <span style={{width: `${review.stars/.05}%`}} className="star-ratings-sprite-rating" />
           </div>
           <h2>{review.content}</h2>
-          </div>)) */}
+          </div>))
           :
           <h2>No reviews found</h2>
         }
-        </Grid>
             </div>
         )
     }

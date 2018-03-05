@@ -12,7 +12,6 @@ const REMOVE_SUPERPOWER = 'REMOVE_SUPERPOWER'
 /**
  * INITIAL STATE
  */
-// const initialState = []
 
 /**
  * ACTION CREATORS
@@ -41,11 +40,14 @@ export const fetchReviews = () =>
       .then(res => res.data)
       .then(reviews => dispatch(getReviews(reviews)))
 
-export const postReview = () =>
+export const postReview = (userId, superpowerId, rating, review) =>
   dispatch =>
-    axios.post('/api/reviews')
+    axios.post('/api/reviews', {userId, superPowerId, rating, review})
     .then(res => res.data)
-    .then(review => dispatch(addReview(review)))
+    .then(review => {
+      dispatch(addReview(review))
+      // history.push(``)
+    })
 
 
 /**
@@ -56,7 +58,7 @@ export default function (state = [], action) {
     case GET_REVIEWS:
       return action.reviews
     case ADD_REVIEW:
-      return action.review
+      return [...state, action.review]
     default:
       return state
   }
