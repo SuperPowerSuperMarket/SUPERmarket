@@ -85,22 +85,27 @@ const users = [{
 
 
 const authorId = () => Math.round(Math.random() * (users.length - 1)) + 1;
+const superpowerId = () => Math.round(Math.random() * (superpowers.length - 1)) + 1;
+
 
 const reviews = [{
   stars: 4,
   content: 'I loved flying everywhere! It was the coolest!',
   dateCreated: '2018-01-12',
-  authorId: authorId()
+  userId: authorId(),
+  superpowerId: superpowerId()
 }, {
   stars: 3,
   content: 'I didn\'t like being invisible. People kept bumping into me as I walked on the sidewalk. But, it definitely worked as advertised! I was not seen.',
   dateCreated: '2017-06-24',
-  authorId: authorId()
+  userId: authorId(),
+  superpowerId: superpowerId()
 }, {
   stars: 5,
   content: 'Teleportation really improved my morning commute. I will definitely be using this again!',
   dateCreated: '2017-03-12',
-  authorId: authorId()
+  userId: authorId(),
+  superpowerId: superpowerId()
 }]
 
 

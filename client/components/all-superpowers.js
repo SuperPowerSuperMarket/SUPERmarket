@@ -44,8 +44,8 @@ class AllSuperpowers extends Component {
     const filteredTags = allTags.filter((el, index, self) => self.indexOf(el) === index)
 
     return (
-      <div text style={{ marginTop: '5.5em' }}>
-        <Form text style={{marginLeft: '5.5em', marginBottom: '2em'}}>
+      <div style={{ marginTop: '5.5em' }}>
+        <Form style={{marginLeft: '5.5em', marginBottom: '2em'}}>
           <Form.Input
             placeholder="Search by name"
             label="Search"
@@ -54,7 +54,7 @@ class AllSuperpowers extends Component {
             value={this.state.search ? this.state.search : ''}
           />
         </Form>
-        <Grid columns={8} divided text style={{marginLeft: '5.5em'}}>
+        <Grid columns={8} divided style={{marginLeft: '5.5em'}}>
         {
           filteredTags.map(tag => {
             return (

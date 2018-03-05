@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <div text style={{marginTop: '8em'}}>
+      <div style={{marginTop: '8em'}}>
         <Routes />
       </div>
     </div>

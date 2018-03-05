@@ -12,10 +12,6 @@ const Review = db.define('review', {
   },
   content: {
     type: Sequelize.TEXT
-  },
-  dateCreated: {
-    type: Sequelize.DATE,
-    defaultValue: Date.now()
   }
 })
 
