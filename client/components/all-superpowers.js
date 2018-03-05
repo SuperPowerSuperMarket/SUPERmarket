@@ -62,7 +62,7 @@ class AllSuperpowers extends Component {
                 <Button
                   onClick={this.handleTag}
                   value={tag}
-                  color={this.state.tag === tag ? this.state.color : "gray"}
+                  color={this.state.tag === tag ? this.state.color : 'gray'}
                 >
                   {tag}
                 </Button>
@@ -83,7 +83,7 @@ class AllSuperpowers extends Component {
         {
           this.props.superpowers.filter(superpower => {
             if (this.state.search) {
-              return superpower.name.toLowerCase().includes(this.state.search)
+              return superpower.name.toLowerCase().includes(this.state.search.toLowerCase())
             }
             if (this.state.tag) {
               return superpower.tags.indexOf(this.state.tag) !== -1
