@@ -16,7 +16,6 @@ router.get('/', (req, res, next) => {
   // :
     User.findAll()
       .then(users => {
-        console.log(users)
         res.json(users)
       })
       .catch(next)
