@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { logout } from "../store";
 import {
   Button,
@@ -18,7 +18,6 @@ import {
 } from "semantic-ui-react";
 
 const Navbar = ({ handleClick, isLoggedIn, user }) => {
-
   return (
     <div>
       <Menu fixed="top" inverted>
@@ -37,6 +36,12 @@ const Navbar = ({ handleClick, isLoggedIn, user }) => {
             <Menu.Item position="right">
               {/* The navbar will show these links after you log in */}
               <h4 text style={{marginRight: '8em', marginBottom: '0.1em'}}>Hello {'' + user.firstName}</h4>
+              {
+                user.isAdmin &&
+                <Link to={'/users-list'}>
+                  <Button text style={{marginRight: '8em'}} primary>Admin</Button>
+                </Link>
+              }
               <a href="#" onClick={handleClick}>
                 Logout
               </a>
@@ -84,7 +89,7 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(mapState, mapDispatch)(Navbar);
+export default withRouter(connect(mapState, mapDispatch)(Navbar));
 
 /**
  * PROP TYPES

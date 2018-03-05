@@ -1,6 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 import {getOrders, fetchOrders} from './orders'
+import {fetchUsers} from './users'
 
 /**
  * ACTION TYPES
@@ -27,8 +28,8 @@ export const me = () =>
     axios.get('/auth/me')
       .then(res => {
         dispatch(getUser(res.data || defaultUser))
-        console.log('userObj', res.data.orders)
         dispatch(fetchOrders())
+        dispatch(fetchUsers())
       })
       .catch(err => console.log(err))
 
@@ -61,8 +62,10 @@ export default function (state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user
+
     case REMOVE_USER:
       return defaultUser
+
     default:
       return state
   }
