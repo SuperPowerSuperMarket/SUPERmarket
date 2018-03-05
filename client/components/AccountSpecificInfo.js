@@ -4,17 +4,20 @@ import { connect } from 'react-redux'
 import { putUser } from '../store/users';
 
 const UserEditForm = (props) => {
-    const currentUserId = +props.match.params.userId
-    const currentUser = props.users.find(user => user.id === currentUserId)
+    // const currentUserId = +props.match.params.userId
+    // const currentUser = props.users.find(user => user.id === currentUserId)
+    if (props.currentUser) {
+        console.log(props.currentUser)
+    }
     return (
         <div className="ui center aligned grid">
-            <Form onSubmit={(evt) => props.updateUser(currentUser, evt)}>
+            <Form onSubmit={(evt) => props.updateUser(props.currentUser, evt)}>
                 <Form.Field text style={{ marginRight: '4em'}}>
                     <label>First Name</label>
                     {
-                        currentUser &&
-                        <input 
-                        placeholder={currentUser.firstName} 
+                        props.currentUser &&
+                        <input
+                        placeholder={props.currentUser.firstName} 
                         name="firstname"
                         />
                     }
@@ -22,9 +25,9 @@ const UserEditForm = (props) => {
                 <Form.Field>
                     <label>Last Name</label>
                     {
-                        currentUser &&
-                        <input 
-                        placeholder={currentUser.lastName} 
+                        props.currentUser &&
+                        <input
+                        placeholder={props.currentUser.lastName} 
                         name="lastname"
                         />
                     }
@@ -33,9 +36,9 @@ const UserEditForm = (props) => {
                 <Form.Field text style={{ marginRight: '4em'}}>
                     <label>Email</label>
                     {
-                        currentUser &&
-                        <input 
-                        placeholder={currentUser.email} 
+                        props.currentUser &&
+                        <input
+                        placeholder={props.currentUser.email} 
                         name="email"
                         />
                     }
@@ -43,9 +46,9 @@ const UserEditForm = (props) => {
                 <Form.Field>
                     <label>Mailing Address</label>
                     {
-                        currentUser && 
+                        props.currentUser && 
                         <input 
-                        placeholder={currentUser.mailingAddress} 
+                        placeholder={props.currentUser.mailingAddress} 
                         name="mailingaddress"
                         />
                     }
@@ -54,9 +57,9 @@ const UserEditForm = (props) => {
                 <Form.Field text style={{ marginRight: '4em'}}>
                     <label>Phone</label>
                     {
-                        currentUser &&
-                        <input 
-                        placeholder={currentUser.phone}
+                        props.currentUser &&
+                        <input
+                        placeholder={props.currentUser.phone}
                         name="phone"
                         />
                     }
@@ -64,9 +67,9 @@ const UserEditForm = (props) => {
                 <Form.Field>
                     <label>Billing Address</label>
                     {
-                        currentUser &&
-                        <input 
-                        placeholder={currentUser.billingAddress} 
+                        props.currentUser &&
+                        <input
+                        placeholder={props.currentUser.billingAddress} 
                         name="billingaddress"
                         />
                     }
@@ -82,7 +85,7 @@ const UserEditForm = (props) => {
 
 const mapStateToProps = state => {
     return {
-        users: state.users
+        currentUser: state.user
     }
 }
 
@@ -103,7 +106,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                 }
             }
             dispatch(putUser(updatedUser, ownProps))
-            ownProps.history.push('/users-list')
+            ownProps.history.push('/my-account')
         }
     }
 }

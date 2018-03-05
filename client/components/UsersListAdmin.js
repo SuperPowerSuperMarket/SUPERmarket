@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form, Feed, Card, Grid } from 'semantic-ui-react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { deleteUser } from '../store/users'
 
 const UserListAdmin = (props) => {
     let otherUsers;
@@ -34,7 +35,7 @@ const UserListAdmin = (props) => {
                                     <Link to={`/edit-user/${user.id}`}>
                                         <Button basic color='green'>Edit</Button>
                                     </Link>
-                                    <Button basic color='red'>Delete</Button>
+                                    <Button onClick={() => props.removeUser(user.id)} basic color='red'>Delete</Button>
                                 </div>
                             </Card.Content>
                         </Card>
@@ -53,6 +54,14 @@ const mapStateToProps = state => {
     }
 }
 
-const UserListAdminContainer = withRouter(connect(mapStateToProps)(UserListAdmin))
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        removeUser: function (userId) {
+            dispatch(deleteUser(userId, ownProps))
+        }
+    }
+}
+
+const UserListAdminContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(UserListAdmin))
 export default UserListAdminContainer
 
