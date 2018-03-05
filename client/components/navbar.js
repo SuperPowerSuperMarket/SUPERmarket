@@ -54,7 +54,7 @@ const Navbar = ({ handleClick, isLoggedIn, user }) => {
           )}
           <Menu.Item>
             <Link to="/cart">
-              <Icon className="shopping cart big icon" text style={{marginRight: '1em'}} />
+              <Icon className="shopping cart big icon" style={{marginRight: '1em'}} />
             </Link>
             <Link to={'/home'}>
               Account

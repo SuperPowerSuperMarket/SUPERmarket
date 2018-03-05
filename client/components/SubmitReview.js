@@ -51,12 +51,10 @@ class SubmitReview extends Component {
             <option value={1}>1</option>
           </select>
           <h3>Write Review Here</h3>
-          <Form.TextArea name="review" onChange={this.handleChange} placeholder="Write review here" />
+          <TextArea name="review" onChange={this.handleChange} placeholder="Write review here" />
         { warning && <div>{warning}</div> }
         </Form>
-        <Form>
           <Form.Button onClick={this.handleSubmit}>Submit</Form.Button>
-        </Form>
       </div>
     );
   }

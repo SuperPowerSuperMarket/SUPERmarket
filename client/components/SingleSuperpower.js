@@ -45,6 +45,7 @@ class SingleSuperpower extends Component {
         const reviews = this.props.reviews.filter(
           review => review.superpowerId === currentSuperpowerId
         )
+        const currentUser = this.props.user
 
         return (
             this.props.superpowers.length &&
@@ -84,16 +85,17 @@ class SingleSuperpower extends Component {
                             </Button>
                         </Card.Content>
                         </Card>
-                <SubmitReview />
                 </Grid.Row>
                 </form>
+                <SubmitReview />
                 </Grid>
                 {reviews && reviews.length ? reviews.map((review) => (
           <div key={review.id}>
           <div className="star-ratings-sprite">
           <span style={{width: `${review.stars/.05}%`}} className="star-ratings-sprite-rating" />
           </div>
-          <h2>{review.content}</h2>
+          <h2>By {review.userId}</h2>
+          <h3>{review.content}</h3>
           </div>))
           :
           <h2>No reviews found</h2>

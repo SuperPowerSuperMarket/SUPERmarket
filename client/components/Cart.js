@@ -61,7 +61,7 @@ const Cart = (props) => {
 
                 </Card.Description>
             </Card.Content>
-            <div className="ui center aligned grid" text style={{marginTop: '1em', marginBottom: '1.5em'}}>
+            <div className="ui center aligned grid" style={{marginTop: '1em', marginBottom: '1.5em'}}>
                 <Button positive animated='fade'>
                     <Button.Content visible>
                         Checkout
