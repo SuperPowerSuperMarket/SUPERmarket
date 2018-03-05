@@ -93,7 +93,7 @@ class SingleSuperpower extends Component {
           <div className="star-ratings-sprite">
           <span style={{width: `${review.stars/.05}%`}} className="star-ratings-sprite-rating" />
           </div>
-          <h2>By {review.userId}</h2>
+          <h2>By {users.find(user => user.id === review.userId).fullName}</h2>
           <h3>{review.content}</h3>
           </div>))
           :
