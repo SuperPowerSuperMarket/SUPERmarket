@@ -92,11 +92,10 @@ class AllSuperpowers extends Component {
           })
           .map((superpower) => {
           return (
-            <Grid.Column key={superpower.id}>
+            <Grid.Column key={superpower.id} className="listing">
               <NavLink to={`/single-superpower/${superpower.id}`}>
                 <Image src={superpower.imageUrl} />
-                  <h2>{superpower.name}</h2>
-                  <h2>{superpower.description}</h2>
+                  <h2 className="listingContent">{superpower.name} <br /> {superpower.description}</h2>
               </NavLink>
             </Grid.Column>
           )}

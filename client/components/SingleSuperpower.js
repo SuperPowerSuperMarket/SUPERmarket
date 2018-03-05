@@ -43,6 +43,7 @@ class SingleSuperpower extends Component {
         const reviews = this.props.reviews.filter(
           review => review.superpowerId === currentSuperpowerId
         )
+        const users = this.props.users
         const currentUser = this.props.user
 
         return (
@@ -110,7 +111,7 @@ class SingleSuperpower extends Component {
         )
     }
     }
-const mapStateToProps = state => ({ superpowers: state.superpowers, user: state.user, reviews: state.reviews, orders: state.orders })
+const mapStateToProps = state => ({ superpowers: state.superpowers, user: state.user, reviews: state.reviews, orders: state.orders, users: state.users })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     postOrder: (userId, superpower, quantity) => dispatch(postOrder(userId, superpower, quantity, ownProps.history)),

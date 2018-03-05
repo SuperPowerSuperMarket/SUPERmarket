@@ -17,9 +17,8 @@ class Routes extends Component {
     const superpowersThunk = fetchSuperpowers()
     const getOrdersThunk = fetchOrders()
     const quantsThunk = fetchOrderQuants()
-
-    store.dispatch(superpowersThunk)
     const reviewsThunk = fetchReviews()
+    store.dispatch(superpowersThunk)
     store.dispatch(reviewsThunk)
     store.dispatch(getOrdersThunk)
     store.dispatch(quantsThunk)
