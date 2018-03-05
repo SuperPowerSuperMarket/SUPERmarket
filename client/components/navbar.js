@@ -36,7 +36,7 @@ const Navbar = ({ handleClick, isLoggedIn, user }) => {
           {isLoggedIn ? (
             <Menu.Item position="right">
               {/* The navbar will show these links after you log in */}
-              <h4 text style={{marginRight: '8em', marginBottom: '0.1em'}}>Hello {'' + user.firstName}</h4>
+              <h4 style={{marginRight: '8em', marginBottom: '0.1em'}}>Hello {'' + user.firstName}</h4>
               <a href="#" onClick={handleClick}>
                 Logout
               </a>
@@ -54,7 +54,7 @@ const Navbar = ({ handleClick, isLoggedIn, user }) => {
           )}
           <Menu.Item>
             <Link to="/cart">
-              <Icon className="shopping cart big icon" text style={{marginRight: '1em'}} />
+              <Icon className="shopping cart big icon" style={{marginRight: '1em'}} />
             </Link>
             <Link to={'/my-account'}>
               Account

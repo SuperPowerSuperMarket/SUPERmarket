@@ -6,7 +6,11 @@ import {Login, Signup, UserHome, AllSuperpowers, SingleSuperpower, Cart, Superpo
 import store, {me} from './store'
 import {fetchOrders} from './store/orders'
 import { fetchSuperpowers } from './store/superpowers';
+<<<<<<< HEAD
+import { fetchReviews } from './store/reviews'
+=======
 import {fetchOrderQuants} from './store/order-quantities'
+>>>>>>> master
 
 /**
  * COMPONENT
@@ -18,6 +22,8 @@ class Routes extends Component {
     const quantsThunk = fetchOrderQuants()
 
     store.dispatch(superpowersThunk)
+    const reviewsThunk = fetchReviews()
+    store.dispatch(reviewsThunk)
     store.dispatch(getOrdersThunk)
     store.dispatch(quantsThunk)
 
