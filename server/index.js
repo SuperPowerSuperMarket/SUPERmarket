@@ -48,10 +48,15 @@ const createApp = () => {
     secret: process.env.SESSION_SECRET || 'my best friend is Cody',
     store: sessionStore,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: true
   }))
   app.use(passport.initialize())
   app.use(passport.session())
+
+  app.use((req, res, next) => {
+    req.session.orderId = req.session.orderId || null;
+    next();
+  })
 
   // auth and api routes
   app.use('/auth', require('./auth'))

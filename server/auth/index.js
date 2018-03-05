@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const User = require('../db/models/user')
+const {User, Order, OrderQuantity} = require('../db/models')
+
 module.exports = router
 
 router.post('/login', (req, res, next) => {
@@ -14,10 +15,24 @@ router.post('/login', (req, res, next) => {
         res.status(401).send('Incorrect password')
       } else {
         req.login(user, err => (err ? next(err) : res.json(user)))
+        return user;
       }
     })
-    .catch(next)
-})
+    .then((user) => {
+      const cart = user.orders.find(order => order.status === 'active')
+      OrderQuantity.update(
+        { orderId: cart.id },
+        { where: { orderId: req.session.orderId}}
+      )
+    })
+    .spread((affectedCount, affectedRows) => {
+      return  Order.destroy({where: {id: req.session.orderId}})
+    })
+    .then(() => console.log('deleted!'))
+     
+    })
+    //.catch(next)
+
 
 router.post('/signup', (req, res, next) => {
   User.create(req.body)
