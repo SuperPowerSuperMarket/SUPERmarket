@@ -1,38 +1,34 @@
 const router = require('express').Router()
-const {User, Order, OrderQuantity} = require('../db/models')
+const { User, Order, OrderQuantity } = require('../db/models')
 
 module.exports = router
 
-router.post('/login', (req, res, next) => {
-  User.findOne({
-    include: [{all: true}],
-    where: {email: req.body.email}
+router.post('/login', async (req, res, next) => {
+  const user = await User.findOne({
+    include: [{ all: true }],
+    where: { email: req.body.email }
   })
-    .then(user => {
-      if (!user) {
-        res.status(401).send('User not found')
-      } else if (!user.correctPassword(req.body.password)) {
-        res.status(401).send('Incorrect password')
-      } else {
-        req.login(user, err => (err ? next(err) : res.json(user)))
-        return user;
-      }
-    })
-    .then((user) => {
-      const cart = user.orders.find(order => order.status === 'active')
-      OrderQuantity.update(
-        { orderId: cart.id },
-        { where: { orderId: req.session.orderId}}
-      )
-    })
-    .spread((affectedCount, affectedRows) => {
-      return  Order.destroy({where: {id: req.session.orderId}})
-    })
-    .then(() => console.log('deleted!'))
-     
-    })
-    //.catch(next)
-
+  if (!user) {
+    res.status(401).send('User not found')
+  } else if (!user.correctPassword(req.body.password)) {
+    res.status(401).send('Incorrect password')
+  } else {
+    req.login(user, err => (err ? next(err) : res.json(user)))
+  }
+  const cart = await Order.findOrCreate({
+    where: {status: 'active', userId: user.id},
+    defaults: {userId: user.id},
+    include: [{all: true, nested: true}]
+  })
+  await OrderQuantity.update(
+    { orderId: cart[0].id },
+    {
+      where: { orderId: req.session.orderId },
+      returning: true
+    }
+  )
+  await Order.destroy({ where: { id: req.session.orderId } })
+})
 
 router.post('/signup', (req, res, next) => {
   User.create(req.body)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Card, Icon, Image, Input, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import { fetchSuperpower, postOrder, updateOrder } from '../store';
+import { postOrder, updateOrder } from '../store';
 import CardContent from 'semantic-ui-react/dist/commonjs/views/Card/CardContent';
 
 
