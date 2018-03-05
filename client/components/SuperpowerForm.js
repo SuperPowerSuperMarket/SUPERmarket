@@ -36,9 +36,13 @@ class superpowerForm extends Component {
   }
 
   handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+    const name = event.target.name
+    let value
+    name === 'tags' ? value = event.target.value.split(',') : value = event.target.value
+
+      this.setState({
+        [name]: value
+      })
   }
 
   handleSubmit(event) {
@@ -116,8 +120,21 @@ class superpowerForm extends Component {
               />
             </Form.Field>
             <br />
+            <Form.Field>
+              <label>Tags</label>
+              <input
+                name="tags"
+                placeholder="tags must be separated by commas"
+                label="Tags"
+                onChange={this.handleChange}
+                value={this.state.tags ? this.state.tags : ''}
+              />
+            </Form.Field>
+            <br />
             <Button type="submit">Submit</Button>
-            <Button onClick={this.handleDelete} color="red">Delete Superpower</Button>
+            <Button onClick={this.handleDelete} color="red">
+              Delete Superpower
+            </Button>
           </Form>
         </div>) : (<div>You are not authorized to view this page.</div>))
     }
