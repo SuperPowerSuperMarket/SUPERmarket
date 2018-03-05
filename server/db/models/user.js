@@ -9,8 +9,7 @@ const User = db.define('user', {
     allowNull: false
   },
   lastName: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   email: {
     type: Sequelize.STRING,
@@ -34,16 +33,13 @@ const User = db.define('user', {
     }
   },
   mailingAddress: {
-    type: Sequelize.TEXT,
-    allowNull: false
+    type: Sequelize.TEXT
   },
   billingAddress: {
-    type: Sequelize.TEXT,
-    allowNull: false
+    type: Sequelize.TEXT
   },
   phone: {
-    type: Sequelize.INTEGER,
-    allowNull: false
+    type: Sequelize.INTEGER
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
