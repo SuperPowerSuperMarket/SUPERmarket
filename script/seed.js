@@ -1,7 +1,9 @@
 const db = require('../server/db/db')
 const { User
   , Superpower
-  , Review } = require('../server/db/models')
+  , Review
+  , Order
+  , OrderQuantity } = require('../server/db/models')
 
 
 const superpowers = [{
@@ -108,6 +110,35 @@ const reviews = [{
   superpowerId: superpowerId()
 }]
 
+const orders = [{
+  status: 'shipped',
+  userId: 1
+}, {
+  status: 'shipped',
+  userId: 2
+}, {
+  status: 'shipped',
+  userId: 1
+}]
+
+const orderQuantities = [{
+  quantity: 2,
+  superpowerId: 1,
+  orderId: 1
+}, {
+  quantity: 1,
+  superpowerId: 3,
+  orderId: 1
+}, {
+  quantity: 3,
+  superpowerId: 2,
+  orderId: 2
+}, {
+  quantity: 1,
+  superpowerId: 1,
+  orderId: 3
+}]
+
 
 const seed = () =>
   Promise.all(superpowers.map(superpower =>
@@ -120,6 +151,14 @@ const seed = () =>
   .then(() =>
   Promise.all(reviews.map(review =>
     Review.create(review)
+  )))
+  .then(() =>
+  Promise.all(orders.map(order =>
+    Order.create(order)
+  )))
+  .then(() =>
+  Promise.all(orderQuantities.map(quant =>
+    OrderQuantity.create(quant)
   )))
 
 const main = () => {
