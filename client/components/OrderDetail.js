@@ -12,7 +12,7 @@ export const OrderDetail = (props) => {
   const orderQuantities = props.orderQuantities.filter(quant => quant.orderId === orderId)
   const superpowers = props.superpowers
   const orderObjects = orderQuantities.map(quant => {
-              const superpower = superpowers.find(superpower => quant.superpowerId === superpower.id).name
+              const superpower = superpowers.find(superpower => quant.superpowerId === superpower.id)
               const quantity = quant.quantity
               const id = quant.id
               return {superpower, quantity, id}
@@ -40,7 +40,9 @@ export const OrderDetail = (props) => {
             orderObjects &&
             orderObjects.map(obj => (<div key={obj.id}>
                                       <h4>
-                                        Superpower: {obj.superpower}
+                                        <Link to={`/single-superpower/${obj.superpower.id}`}>
+                                          Superpower: {obj.superpower.name}
+                                        </Link>
                                         <br />
                                         Quantity: {obj.quantity}
                                       </h4>
