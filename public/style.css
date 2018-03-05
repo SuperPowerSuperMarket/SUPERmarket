@@ -28,6 +28,14 @@ form div {
   background: #dfe6ee;
 }
 
+.listingName{
+  position: absolute;
+  top: 0;
+  background: white;
+  opacity: .8;
+  color: black;
+}
+
 .listingContent {
   position: absolute;
   bottom: 0;

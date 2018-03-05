@@ -95,7 +95,8 @@ class AllSuperpowers extends Component {
             <Grid.Column key={superpower.id} className="listing">
               <NavLink to={`/single-superpower/${superpower.id}`}>
                 <Image src={superpower.imageUrl} />
-                  <h2 className="listingContent">{superpower.name} <br /> {superpower.description}</h2>
+                  <h2 className="listingName">{superpower.name}</h2>
+                  <h3 className="listingContent">{superpower.description}</h3>
               </NavLink>
             </Grid.Column>
           )}
