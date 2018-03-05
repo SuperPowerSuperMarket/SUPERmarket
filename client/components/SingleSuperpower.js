@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Card, Icon, Image, Input, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import { fetchSuperpower, postOrder, updateOrder } from '../store';
+import { postOrder, updateOrder } from '../store';
 import CardContent from 'semantic-ui-react/dist/commonjs/views/Card/CardContent';
 
 
@@ -16,7 +16,6 @@ class SingleSuperpower extends Component {
 
     handleEdit(event) {
       event.preventDefault()
-      console.log(this.props.history)
       const superpower = +this.props.match.params.superpowerId
       this.props.history.push(`/single-superpower/${superpower}/edit`)
     }
@@ -29,7 +28,6 @@ class SingleSuperpower extends Component {
         const orders = this.props.orders
         const foundOrder = orders.find(order => order.status === 'active')
         if (!orders.length || !foundOrder) {
-            console.log(foundOrder)
             this.props.postOrder(+user.id, superpower, quantity)
         } else {
             this.props.updateOrder(+user.id, superpower, quantity, foundOrder.id)
@@ -61,6 +59,12 @@ class SingleSuperpower extends Component {
                             {singlePower.description}
                         </Card.Description>
                     </Card.Content>
+                    <Card.Content>
+                      <p>
+                        Tags:
+                      </p>
+                      {singlePower.tags.map(tag => <div key={tag}><a>{tag}</a><br /></div>)}
+                    </Card.Content>
                     <Card.Content extra>
                       <Icon />
                       {'$' + singlePower.price}
@@ -76,12 +80,12 @@ class SingleSuperpower extends Component {
                         <Input name="quant" label="Quantity" type="number" min="0" />
                     </Card.Content>
                     <Card.Content>
-                    <Button animated='vertical' type="submit">
-                            <Button.Content hidden>Add</Button.Content>
-                            <Button.Content visible>
-                                <Icon name='shop' />
-                            </Button.Content>
-                        </Button>
+                      <Button animated='vertical' type="submit">
+                        <Button.Content hidden>Add</Button.Content>
+                        <Button.Content visible>
+                            <Icon name='shop' />
+                        </Button.Content>
+                      </Button>
                     </Card.Content>
                     </Card>
                 </form>

@@ -16,6 +16,18 @@ const Order = db.define('order', {
   arrivedOn: {
     type: Sequelize.DATE,
   }
+}, {
+  getterMethods: {
+    subTotal() {
+      if (this.superpowers) {
+          
+      return this.superpowers.reduce((total, power) => {
+        total += power.price * power['order-quantity'].quantity
+        return total;
+      }, 0)
+    }
+    }
+  }
 });
 
 Order.beforeDestroy(order => {
@@ -23,5 +35,7 @@ Order.beforeDestroy(order => {
     where: {orderId: order.id}
   })
 })
+
 module.exports = Order;
+
 

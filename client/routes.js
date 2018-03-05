@@ -7,6 +7,7 @@ import store, {me} from './store'
 import {fetchOrders} from './store/orders'
 import { fetchSuperpowers } from './store/superpowers'
 import { fetchUsers } from './store/users'
+import { fetchOrderQuants } from './store/order-quantities'
 
 /**
  * COMPONENT
@@ -16,9 +17,12 @@ class Routes extends Component {
     const superpowersThunk = fetchSuperpowers()
     const getOrdersThunk = fetchOrders()
     const getUsersThunk = fetchUsers()
+    const quantsThunk = fetchOrderQuants()
     store.dispatch(superpowersThunk)
     store.dispatch(getOrdersThunk)
     store.dispatch(getUsersThunk)
+    store.dispatch(quantsThunk)
+
     this.props.loadInitialData()
   }
 
@@ -34,6 +38,9 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/cart" component={Cart} />
         <Route path="/single-superpower/:superpowerId/edit" component={SuperpowerForm} />
+        <Route path="/my-account" component={AccountInfo} />
+        <Route exact path="/order-history" component={OrderHistory} />
+        <Route path="/order-history/:orderId" component={OrderDetail} />
         {
           isLoggedIn &&
           <Switch>
