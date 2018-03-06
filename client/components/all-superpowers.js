@@ -26,7 +26,6 @@ class AllSuperpowers extends Component {
       tag: event.target.value,
       color: 'green'
     })
-    console.log(this.state)
   }
 
   handleClearTags(event) {
@@ -42,6 +41,9 @@ class AllSuperpowers extends Component {
       return superpower.tags.forEach(tag => allTags.push(tag))
     })
     const filteredTags = allTags.filter((el, index, self) => self.indexOf(el) === index)
+
+    const availablePowers = this.props.superpowers.filter(superpower => superpower.stock > 0)
+    console.log({availablePowers})
 
     return (
       <div style={{ marginTop: '5.5em', marginBottom: '5em', marginRight: '4em', marginLeft: '4em' }}>
@@ -93,7 +95,7 @@ class AllSuperpowers extends Component {
         }
         <Grid columns={3} divided>
         {
-          this.props.superpowers.filter(superpower => {
+          availablePowers.filter(superpower => {
             if (this.state.search) {
               return superpower.name.toLowerCase().includes(this.state.search.toLowerCase())
             }

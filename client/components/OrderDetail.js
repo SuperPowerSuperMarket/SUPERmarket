@@ -11,15 +11,17 @@ export const OrderDetail = (props) => {
   const orderId = +props.match.params.orderId
   const orderQuantities = props.orderQuantities.filter(quant => quant.orderId === orderId)
   const superpowers = props.superpowers
+  let count = 0;
   const orderObjects = orderQuantities.map(quant => {
               const superpower = superpowers.find(superpower => quant.superpowerId === superpower.id)
               const quantity = quant.quantity
-              const id = quant.id
+              const id = count++
               return {superpower, quantity, id}
             })
   let currentOrder
   if (props.user.orders) {
     currentOrder = props.user.orders.find(order => order.id === orderId)
+    console.log({orderQuantities})
   }
 
   return (
@@ -52,6 +54,8 @@ export const OrderDetail = (props) => {
                                         </Link>
                                         <br />
                                         Quantity: {obj.quantity}
+                                        <br />
+                                        Subtotal: ${obj.superpower.price * obj.quantity}
                                       </h4>
                                       <br />
                                       <br />

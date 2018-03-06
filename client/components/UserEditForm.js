@@ -10,7 +10,7 @@ const UserEditForm = (props) => {
         return (
             <div className="ui center aligned grid">
                 <Form onSubmit={(evt) => props.updateUser(currentUser, evt)}>
-                    <Form.Field text style={{ marginRight: '4em'}}>
+                    <Form.Field style={{ marginRight: '4em'}}>
                         <label>First Name</label>
                             <input
                             placeholder={currentUser.firstName}
@@ -25,7 +25,7 @@ const UserEditForm = (props) => {
                             />
                     </Form.Field>
                     <br />
-                    <Form.Field text style={{ marginRight: '4em'}}>
+                    <Form.Field style={{ marginRight: '4em'}}>
                         <label>Email</label>
                             <input
                             placeholder={currentUser.email}
@@ -40,7 +40,7 @@ const UserEditForm = (props) => {
                             />
                     </Form.Field>
                     <br />
-                    <Form.Field text style={{ marginRight: '4em'}}>
+                    <Form.Field style={{ marginRight: '4em'}}>
                         <label>Phone</label>
                             <input
                             placeholder={currentUser.phone}
@@ -55,7 +55,7 @@ const UserEditForm = (props) => {
                             />
                     </Form.Field>
                     <br />
-                    <div text style={{ marginTop: "1em" }} className="ui center aligned grid">
+                    <div style={{ marginTop: "1em" }} className="ui center aligned grid">
                         <Button basic color='green' type='submit'>Submit</Button>
                     </div>
                 </Form>

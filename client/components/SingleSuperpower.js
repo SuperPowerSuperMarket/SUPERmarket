@@ -27,7 +27,7 @@ class SingleSuperpower extends Component {
     const superpower = +this.props.match.params.superpowerId;
     const quantity = +event.target.quant.value;
     const orders = this.props.orders;
-    const foundOrder = orders.find(order => order.status === "active");
+    const foundOrder = orders.find(order => order.status === 'active');
     if (!orders.length || !foundOrder) {
       this.props.postOrder(+user.id, superpower, quantity);
     } else {
@@ -41,7 +41,6 @@ class SingleSuperpower extends Component {
       superpower => superpower.id === currentSuperpowerId
     );
     const currentUser = this.props.user;
-    console.log(currentUser);
 
     return (
       this.props.superpowers.length && (
@@ -63,8 +62,15 @@ class SingleSuperpower extends Component {
                   <Card.Content extra>
                     <a>
                       <Icon />
-                      {"$" + singlePower.price}
+                      {'$' + singlePower.price}
                     </a>
+                  </Card.Content>
+                  <Card.Content extra>
+                      {
+                        singlePower.stock > 0 ?
+                        `In Stock: ${singlePower.stock}` :
+                        'This superpower is currently unavailable.'
+                      }
                   </Card.Content>
                   <Card.Content>
                     <Input

@@ -31,7 +31,6 @@ class SubmitReview extends Component {
     event.preventDefault();
     const userId = this.props.user.id;
     const superpowerId = +this.props.match.params.superpowerId;
-    console.log(userId, superpowerId, +this.state.stars, this.state.content);
     store.dispatch(
       postReview(userId, superpowerId, +this.state.stars, this.state.content)
     );

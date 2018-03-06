@@ -8,37 +8,37 @@ const UserEditForm = (props) => {
         return (
             <div className="ui center aligned grid">
                 <Form onSubmit={(evt) => props.updateUser(props.currentUser, evt)}>
-                    <Form.Field text style={{ marginRight: '4em'}}>
+                    <Form.Field style={{ marginRight: '4em'}}>
                         <label>First Name</label>
                             <input
-                            placeholder={props.currentUser.firstName} 
+                            placeholder={props.currentUser.firstName}
                             name="firstname"
                             />
                     </Form.Field>
                     <Form.Field>
                         <label>Last Name</label>
                             <input
-                            placeholder={props.currentUser.lastName} 
+                            placeholder={props.currentUser.lastName}
                             name="lastname"
                             />
                     </Form.Field>
                     <br />
-                    <Form.Field text style={{ marginRight: '4em'}}>
+                    <Form.Field style={{ marginRight: '4em'}}>
                         <label>Email</label>
                             <input
-                            placeholder={props.currentUser.email} 
+                            placeholder={props.currentUser.email}
                             name="email"
                             />
                     </Form.Field>
                     <Form.Field>
                         <label>Mailing Address</label>
-                            <input 
-                            placeholder={props.currentUser.mailingAddress} 
+                            <input
+                            placeholder={props.currentUser.mailingAddress}
                             name="mailingaddress"
                             />
                     </Form.Field>
                     <br />
-                    <Form.Field text style={{ marginRight: '4em'}}>
+                    <Form.Field style={{ marginRight: '4em'}}>
                         <label>Phone</label>
                             <input
                             placeholder={props.currentUser.phone}
@@ -48,12 +48,12 @@ const UserEditForm = (props) => {
                     <Form.Field>
                         <label>Billing Address</label>
                             <input
-                            placeholder={props.currentUser.billingAddress} 
+                            placeholder={props.currentUser.billingAddress}
                             name="billingaddress"
                             />
                     </Form.Field>
                     <br />
-                    <div text style={{ marginTop: "1em" }} className="ui center aligned grid">
+                    <div style={{ marginTop: "1em" }} className="ui center aligned grid">
                         <Button basic color='green' type='submit'>Submit</Button>
                     </div>
                 </Form>

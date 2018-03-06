@@ -55,7 +55,7 @@ export const AccountInfo = (props) => {
             <Button style={{ marginBottom: '1em' }} basic color='green'>Edit Your Account</Button>
           </Link>
           <Link to="/order-history">
-            View Your Order History
+            <Button style={{ marginBottom: '1em' }} basic color='blue'>View Your Order History</Button>
           </Link>
         </Card.Content>
       </Card>
