@@ -49,6 +49,7 @@ class superpowerForm extends Component {
   }
 
   render() {
+    const edit = this.props.match.path.indexOf('edit') !== -1
 
       return (this.props.user && this.state &&
         this.props.user.isAdmin ?
@@ -126,9 +127,12 @@ class superpowerForm extends Component {
             </Form.Field>
             <br />
             <Button type="submit">Submit</Button>
-            <Button onClick={(event) => this.props.handleDelete(event, this.state)} color="red">
-              Delete Superpower
-            </Button>
+            {
+              edit ?
+              (<Button onClick={(event) => this.props.handleDelete(event, this.state)} color="red">
+                Delete Superpower
+              </Button>) : null
+            }
           </Form>
         </div>) : (<div>You are not authorized to view this page.</div>))
     }
