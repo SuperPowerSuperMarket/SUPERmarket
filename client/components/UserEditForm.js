@@ -12,45 +12,45 @@ const UserEditForm = (props) => {
                 <Form onSubmit={(evt) => props.updateUser(currentUser, evt)}>
                     <Form.Field text style={{ marginRight: '4em'}}>
                         <label>First Name</label>
-                            <input 
-                            placeholder={currentUser.firstName} 
+                            <input
+                            placeholder={currentUser.firstName}
                             name="firstname"
                             />
                     </Form.Field>
                     <Form.Field>
                         <label>Last Name</label>
-                            <input 
-                            placeholder={currentUser.lastName} 
+                            <input
+                            placeholder={currentUser.lastName}
                             name="lastname"
                             />
                     </Form.Field>
                     <br />
                     <Form.Field text style={{ marginRight: '4em'}}>
                         <label>Email</label>
-                            <input 
-                            placeholder={currentUser.email} 
+                            <input
+                            placeholder={currentUser.email}
                             name="email"
                             />
                     </Form.Field>
                     <Form.Field>
-                        <label>Mailing Address</label> 
-                            <input 
-                            placeholder={currentUser.mailingAddress} 
+                        <label>Mailing Address</label>
+                            <input
+                            placeholder={currentUser.mailingAddress}
                             name="mailingaddress"
                             />
                     </Form.Field>
                     <br />
                     <Form.Field text style={{ marginRight: '4em'}}>
                         <label>Phone</label>
-                            <input 
+                            <input
                             placeholder={currentUser.phone}
                             name="phone"
                             />
                     </Form.Field>
                     <Form.Field>
                         <label>Billing Address</label>
-                            <input 
-                            placeholder={currentUser.billingAddress} 
+                            <input
+                            placeholder={currentUser.billingAddress}
                             name="billingaddress"
                             />
                     </Form.Field>
