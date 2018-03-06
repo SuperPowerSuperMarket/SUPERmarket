@@ -14,7 +14,7 @@ const DisplayReviews = props => {
           return (
           <div key={review.id}>
           <Card>
-            <Card.Header>{review.user.fullName}</Card.Header>
+            <Card.Header>{review.user.id ? review.user.fullName : null}</Card.Header>
             <Card.Meta textAlign="left">
             <div className="star-ratings-sprite">
               <span
