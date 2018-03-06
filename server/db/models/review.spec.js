@@ -87,7 +87,3 @@ describe('Review model', () => {
     })
   })
 })
-
-
-// Reviews belong to superpower and user
-// columns: number of stars, content, date

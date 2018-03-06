@@ -27,7 +27,7 @@ describe('Superpower model', () => {
     });
   });
 
-  //remove the review instance we made after running each spec
+  //remove the instance we made after running each spec
   afterEach(function() {
     return Superpower.truncate({ cascade: true });
   });
@@ -36,15 +36,16 @@ describe('Superpower model', () => {
     it('includes `name`, `price`, `description`, `imageUrl`, `stock`, and `tags` fields', function() {
       return superpower.save().then(function(savedSuperpower) {
         expect(savedSuperpower.name).to.equal('Cat-like Reflexes');
-        expect(savedSuperpower.price).to.equal(750);
+        expect(+savedSuperpower.price).to.equal(750);
         expect(savedSuperpower.description).to.equal(
           'Like the eye of the tiger'
         );
         expect(savedSuperpower.imageUrl).to.equal(
           'http://www.survivorband.com/wp-content/uploads/2016/04/final_11.-Best-of.jpg'
         );
-        expect(savedSuperpower.stock).to.equal(100);
-        expect(savedSuperpower.tags).to.equal(['animal', 'speed']);
+        expect(+savedSuperpower.stock).to.equal(100);
+        console.log(savedSuperpower.tags)
+        expect(savedSuperpower.tags[0]).to.equal('animal');
       });
     });
 
@@ -62,6 +63,3 @@ describe('Superpower model', () => {
     });
   });
 });
-
-// Reviews belong to superpower and user
-// columns: number of stars, content, date
