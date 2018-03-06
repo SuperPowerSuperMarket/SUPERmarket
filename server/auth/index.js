@@ -30,21 +30,8 @@ router.post('/login', async (req, res, next) => {
     res.status(401).send('Incorrect password')
   } else {
     req.login(user, err => (err ? next(err) : res.json(user)))
-  }
     merger(user, req)
-  // const cart = await Order.findOrCreate({
-  //   where: {status: 'active', userId: user.id},
-  //   defaults: {userId: user.id},
-  //   include: [{all: true, nested: true}]
-  // })
-  // await OrderQuantity.update(
-  //   { orderId: cart[0].id },
-  //   {
-  //     where: { orderId: req.session.orderId },
-  //     returning: true
-  //   }
-  // )
-  // await Order.destroy({ where: { id: req.session.orderId } })
+  }
 })
 
 router.post('/signup', (req, res, next) => {

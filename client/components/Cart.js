@@ -11,7 +11,7 @@ const Cart = (props) => {
     // } else {
     //   console.log('get cart by session')
     // }
-    if (!props.orders) return <h3>There are no orders is your cart</h3>
+    if (!props.orders) return <h3>There are no orders in your cart</h3>
     const activeOrder = props.orders.find(order => order.status === 'active')
     // let totals
 
@@ -31,7 +31,7 @@ const Cart = (props) => {
         <Card>
             <Card.Content>
                 <Card.Header>
-                    {activeOrder && activeOrder.superpowers ? `${props.user.firstName},  this is your cart.` : `Your cart is empty`}
+                    {activeOrder && activeOrder.superpowers ? `This is your cart.` : `Your cart is empty`}
                 </Card.Header>
                 <Card.Meta>
                   <Icon className="shopping cart huge icon" />
