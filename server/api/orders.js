@@ -3,6 +3,11 @@ const { Order, Superpower, OrderQuantity } = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
+  const orders = await OrderQuantity.findAll({include: [{ all: true, nested: true }]})
+  res.json(orders);
+})
+
+router.get('/user', async (req, res, next) => {
   let order;
   if (req.user) {
     const userId = req.user.id
@@ -20,7 +25,7 @@ router.get('/', async (req, res, next) => {
       }
       return [item]})
   }
-  res.send(order)
+  res.json(order);
 });
 
 router.post('/', async (req, res, next) => {
@@ -68,6 +73,15 @@ router.put('/:id', (req, res, next) => {
       }).then(order => res.json(order));
     }
   })
+})
+
+router.put('/:id/complete', async (req, res, next) => {
+  const order = await Order.findById(req.params.id, {
+    include: [{ all: true }]
+  })
+  console.log(req.body)
+  //const updated = await order.update(req.body)
+  //res.json(updated)
 })
 
 router.delete('/:id', (req, res, next) => {

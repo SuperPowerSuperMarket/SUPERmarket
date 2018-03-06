@@ -15,6 +15,12 @@ const Order = db.define('order', {
   },
   arrivedOn: {
     type: Sequelize.DATE,
+  },
+  fullName: {
+    type: Sequelize.STRING
+  },
+  shippingAddress: {
+    type: Sequelize.TEXT
   }
 }, {
   getterMethods: {
