@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { createStore } from 'redux';
 
 // You will write these functions
-import { getSuperpowers, editSuperpower, deleteSuperpower } from '../src/store/action-creators';
+import { getSuperpowers, editSuperpower, deleteSuperpower } from './superpowers';
 import store from './index';
 
 const dummySuperpower =
