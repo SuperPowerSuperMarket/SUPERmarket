@@ -41,6 +41,7 @@ class SingleSuperpower extends Component {
       superpower => superpower.id === currentSuperpowerId
     );
     const currentUser = this.props.user;
+    console.log(currentUser);
 
     return (
       this.props.superpowers.length && (
@@ -89,7 +90,11 @@ class SingleSuperpower extends Component {
                 <Button onClick={this.handleEdit}>Edit</Button>
               </div>
             ) : null}
-            {currentUser ? <SubmitReview /> : null}
+            {currentUser.email ? (
+              <div>
+                <SubmitReview />
+              </div>
+            ) : null}
             <DisplayReviews currentSuperpowerId={currentSuperpowerId} />
           </Grid>
         </div>
