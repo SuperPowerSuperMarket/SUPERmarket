@@ -1,8 +1,9 @@
 import React from 'react'
-import { Button, Card, Grid, Loader } from 'semantic-ui-react'
+import { Button, Card, Grid, Loader, Header } from 'semantic-ui-react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { deleteUser } from '../store/users'
+import DisplayOrders from './DisplayOrders'
 
 const UserListAdmin = (props) => {
     let otherUsers;
@@ -12,7 +13,12 @@ const UserListAdmin = (props) => {
     if (!props.users.length) { return (  <Loader active inline='centered' /> ) }
     else {
      return (
-            <Grid column={2} divided className="ui center aligned grid">
+         <div>
+            <Grid className="ui center aligned grid">
+            <Grid.Row>
+            <Header as="h1">User List</Header>
+            </Grid.Row>
+            <Grid.Row>
                 <Card.Group>
                 {
                     otherUsers.map(user => {
@@ -27,11 +33,11 @@ const UserListAdmin = (props) => {
                                     </Card.Description>
                                     </Card.Content>
                                     <Card.Content extra>
-                                    <div className='ui two buttons'>
+                                    <div className="ui two buttons">
                                         <Link to={`/edit-user/${user.id}`}>
-                                            <Button basic color='green'>Edit</Button>
+                                            <Button basic color="green">Edit</Button>
                                         </Link>
-                                        <Button onClick={() => props.removeUser(user.id)} basic color='red'>Delete</Button>
+                                        <Button onClick={() => props.removeUser(user.id)} basic color="red">Delete</Button>
                                     </div>
                                 </Card.Content>
                             </Card>
@@ -39,7 +45,15 @@ const UserListAdmin = (props) => {
                     })
                 }
                 </Card.Group>
+                </Grid.Row>
+                <Grid.Row>
+                    <Header as="h1">Orders List</Header>
+                    </Grid.Row>
             </Grid>
+            <Grid columns={3}>
+            <DisplayOrders />
+            </Grid>
+            </div>
         )
     }
 }
