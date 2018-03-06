@@ -11,9 +11,6 @@ const Superpower = db.define('superpower', {
     type: Sequelize.DECIMAL,
     // allowNull: false
   },
-  // duration: {
-  //   type: Sequelize.ARRAY(Sequelize.INTEGER)
-  // },
   description: {
     type: Sequelize.TEXT
   },
@@ -42,5 +39,3 @@ Superpower.findByTag = (tag) => {
 }
 
 module.exports = Superpower
-
-// Superpower.prototype.findSimilar = () => {}
