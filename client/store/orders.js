@@ -23,9 +23,9 @@ export const editOrder = order => {
 }
 
 //Thunk Creators
-export const fetchOrders = (user) =>
+export const fetchOrders = () =>
   dispatch =>
-    axios.get('/api/orders', user)
+    axios.get('/api/orders')
       .then(res => res.data)
       .then(orders => dispatch(getOrders(orders)))
 
