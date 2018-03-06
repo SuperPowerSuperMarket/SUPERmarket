@@ -42,9 +42,28 @@ class superpowerForm extends Component {
     let value
     name === 'tags' ? value = event.target.value.split(',') : value = event.target.value
 
-    this.setState({
-      [name]: value
-    })
+      this.setState({
+        [name]: value
+      })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    const edit = this.props.match.path.indexOf('edit') !== -1
+
+    if (edit) {
+      const putSuperpowerThunk = putSuperpower(this.state, this.props);
+      store.dispatch(putSuperpowerThunk);
+    } else {
+      const newSuperpowerThunk = postSuperpower(this.state, this.props);
+      store.dispatch(newSuperpowerThunk);
+      store.dispatch(fetchSuperpowers());
+    }
+  }
+
+  handleDelete(event) {
+    event.preventDefault()
+    const edit = this.props.match.path.indexOf('edit') !== -1
 
   }
 

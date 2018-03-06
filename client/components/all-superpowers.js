@@ -26,7 +26,6 @@ class AllSuperpowers extends Component {
       tag: event.target.value,
       color: 'green'
     })
-    console.log(this.state)
   }
 
   handleClearTags(event) {
