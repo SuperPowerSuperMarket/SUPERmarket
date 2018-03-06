@@ -78,6 +78,18 @@ class AllSuperpowers extends Component {
           </Button>
         </Grid.Column>
         </Grid>
+        {
+          this.props.user.isAdmin ?
+          (<div style={{marginBottom: '3em'}}>
+          <br />
+            <NavLink to="/all-superpowers/add">
+              <Button color="yellow">
+                Add A Superpower
+              </Button>
+            </NavLink>
+          <br />
+          </div>) : null
+        }
         <Grid columns={3} divided>
         {
           this.props.superpowers.filter(superpower => {
@@ -108,7 +120,8 @@ class AllSuperpowers extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    superpowers: state.superpowers
+    superpowers: state.superpowers,
+    user: state.user
   }
 }
 

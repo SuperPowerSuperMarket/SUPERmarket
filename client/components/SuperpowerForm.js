@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import store, { fetchSuperpowers, postSuperpower, putSuperpower, destroySuperpower } from '../store'
+import { postSuperpower, putSuperpower, destroySuperpower } from '../store'
 import { Button, Form } from 'semantic-ui-react'
 
 
@@ -17,12 +17,14 @@ class superpowerForm extends Component {
       const currentPower = props.superpowers.find(superpower => superpower.id === id)
       this.state = currentPower
     } else {
-      this.state = {}
+      this.state = {
+        name: '',
+        imageUrl: '',
+        description: ''
+      }
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -63,23 +65,21 @@ class superpowerForm extends Component {
     event.preventDefault()
     const edit = this.props.match.path.indexOf('edit') !== -1
 
-    if (edit) {
-      const deletePowerThunk = destroySuperpower(this.state, this.props)
-      store.dispatch(deletePowerThunk)
-    }
   }
 
   render() {
+    const edit = this.props.match.path.indexOf('edit') !== -1
 
       return (this.props.user && this.state &&
         this.props.user.isAdmin ?
         (<div className="ui center aligned grid">
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={(event) => this.props.handleSubmit(event, this.state, this.props)}>
             <Form.Field>
               <label>Superpower Name</label>
               <input
                 placeholder="Name of superpower"
                 name="name"
+                type="text"
                 required
                 onChange={this.handleChange}
                 value={this.state.name}
@@ -90,6 +90,7 @@ class superpowerForm extends Component {
               <label>Image Url</label>
               <input
                 name="imageUrl"
+                type="text"
                 label="image url"
                 onChange={this.handleChange}
                 value={this.state.imageUrl}
@@ -101,6 +102,7 @@ class superpowerForm extends Component {
               <input
                 placeholder="Price"
                 name="price"
+                type="number"
                 required
                 onChange={this.handleChange}
                 value={this.state.price}
@@ -120,9 +122,22 @@ class superpowerForm extends Component {
             </Form.Field>
             <br />
             <Form.Field>
+              <label>Description</label>
+              <input
+                name="description"
+                type="text"
+                placeholder="describe your superpower"
+                label="Description"
+                onChange={this.handleChange}
+                value={this.state.description}
+              />
+            </Form.Field>
+            <br />
+            <Form.Field>
               <label>Tags</label>
               <input
                 name="tags"
+                type="text"
                 placeholder="tags must be separated by commas"
                 label="Tags"
                 onChange={this.handleChange}
@@ -131,9 +146,12 @@ class superpowerForm extends Component {
             </Form.Field>
             <br />
             <Button type="submit">Submit</Button>
-            <Button onClick={this.handleDelete} color="red">
-              Delete Superpower
-            </Button>
+            {
+              edit ?
+              (<Button onClick={(event) => this.props.handleDelete(event, this.state)} color="red">
+                Delete Superpower
+              </Button>) : null
+            }
           </Form>
         </div>) : (<div>You are not authorized to view this page.</div>))
     }
@@ -142,5 +160,24 @@ class superpowerForm extends Component {
 
 const mapStateToProps = state => ({ superpowers: state.superpowers, user: state.user})
 
-const formContainer = connect(mapStateToProps)(superpowerForm)
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    handleSubmit(event, formState, props) {
+      event.preventDefault()
+      const edit = ownProps.match.path.indexOf('edit') !== -1
+
+      if (edit) {
+        dispatch(putSuperpower(formState, props));
+      } else {
+        dispatch(postSuperpower(formState, props));
+      }
+    },
+    handleDelete(event, formState) {
+      event.preventDefault()
+      dispatch(destroySuperpower(formState, ownProps))
+    }
+  }
+}
+
+const formContainer = connect(mapStateToProps, mapDispatchToProps)(superpowerForm)
 export default formContainer
