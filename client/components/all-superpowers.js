@@ -44,7 +44,7 @@ class AllSuperpowers extends Component {
     const filteredTags = allTags.filter((el, index, self) => self.indexOf(el) === index)
 
     return (
-      <div style={{ marginTop: '5.5em' }}>
+      <div style={{ marginTop: '5.5em', marginBottom: '5em', marginRight: '4em', marginLeft: '4em' }}>
         <Form style={{marginLeft: '5.5em', marginBottom: '2em'}}>
           <Form.Input
             placeholder="Search by name"
@@ -94,7 +94,7 @@ class AllSuperpowers extends Component {
           return (
             <Grid.Column key={superpower.id} className="listing">
               <NavLink to={`/single-superpower/${superpower.id}`}>
-                <Image src={superpower.imageUrl} />
+                <Image style={{ marginBottom: '3em' }}src={superpower.imageUrl} />
                   <h2 className="listingName">{superpower.name}</h2>
                   <h3 className="listingContent">{superpower.description}</h3>
               </NavLink>
