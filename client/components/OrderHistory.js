@@ -7,7 +7,6 @@ import { Card, Icon, Image, Input, Button } from 'semantic-ui-react'
  * COMPONENT
  */
 export const OrderHistory = (props) => {
-  console.log(props.user.orders)
 
   return (
     <div className="ui center aligned grid">

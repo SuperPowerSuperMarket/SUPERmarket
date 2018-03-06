@@ -41,7 +41,6 @@ class SingleSuperpower extends Component {
       superpower => superpower.id === currentSuperpowerId
     );
     const currentUser = this.props.user;
-    console.log(currentUser);
 
     return (
       this.props.superpowers.length && (

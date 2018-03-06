@@ -49,7 +49,6 @@ export const putSuperpower = (superpower, props) => {
     const superpowerId = superpower.id
     axios.put(`/api/superpowers/${superpowerId}`, superpower)
     .then(res => {
-      console.log('resData', res.data)
       return res.data
     })
     .then(editedSuperpower => {

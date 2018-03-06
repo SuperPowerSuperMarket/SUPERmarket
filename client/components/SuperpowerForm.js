@@ -62,7 +62,6 @@ class superpowerForm extends Component {
   handleDelete(event) {
     event.preventDefault()
     const edit = this.props.match.path.indexOf('edit') !== -1
-    console.log('delete clicked', this.state)
 
     if (edit) {
       const deletePowerThunk = destroySuperpower(this.state, this.props)

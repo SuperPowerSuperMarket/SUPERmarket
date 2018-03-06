@@ -35,11 +35,11 @@ const Navbar = ({ handleClick, isLoggedIn, user }) => {
           {isLoggedIn ? (
             <Menu.Item position="right">
               {/* The navbar will show these links after you log in */}
-              <h4 text style={{marginRight: '8em', marginBottom: '0.1em'}}>Hello {'' + user.firstName}</h4>
+              <h4 style={{marginRight: '8em', marginBottom: '0.1em'}}>Hello {'' + user.firstName}</h4>
               {
                 user.isAdmin &&
                 <Link to={'/users-list'}>
-                  <Button text style={{marginRight: '8em'}} primary>Admin</Button>
+                  <Button style={{marginRight: '8em'}} primary>Admin</Button>
                 </Link>
               }
               <a href="#" onClick={handleClick}>
