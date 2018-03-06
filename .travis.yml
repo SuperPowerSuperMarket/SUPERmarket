@@ -17,12 +17,12 @@ install:
 before_script:
   - psql -c 'create database "supermarket-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy:
+  - npm run build-client # make the bundle
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: sup3r-market # see README
+  api_key:
+    secure: "EA4dyD+VLjmjbyAJfqB3TbmjGltMXqNapEVnqB0oalc1+KeiN+qcYwFfLA77fQVlFpbRImoMiERmDEd0rVr7+0iUKqYik6iH81eLFGKUAadi9QN61fQktZCyPfMYLAE839SX6p0/6sVmTNiCWBoigfOV7DdAFsTV/VhwxDYKBBff2ZTkVdHxz3Nile9wZ5FvWYmYUSpwF0L+7zVugq+sX+mFQYy8iNtIDPz3gqkmHkhMddSFlQi8jmzcFOHp2/O5D+iiwnnvj8nJR4nlGgrm8PMMUmJ7pIiCKt3p+HO6ptEVBBhLb9i20Y2/Gkiqh6hAdD4te9G5Z+plAj3cuc7SQ1HmvKNnaz1SKn9XlAubpgagEbNsoWC+lHZNsuSj89w4Ngr7E2asUtXZ8+nEv2+gf4s4wyWNvJ74A7J4k9rNYI0HN1LKc4ibiqIHsm4p6C7DrQpSTuPBMxqfODnwKrMfLZKzXUHhrPEYsBtme7yJBJTQ/D+jkE/ibMU0GlxthJqedMm/rzV2Sw+xcsy3JlhMD0RHI1aSS/BFHpUbUoOHgr+qyu7vhpoPfQSOz8U0cWUVphLJk8x9OzIP/HzR2PT1I/12Vtc29BxUq/nwt6lk+XetWZNzS50ZohGOMA96s2LejbXzTTmPoK2i74eKOL++pu9jW1ekO+hzUm97IsUBXC8=" # see README

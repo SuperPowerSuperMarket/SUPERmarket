@@ -7,6 +7,7 @@ import { Card, Icon, Image, Input, Button } from 'semantic-ui-react'
  * COMPONENT
  */
 export const OrderHistory = (props) => {
+  console.log(props.user.orders)
 
   return (
     <div className="ui center aligned grid">
@@ -21,12 +22,14 @@ export const OrderHistory = (props) => {
         </Card.Content>
         <Card.Content>
           {
-            props.user &&
+            props.user && props.user.orders &&
             props.user.orders.filter(order => order.status !== 'active')
             .map(order => (<Link to={`/order-history/${order.id}`} key={order.id}>
                              Order Date:
                              <br />
                              {order.createdAt.slice(0, 10)}
+                             <br />
+                             {order.status}
                              <br />
                              <br />
                            </Link>))

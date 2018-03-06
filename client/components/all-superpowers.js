@@ -44,7 +44,7 @@ class AllSuperpowers extends Component {
     const filteredTags = allTags.filter((el, index, self) => self.indexOf(el) === index)
 
     return (
-      <div style={{ marginTop: '5.5em' }}>
+      <div style={{ marginTop: '5.5em', marginBottom: '5em', marginRight: '4em', marginLeft: '4em' }}>
         <Form style={{marginLeft: '5.5em', marginBottom: '2em'}}>
           <Form.Input
             placeholder="Search by name"
@@ -62,7 +62,7 @@ class AllSuperpowers extends Component {
                 <Button
                   onClick={this.handleTag}
                   value={tag}
-                  color={this.state.tag === tag ? this.state.color : "gray"}
+                  color={this.state.tag === tag ? this.state.color : 'gray'}
                 >
                   {tag}
                 </Button>
@@ -83,7 +83,7 @@ class AllSuperpowers extends Component {
         {
           this.props.superpowers.filter(superpower => {
             if (this.state.search) {
-              return superpower.name.toLowerCase().includes(this.state.search)
+              return superpower.name.toLowerCase().includes(this.state.search.toLowerCase())
             }
             if (this.state.tag) {
               return superpower.tags.indexOf(this.state.tag) !== -1
@@ -92,11 +92,11 @@ class AllSuperpowers extends Component {
           })
           .map((superpower) => {
           return (
-            <Grid.Column key={superpower.id}>
+            <Grid.Column key={superpower.id} className="listing">
               <NavLink to={`/single-superpower/${superpower.id}`}>
-                <Image src={superpower.imageUrl} />
-                  <h2>{superpower.name}</h2>
-                  <h2>{superpower.description}</h2>
+                <Image style={{ marginBottom: '3em' }}src={superpower.imageUrl} />
+                  <h2 className="listingName">{superpower.name}</h2>
+                  <h3 className="listingContent">{superpower.description}</h3>
               </NavLink>
             </Grid.Column>
           )}
