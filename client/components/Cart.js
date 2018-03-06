@@ -84,11 +84,5 @@ const Cart = (props) => {
 
 const mapStateToProps = state => ({superpowers: state.superpowers, user: state.user, orders: state.orders})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleSubmit,
-  }
-}
-
 const CartContainer = connect(mapStateToProps)(Cart)
 export default CartContainer;
