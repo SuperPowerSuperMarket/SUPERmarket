@@ -48,7 +48,7 @@ class SubmitReview extends Component {
         <Form onSubmit={this.handleSubmit}>
           <h3>Select a rating</h3>
           <select id="stars" name="stars" onChange={this.handleChange}>
-            <option value={5}>5</option>
+            <option value={5} selected="selected">5</option>
             <option value={4}>4</option>
             <option value={3}>3</option>
             <option value={2}>2</option>
