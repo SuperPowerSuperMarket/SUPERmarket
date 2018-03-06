@@ -46,7 +46,7 @@ export const postReview = (userId, superpowerId, stars, content) =>
     .then(res => res.data)
     .then(reviewToPost => {
       dispatch(addReview(reviewToPost))
-      // history.push(``)
+      history.push(`/single-superpower/${superpowerId}`)
     })
 
 

@@ -1,7 +1,7 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
-import { Card, Icon, Image, Input, Button } from 'semantic-ui-react'
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
+import { Card, Icon, Image, Input, Button } from "semantic-ui-react";
 
 /**
  * COMPONENT
@@ -11,8 +11,10 @@ export const OrderHistory = (props) => {
   return (
     <div className="ui center aligned grid">
       <Card>
-        <Card.Content className="ui center
-        aligned grid">
+        <Card.Content
+          className="ui center
+        aligned grid"
+        >
           <h1>
             {props.user.firstName}'s
             <br />
@@ -40,17 +42,17 @@ export const OrderHistory = (props) => {
         </Card.Content>
       </Card>
     </div>
-  )
-}
+  );
+};
 
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapState = state => {
   return {
     user: state.user,
     orders: state.orders
   }
 }
 
-export default withRouter(connect(mapState)(OrderHistory))
+export default withRouter(connect(mapState)(OrderHistory));
