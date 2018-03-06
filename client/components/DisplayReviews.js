@@ -1,42 +1,44 @@
-import React from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Card } from 'semantic-ui-react'
 
 const DisplayReviews = props => {
-  const currentSuperpowerId = +props.match.params.superpowerId;
+  const currentSuperpowerId = props.currentSuperpowerId;
   const reviews = props.reviews.filter(
     review => review.superpowerId === currentSuperpowerId
   );
-  console.log(reviews)
   return (
-    <div>
+    <Card.Group>
       {reviews && reviews.length ? (
-        reviews.map(review => (
+        reviews.map(review => {
+          return (
           <div key={review.id}>
+          <Card>
+            <Card.Header>{review.user.fullName}</Card.Header>
+            <Card.Meta textAlign="left">
             <div className="star-ratings-sprite">
               <span
                 style={{ width: `${review.stars / 0.05}%` }}
                 className="star-ratings-sprite-rating"
               />
             </div>
-            <h2>{review.content}</h2>
+            </Card.Meta>
+            <Card.Description>{review.content}</Card.Description>
+            </Card>
           </div>
-        ))
+        )})
       ) : (
         <h2>No reviews found</h2>
       )}
-    </div>
+    </Card.Group>
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    reviews: state.reviews
-  };
-};
+const mapStateToProps = state => ({
+  reviews: state.reviews,
+  users: state.users
+});
 
-const DisplayReviewsContainer = withRouter(
-  connect(mapStateToProps)(DisplayReviews)
-);
+const DisplayReviewsContainer = connect(mapStateToProps)(DisplayReviews);
 
 export default DisplayReviewsContainer;
