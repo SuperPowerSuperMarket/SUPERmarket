@@ -13,8 +13,6 @@ class superpowerForm extends Component {
     const edit = (props.match.path.indexOf('edit') !== -1)
     const id = +props.match.params.superpowerId
 
-    this.state = {}
-
     if (edit) {
       const currentPower = props.superpowers.find(superpower => superpower.id === id)
       this.state = currentPower
@@ -85,7 +83,7 @@ class superpowerForm extends Component {
                 name="name"
                 required
                 onChange={this.handleChange}
-                value={this.state.name ? this.state.name : ''}
+                value={this.state.name}
               />
             </Form.Field>
             <br />
@@ -95,7 +93,7 @@ class superpowerForm extends Component {
                 name="imageUrl"
                 label="image url"
                 onChange={this.handleChange}
-                value={this.state.imageUrl ? this.state.imageUrl : ''}
+                value={this.state.imageUrl}
               />
             </Form.Field>
             <br />
@@ -106,7 +104,7 @@ class superpowerForm extends Component {
                 name="price"
                 required
                 onChange={this.handleChange}
-                value={this.state.price ? this.state.price : ''}
+                value={this.state.price}
               />
             </Form.Field>
             <br />
@@ -118,7 +116,7 @@ class superpowerForm extends Component {
                 type="number"
                 min="0"
                 onChange={this.handleChange}
-                value={this.state.stock ? this.state.stock : ''}
+                value={this.state.stock}
               />
             </Form.Field>
             <br />
@@ -129,7 +127,7 @@ class superpowerForm extends Component {
                 placeholder="tags must be separated by commas"
                 label="Tags"
                 onChange={this.handleChange}
-                value={this.state.tags ? this.state.tags : ''}
+                value={this.state.tags}
               />
             </Form.Field>
             <br />
