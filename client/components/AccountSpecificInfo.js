@@ -1,86 +1,67 @@
 import React from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Loader } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { putUser } from '../store/users';
 
 const UserEditForm = (props) => {
-    // const currentUserId = +props.match.params.userId
-    // const currentUser = props.users.find(user => user.id === currentUserId)
     if (props.currentUser) {
-        console.log(props.currentUser)
+        return (
+            <div className="ui center aligned grid">
+                <Form onSubmit={(evt) => props.updateUser(props.currentUser, evt)}>
+                    <Form.Field text style={{ marginRight: '4em'}}>
+                        <label>First Name</label>
+                            <input
+                            placeholder={props.currentUser.firstName} 
+                            name="firstname"
+                            />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Last Name</label>
+                            <input
+                            placeholder={props.currentUser.lastName} 
+                            name="lastname"
+                            />
+                    </Form.Field>
+                    <br />
+                    <Form.Field text style={{ marginRight: '4em'}}>
+                        <label>Email</label>
+                            <input
+                            placeholder={props.currentUser.email} 
+                            name="email"
+                            />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Mailing Address</label>
+                            <input 
+                            placeholder={props.currentUser.mailingAddress} 
+                            name="mailingaddress"
+                            />
+                    </Form.Field>
+                    <br />
+                    <Form.Field text style={{ marginRight: '4em'}}>
+                        <label>Phone</label>
+                            <input
+                            placeholder={props.currentUser.phone}
+                            name="phone"
+                            />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Billing Address</label>
+                            <input
+                            placeholder={props.currentUser.billingAddress} 
+                            name="billingaddress"
+                            />
+                    </Form.Field>
+                    <br />
+                    <div text style={{ marginTop: "1em" }} className="ui center aligned grid">
+                        <Button basic color='green' type='submit'>Submit</Button>
+                    </div>
+                </Form>
+            </div>
+        )
+    } else {
+        return (  <Loader active inline='centered' /> )
     }
-    return (
-        <div className="ui center aligned grid">
-            <Form onSubmit={(evt) => props.updateUser(props.currentUser, evt)}>
-                <Form.Field text style={{ marginRight: '4em'}}>
-                    <label>First Name</label>
-                    {
-                        props.currentUser &&
-                        <input
-                        placeholder={props.currentUser.firstName} 
-                        name="firstname"
-                        />
-                    }
-                </Form.Field>
-                <Form.Field>
-                    <label>Last Name</label>
-                    {
-                        props.currentUser &&
-                        <input
-                        placeholder={props.currentUser.lastName} 
-                        name="lastname"
-                        />
-                    }
-                </Form.Field>
-                <br />
-                <Form.Field text style={{ marginRight: '4em'}}>
-                    <label>Email</label>
-                    {
-                        props.currentUser &&
-                        <input
-                        placeholder={props.currentUser.email} 
-                        name="email"
-                        />
-                    }
-                </Form.Field>
-                <Form.Field>
-                    <label>Mailing Address</label>
-                    {
-                        props.currentUser && 
-                        <input 
-                        placeholder={props.currentUser.mailingAddress} 
-                        name="mailingaddress"
-                        />
-                    }
-                </Form.Field>
-                <br />
-                <Form.Field text style={{ marginRight: '4em'}}>
-                    <label>Phone</label>
-                    {
-                        props.currentUser &&
-                        <input
-                        placeholder={props.currentUser.phone}
-                        name="phone"
-                        />
-                    }
-                </Form.Field>
-                <Form.Field>
-                    <label>Billing Address</label>
-                    {
-                        props.currentUser &&
-                        <input
-                        placeholder={props.currentUser.billingAddress} 
-                        name="billingaddress"
-                        />
-                    }
-                </Form.Field>
-                <br />
-                <div text style={{ marginTop: "1em" }} className="ui center aligned grid">
-                    <Button basic color='green' type='submit'>Submit</Button>
-                </div>
-            </Form>
-        </div>
-    )
 }
 
 const mapStateToProps = state => {
