@@ -41,9 +41,7 @@ class AllSuperpowers extends Component {
       return superpower.tags.forEach(tag => allTags.push(tag))
     })
     const filteredTags = allTags.filter((el, index, self) => self.indexOf(el) === index)
-
     const availablePowers = this.props.superpowers.filter(superpower => superpower.stock > 0)
-    console.log({availablePowers})
 
     return (
       <div style={{ marginTop: '5.5em', marginBottom: '5em', marginRight: '4em', marginLeft: '4em' }}>
@@ -64,7 +62,7 @@ class AllSuperpowers extends Component {
                 <Button
                   onClick={this.handleTag}
                   value={tag}
-                  color={this.state.tag === tag ? this.state.color : 'gray'}
+                  className={this.state.tag === tag ? `ui ${this.state.color} button` : `ui button`}
                 >
                   {tag}
                 </Button>
