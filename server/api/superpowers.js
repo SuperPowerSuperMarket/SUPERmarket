@@ -21,9 +21,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  Superpower.create(req.body,
-    // {[{model: Review}]}
-  )
+  Superpower.create(req.body)
   .then(superpower => res.json(superpower))
   .catch(next);
 });

@@ -21,6 +21,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/all-superpowers" component={AllSuperpowers} />
+        <Route path="/all-superpowers/add" component={SuperpowerForm} />
         <Route exact path="/single-superpower/:superpowerId" component={SingleSuperpower} />
         <Route path="/single-superpower/:superpowerId/edit" component={SuperpowerForm} />
         <Route path="/login" component={Login} />
