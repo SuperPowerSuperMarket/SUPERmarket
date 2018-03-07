@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, AllSuperpowers, SingleSuperpower, Cart, UserListAdmin, UserEditForm, SuperpowerForm, AccountInfo, AccountSpecificInfo, OrderHistory, OrderDetail, Checkout, ResetPassword} from './components'
+import {Login, Signup, UserHome, AllSuperpowers, SingleSuperpower, Cart, UserListAdmin, UserEditForm, SuperpowerForm, 
+  AccountInfo, AccountSpecificInfo, OrderHistory, OrderDetail, Checkout, Payment, ResetPassword, Confirmation} from './components'
 import {me, fetchOrders, fetchSuperpowers, fetchUsers, fetchReviews, fetchOrderQuants} from './store'
 
 /**
@@ -28,6 +29,8 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} />
+        <Route path="/payment" component={Payment} />
+        <Route path="/confirmation" component={Confirmation} />
         <Route path="/my-account" component={AccountInfo} />
         <Route exact path="/order-history" component={OrderHistory} />
         <Route path="/order-history/:orderId" component={OrderDetail} />
@@ -64,11 +67,11 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(fetchSuperpowers())
-      dispatch(fetchOrders())
       dispatch(fetchUsers())
       dispatch(fetchOrderQuants())
       dispatch(fetchReviews())
       dispatch(me())
+      dispatch(fetchOrders())
     }
   }
 }

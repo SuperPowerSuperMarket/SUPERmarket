@@ -17,4 +17,6 @@ export {default as OrderHistory} from './OrderHistory'
 export {default as OrderDetail} from './OrderDetail'
 export {default as Checkout} from './Checkout'
 export {default as AccountSpecificInfo} from './AccountSpecificInfo'
+export {default as Payment} from './Payment';
 export {default as ResetPassword} from './ResetPassword'
+export {default as Confirmation} from './Confirmation'

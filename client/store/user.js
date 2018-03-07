@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from '../history'
-import {getOrders, fetchOrders} from './orders'
+import {fetchOrders} from './orders'
 import {fetchUsers} from './users'
 
 /**

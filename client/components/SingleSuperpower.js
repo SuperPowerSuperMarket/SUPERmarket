@@ -1,11 +1,10 @@
-import React, { Component } from "react";
-import { Card, Icon, Image, Input, Button, Grid } from "semantic-ui-react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { postOrder, updateOrder } from "../store";
-import CardContent from "semantic-ui-react/dist/commonjs/views/Card/CardContent";
-import SubmitReview from "./SubmitReview";
-import DisplayReviews from "./DisplayReviews";
+import React, { Component } from 'react';
+import { Card, Icon, Image, Input, Button, Grid } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { postOrder, updateOrder } from '../store';
+import SubmitReview from './SubmitReview';
+import DisplayReviews from './DisplayReviews';
 
 class SingleSuperpower extends Component {
   constructor(props) {
@@ -25,12 +24,16 @@ class SingleSuperpower extends Component {
     event.preventDefault();
     const user = this.props.user;
     const superpower = +this.props.match.params.superpowerId;
-    const quantity = +event.target.quant.value;
     const orders = this.props.orders;
     const foundOrder = orders.find(order => order.status === 'active');
+    let quantity = +event.target.quant.value;
     if (!orders.length || !foundOrder) {
       this.props.postOrder(+user.id, superpower, quantity);
     } else {
+      const foundQuant = this.props.orderQuantities.find(quant => {
+        return quant.orderId === foundOrder.id && quant.superpowerId === superpower;
+      })
+      quantity += foundQuant.quantity;
       this.props.updateOrder(+user.id, superpower, quantity, foundOrder.id);
     }
   }
@@ -78,6 +81,7 @@ class SingleSuperpower extends Component {
                       label="Quantity"
                       type="number"
                       min="0"
+                      max={singlePower.stock}
                     />
                   </Card.Content>
                   <Card.Content>
@@ -113,7 +117,8 @@ const mapStateToProps = state => ({
   user: state.user,
   reviews: state.reviews,
   orders: state.orders,
-  users: state.users
+  users: state.users,
+  orderQuantities: state.orderQuantities
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
