@@ -47,26 +47,6 @@ class superpowerForm extends Component {
       })
   }
 
-  handleSubmit(event) {
-    event.preventDefault()
-    const edit = this.props.match.path.indexOf('edit') !== -1
-
-    if (edit) {
-      const putSuperpowerThunk = putSuperpower(this.state, this.props);
-      store.dispatch(putSuperpowerThunk);
-    } else {
-      const newSuperpowerThunk = postSuperpower(this.state, this.props);
-      store.dispatch(newSuperpowerThunk);
-      store.dispatch(fetchSuperpowers());
-    }
-  }
-
-  handleDelete(event) {
-    event.preventDefault()
-    const edit = this.props.match.path.indexOf('edit') !== -1
-
-  }
-
   render() {
     const edit = this.props.match.path.indexOf('edit') !== -1
 

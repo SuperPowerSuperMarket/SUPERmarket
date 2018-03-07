@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, AllSuperpowers, SingleSuperpower, Cart, UserListAdmin, UserEditForm, SuperpowerForm, AccountInfo, AccountSpecificInfo, OrderHistory, OrderDetail, Checkout} from './components'
+import {Login, Signup, UserHome, AllSuperpowers, SingleSuperpower, Cart, UserListAdmin, UserEditForm, SuperpowerForm, AccountInfo, AccountSpecificInfo, OrderHistory, OrderDetail, Checkout, ResetPassword} from './components'
 import {me, fetchOrders, fetchSuperpowers, fetchUsers, fetchReviews, fetchOrderQuants} from './store'
 
 /**
@@ -32,6 +32,7 @@ class Routes extends Component {
         <Route exact path="/order-history" component={OrderHistory} />
         <Route path="/order-history/:orderId" component={OrderDetail} />
         <Route path="/edit-account" component={AccountSpecificInfo} />
+        <Route path="/reset-password" component={ResetPassword} />
         {
           isLoggedIn &&
           <Switch>

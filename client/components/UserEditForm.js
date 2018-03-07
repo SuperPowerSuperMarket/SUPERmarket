@@ -55,6 +55,17 @@ const UserEditForm = (props) => {
                             />
                     </Form.Field>
                     <br />
+                      <Form.Field>
+                      {
+                        currentUser.passwordReset ?
+                        (<p style={{color: 'red'}}>Password Reset Triggered</p>) :
+                        (<div>
+                          <label>Trigger Password Reset</label>
+                          <input name="password" type='checkbox' />
+                        </div>)
+                      }
+                      </Form.Field>
+                    <br />
                     <div style={{ marginTop: "1em" }} className="ui center aligned grid">
                         <Button basic color='green' type='submit'>Submit</Button>
                     </div>
@@ -76,6 +87,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         updateUser: function(currentUser, evt) {
             evt.preventDefault()
+            console.log(evt.target.password.checked)
+
             const currentUserId = currentUser.id
             const updatedUser = {
                 id: currentUserId,
@@ -85,7 +98,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                     email: evt.target.email.value || currentUser.email,
                     mailingAddress: evt.target.mailingaddress.value || currentUser.mailingAddress,
                     billingAddress: evt.target.billingaddress.value || currentUser.billingAddress,
-                    phone: evt.target.phone.value || currentUser.phone
+                    phone: evt.target.phone.value || currentUser.phone,
+                    passwordReset: evt.target.password.checked || false
                 }
             }
             dispatch(putUser(updatedUser, ownProps))
