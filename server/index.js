@@ -61,6 +61,7 @@ const createApp = () => {
   // auth and api routes
   app.use('/auth', require('./auth').router)
   app.use('/api', require('./api'))
+  app.use('/mail', require('./mailer'))
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))

@@ -49,17 +49,20 @@ router.post('/', async (req, res, next) => {
   res.send(order)
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
+  const {superpowerId, quantity} = req.body
   OrderQuantity.findOrCreate({
     where: {
       orderId: req.params.id,
-      superpowerId: req.body.superpowerId
+      superpowerId: superpowerId
     },
-    defaults: {quantity: req.body.quantity},
+    defaults: {quantity},
     include: [{ all: true }]
   }).spread((item, created) => {
     if (!created) {
-      return item.update(req.body)
+      return item.update({
+        quantity: quantity
+      })
         .then(updated => Order.findById(updated.orderId, {
           include: [{ all: true }]
         }))
@@ -75,13 +78,14 @@ router.put('/:id', (req, res, next) => {
   })
 })
 
-router.put('/:id/complete', async (req, res, next) => {
-  const order = await Order.findById(req.params.id, {
+router.put('/:id/pending', async (req, res, next) => {
+  const {fullName, shippingAddress} = req.body
+  const order = await Order.findById(+req.params.id, {
     include: [{ all: true }]
   })
-  console.log(req.body)
-  //const updated = await order.update(req.body)
-  //res.json(updated)
+  const updated = await order.update({
+    status: 'pending', orderedOn: new Date(), fullName, shippingAddress})
+  res.json(updated)
 })
 
 router.delete('/:id', (req, res, next) => {
@@ -89,4 +93,3 @@ router.delete('/:id', (req, res, next) => {
     .then(() => res.status(204).json('order deleted'))
     .catch(next);
 });
-

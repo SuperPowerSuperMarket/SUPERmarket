@@ -29,7 +29,7 @@ const Cart = (props) => {
                                 <Feed.Event>
                                     <Feed.Label image={superpower.imageUrl} />
                                     <Feed.Content>
-                                        <Feed.Date content='SUPERpower' />
+                                        <Feed.Date content="SUPERpower" />
                                         <Feed.Summary>
                                             {superpower.name}
                                             <br />
@@ -48,7 +48,7 @@ const Cart = (props) => {
             </Card.Content>
             <div className="ui center aligned grid" style={{marginTop: '1em', marginBottom: '1.5em'}}>
                 <NavLink to={'/checkout'}>
-                <Button positive animated='fade'>
+                <Button positive animated="fade">
                     <Button.Content visible>
                         Checkout
                     </Button.Content>

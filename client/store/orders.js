@@ -43,11 +43,13 @@ export const updateOrder = (userId, superpowerId, quantity, orderId, history) =>
       history.push('/cart');
     })
 
-export const completeOrder = (orderId, orderInfo, history) => dispatch =>
-  axios.put(`/api/orders/${orderId}/complete`, orderInfo)
+export const pendingOrder = (orderId, fullName, shippingAddress, history) => dispatch =>
+  axios.put(`/api/orders/${orderId}/pending`, {fullName, shippingAddress})
     .then(res => {
       dispatch(editOrder(res.data))
-      //history.push('/cart');
+      history.push('/payment');
+    //   return axios.post('/mail')
+    // .then(() => console.log('email sent'))
     })
 
 export default function (state = [], action) {

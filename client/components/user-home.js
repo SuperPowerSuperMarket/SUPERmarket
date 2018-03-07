@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import {Header} from 'semantic-ui-react'
 
 /**
  * COMPONENT
@@ -10,9 +11,9 @@ export const UserHome = (props) => {
   const {email} = props
 
   return (
-    <div>
+    <Header style={{marginLeft: '2em'}}>
       <h3>Welcome, {email}</h3>
-    </div>
+    </Header>
   )
 }
 
