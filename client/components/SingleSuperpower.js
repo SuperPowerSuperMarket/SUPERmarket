@@ -33,7 +33,7 @@ class SingleSuperpower extends Component {
       const foundQuant = this.props.orderQuantities.find(quant => {
         return quant.orderId === foundOrder.id && quant.superpowerId === superpower;
       })
-      quantity += foundQuant.quantity;
+      if (foundQuant) quantity += foundQuant.quantity;
       this.props.updateOrder(+user.id, superpower, quantity, foundOrder.id);
     }
   }
