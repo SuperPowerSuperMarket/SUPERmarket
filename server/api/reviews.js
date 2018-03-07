@@ -8,32 +8,6 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-router.get('/:id', (req, res, next) => {
-  Review.findById(req.params.id)
-    .then(review => res.json(review))
-    .catch(next)
-})
-
-router.get('/:superpowerId', (req, res, next) => {
-  Review.findAll({
-    where: {
-      superpowerId: req.params.superpowerId
-    }
-  })
-    .then(review => res.json(review))
-    .catch(next)
-})
-
-router.get('/:userId', (req, res, next) => {
-  Review.findAll({
-    where: {
-      userId: req.params.userId
-    }
-  })
-    .then(review => res.json(review))
-    .catch(next)
-})
-
 router.post('/', (req, res, next) => {
   Review.create(req.body, {
     include: [{ all: true, nested: true }]
