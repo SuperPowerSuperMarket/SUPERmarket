@@ -1,18 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
-import {Header} from 'semantic-ui-react'
+import {withRouter, Link} from 'react-router-dom'
+import {Header, Button} from 'semantic-ui-react'
 
 /**
  * COMPONENT
  */
 export const UserHome = (props) => {
-  const {email} = props
+  const {user} = props
 
   return (
     <Header style={{marginLeft: '2em'}}>
-      <h3>Welcome, {email}</h3>
+      <h3>Welcome, {user.email}</h3>
+      {
+        props.user.passwordReset ?
+        (<Link to="/reset-password">
+           <Button color="red">
+            Reset Your Password
+           </Button>
+         </Link>) : null
+      }
     </Header>
   )
 }
@@ -22,7 +30,7 @@ export const UserHome = (props) => {
  */
 const mapState = (state) => {
   return {
-    email: state.user.email
+    user: state.user
   }
 }
 
