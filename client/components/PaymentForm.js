@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {injectStripe, CardElement} from 'react-stripe-elements';
+import {completeOrder} from '../store';
 
 class CheckoutForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleSubmit = (ev) => {
     ev.preventDefault();
-
+    const user = this.props.user.fullName
+    const activeOrder = this.props.orders.find(order => order.status === 'active');
     // Within the context of `Elements`, this call to createToken knows which Element to
     // tokenize, since there's only one in this group.
-    this.props.stripe.createToken({name: 'Jenny Rosen'}).then(({token}) => {
+    this.props.stripe.createToken({name: user}).then(({token}) => {
       console.log('Received Stripe token:', token);
+      this.props.completeOrder(activeOrder.id, activeOrder.subTotal, token.id)
     });
-
-    // However, this line of code will do the same thing:
-    // this.props.stripe.createToken({type: 'card', name: 'Jenny Rosen'});
   }
 
   render() {
@@ -29,19 +35,19 @@ class CheckoutForm extends Component {
   }
 }
 
-//const mapStateToProps = state => ({user: state.user, orders: state.order})
-// const mapDispatchToProps = (dispatch, ownProps) => ({
-//   updateOrder: (userId, superpower, quantity, orderId) =>
-//     dispatch(
-//       updateOrder(userId, superpower, quantity, orderId, ownProps.history)
-//     )
-// });
+const mapStateToProps = state => ({user: state.user, orders: state.orders})
 
-// const CheckoutFormContainer = connect(mapStateToProps, mapDispatchToProps, {
-//   pure: false
-// })
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  completeOrder: (orderId, amount, token) => {
+    dispatch(completeOrder(orderId, amount, token, ownProps.history))
+  }
 
-export default (injectStripe(CheckoutForm))
+});
 
-//export default CheckoutFormContainer;
+// const CheckoutFormContainer = connect(mapStateToProps, mapDispatchToProps, null, {
+//   pure: false,
+// })(injectStripe(CheckoutForm))
 
+const CheckoutFormContainer = injectStripe(connect(mapStateToProps, mapDispatchToProps)(CheckoutForm))
+
+export default CheckoutFormContainer;

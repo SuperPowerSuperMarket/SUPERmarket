@@ -1,5 +1,6 @@
 import axios from 'axios'
 import superpowers from './superpowers';
+import newHistory from '../history'
 
 //Action Types
 export const GET_ORDERS = 'GET_ORDERS';
@@ -48,9 +49,18 @@ export const pendingOrder = (orderId, fullName, shippingAddress, history) => dis
     .then(res => {
       dispatch(editOrder(res.data))
       history.push('/payment');
-    //   return axios.post('/mail')
-    // .then(() => console.log('email sent'))
     })
+
+export const completeOrder = (orderId, amount, token) => dispatch => {
+  axios.post('/stripe', {amount, token})
+    .then(() => axios.put(`/api/orders/${orderId}/complete`))
+    .then(response => {
+      dispatch(editOrder(response.data))
+      return axios.post('/mail')
+    .then(() => newHistory.push('/confirmation'))
+  })
+}
+  
 
 export default function (state = [], action) {
   switch (action.type) {

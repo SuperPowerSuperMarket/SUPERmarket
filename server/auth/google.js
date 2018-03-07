@@ -50,8 +50,12 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   router.get('/', passport.authenticate('google', {scope: 'email'}))
 
   router.get('/callback', passport.authenticate('google', {
-    successRedirect: '/home',
+    // successRedirect: '/home',
     failureRedirect: '/login'
-  }))
+  }), (req, res, next) => {
+    //combine carts here
+    merger(req.user, req)
+    res.redirect('/home')
+  })
 
 }

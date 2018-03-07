@@ -1,19 +1,20 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
-import { Card, Icon, Image, Input, Button } from 'semantic-ui-react'
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
+import { Card, Icon, Image, Input, Button } from "semantic-ui-react";
 
 /**
  * COMPONENT
  */
 export const OrderHistory = (props) => {
-  console.log(props.user.orders)
 
   return (
     <div className="ui center aligned grid">
       <Card>
-        <Card.Content className="ui center
-        aligned grid">
+        <Card.Content
+          className="ui center
+        aligned grid"
+        >
           <h1>
             {props.user.firstName}'s
             <br />
@@ -22,31 +23,36 @@ export const OrderHistory = (props) => {
         </Card.Content>
         <Card.Content>
           {
-            props.user && props.user.orders &&
-            props.user.orders.filter(order => order.status !== 'active')
-            .map(order => (<Link to={`/order-history/${order.id}`} key={order.id}>
-                             Order Date:
+            props.user && props.orders &&
+            props.orders.filter(order => order.status !== 'active' && order.userId === props.user.id)
+            .map(order => (<div key={order.id}>
+                             <Link to={`/order-history/${order.id}`}>
+                               Order Date:
+                               <br />
+                               {order.createdAt.slice(0, 10)}
+                             </Link>
                              <br />
-                             {order.createdAt.slice(0, 10)}
+                             Status: {order.status}
                              <br />
-                             {order.status}
+                             Subtotal: ${order.subTotal}
                              <br />
                              <br />
-                           </Link>))
+                           </div>))
           }
         </Card.Content>
       </Card>
     </div>
-  )
-}
+  );
+};
 
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapState = state => {
   return {
-    user: state.user
+    user: state.user,
+    orders: state.orders
   }
 }
 
-export default withRouter(connect(mapState)(OrderHistory))
+export default withRouter(connect(mapState)(OrderHistory));

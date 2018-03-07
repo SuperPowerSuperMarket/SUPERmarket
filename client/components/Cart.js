@@ -14,7 +14,7 @@ const Cart = (props) => {
         <Card>
             <Card.Content>
                 <Card.Header>
-                    {activeOrder && activeOrder.superpowers ? `${props.user.firstName},  this is your cart.` : `Your cart is empty`}
+                    {activeOrder && activeOrder.superpowers ? `This is your cart.` : `Your cart is empty`}
                 </Card.Header>
                 <Card.Meta>
                   <Icon className="shopping cart huge icon" />

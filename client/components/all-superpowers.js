@@ -26,7 +26,6 @@ class AllSuperpowers extends Component {
       tag: event.target.value,
       color: 'green'
     })
-    console.log(this.state)
   }
 
   handleClearTags(event) {
@@ -42,6 +41,7 @@ class AllSuperpowers extends Component {
       return superpower.tags.forEach(tag => allTags.push(tag))
     })
     const filteredTags = allTags.filter((el, index, self) => self.indexOf(el) === index)
+    const availablePowers = this.props.superpowers.filter(superpower => superpower.stock > 0)
 
     return (
       <div style={{ marginTop: '5.5em', marginBottom: '5em', marginRight: '4em', marginLeft: '4em' }}>
@@ -62,7 +62,7 @@ class AllSuperpowers extends Component {
                 <Button
                   onClick={this.handleTag}
                   value={tag}
-                  color={this.state.tag === tag ? this.state.color : 'gray'}
+                  className={this.state.tag === tag ? `ui ${this.state.color} button` : `ui button`}
                 >
                   {tag}
                 </Button>
@@ -79,9 +79,21 @@ class AllSuperpowers extends Component {
           </Button>
         </Grid.Column>
         </Grid>
+        {
+          this.props.user.isAdmin ?
+          (<div style={{marginBottom: '3em'}}>
+          <br />
+            <NavLink to="/all-superpowers/add">
+              <Button color="yellow">
+                Add A Superpower
+              </Button>
+            </NavLink>
+          <br />
+          </div>) : null
+        }
         <Grid columns={3} divided>
         {
-          this.props.superpowers.filter(superpower => {
+          availablePowers.filter(superpower => {
             if (this.state.search) {
               return superpower.name.toLowerCase().includes(this.state.search.toLowerCase())
             }
@@ -109,7 +121,8 @@ class AllSuperpowers extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    superpowers: state.superpowers
+    superpowers: state.superpowers,
+    user: state.user
   }
 }
 

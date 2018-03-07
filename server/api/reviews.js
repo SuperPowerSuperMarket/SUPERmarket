@@ -35,7 +35,9 @@ router.get('/:userId', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  Review.create(req.body)
+  Review.create(req.body, {
+    include: [{ all: true, nested: true }]
+  })
     .then(review => res.status(201).json(review))
     .catch(next)
 })

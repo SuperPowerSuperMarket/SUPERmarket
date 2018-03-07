@@ -41,5 +41,6 @@ router.post('/', (req, res, next) => {
         });
 
         });
-        res.send('sent!')
+        console.log("jsdkblsjfbldkbfvjkldfbdjbf")
+        res.redirect('/home')
 });

@@ -3,9 +3,8 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, AllSuperpowers, SingleSuperpower, Cart, UserListAdmin, UserEditForm, SuperpowerForm, 
-  AccountInfo, AccountSpecificInfo, OrderHistory, OrderDetail, Checkout, Payment} from './components'
+  AccountInfo, AccountSpecificInfo, OrderHistory, OrderDetail, Checkout, Payment, ResetPassword, Confirmation} from './components'
 import {me, fetchOrders, fetchSuperpowers, fetchUsers, fetchReviews, fetchOrderQuants} from './store'
-import {StripeProvider} from 'react-stripe-elements';
 
 /**
  * COMPONENT
@@ -23,24 +22,25 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/all-superpowers" component={AllSuperpowers} />
+        <Route path="/all-superpowers/add" component={SuperpowerForm} />
         <Route exact path="/single-superpower/:superpowerId" component={SingleSuperpower} />
         <Route path="/single-superpower/:superpowerId/edit" component={SuperpowerForm} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/cart" component={Cart} />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/payment" component={Payment} />
+        <Route path="/confirmation" component={Confirmation} />
         <Route path="/my-account" component={AccountInfo} />
         <Route exact path="/order-history" component={OrderHistory} />
         <Route path="/order-history/:orderId" component={OrderDetail} />
         <Route path="/edit-account" component={AccountSpecificInfo} />
+        <Route path="/reset-password" component={ResetPassword} />
         {
           isLoggedIn &&
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
-            <Route path="/checkout" component={Checkout} />
-            <StripeProvider apiKey="pk_test_xcZDDbzeJUlgAXbpUwImx8kl">
-              <Route path="/payment" component={Payment} />
-            </StripeProvider>
             <Route path="/users-list" component={UserListAdmin} />
             <Route path="/edit-user/:userId" component={UserEditForm} />
           </Switch>
@@ -67,11 +67,11 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(fetchSuperpowers())
-      dispatch(fetchOrders())
       dispatch(fetchUsers())
       dispatch(fetchOrderQuants())
       dispatch(fetchReviews())
       dispatch(me())
+      dispatch(fetchOrders())
     }
   }
 }

@@ -7,7 +7,6 @@ class Checkout extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
 
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -15,7 +14,8 @@ class Checkout extends Component {
   handleSubmit(event) {
     event.preventDefault()
     const user = this.props.user
-    const orderId = user.orders.find(order => order.status === 'active').id
+    const orders = this.props.orders
+    const orderId = orders.find(order => order.status === 'active').id
     const firstName = event.target.firstName.value || user.firstName
     const lastName = event.target.lastName.value  || user.lastName
     const shippingAddress = event.target.mailingAddress.value || user.mailingAddress
@@ -26,10 +26,12 @@ class Checkout extends Component {
 
   render() {
     const user = this.props.user
-    if (!user.orders.find(order => order.status === 'active')) return <h3>Loading...</h3>
-    return !user ?
-    <h3>Loading...</h3>
-  : (
+    const orders = this.props.orders
+    console.log(user);
+    if (!user) return <h3>Loading...</h3>
+
+    if (!orders.find(order => order.status === 'active')) return <h3>Loading...</h3>
+    return (
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>First Name</label>
@@ -56,10 +58,10 @@ class Checkout extends Component {
           <Button type="submit">Submit</Button>
         </Form>
       )
-  }
+    }
 }
 
-const mapStateToProps = state => ({ user: state.user })
+const mapStateToProps = state => ({ user: state.user, orders: state.orders })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   pendingOrder: (orderId, fullName, shippingAddress) => dispatch(pendingOrder(orderId, fullName, shippingAddress, ownProps.history))

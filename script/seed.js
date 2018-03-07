@@ -62,7 +62,7 @@ const users = [{
 }, {
   firstName: 'Connor',
   lastName: 'Kirkwood',
-  email: 'connor@gmail.com',
+  email: 'cdkirkwood@gmail.com',
   password: '123',
   mailingAddress: '123 Fullstack Ave',
   billingAddress: '123 Fullstack Ave',

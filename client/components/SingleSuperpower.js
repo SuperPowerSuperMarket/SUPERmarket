@@ -24,12 +24,16 @@ class SingleSuperpower extends Component {
     event.preventDefault();
     const user = this.props.user;
     const superpower = +this.props.match.params.superpowerId;
-    const quantity = +event.target.quant.value;
     const orders = this.props.orders;
-    const foundOrder = orders.find(order => order.status === "active");
+    const foundOrder = orders.find(order => order.status === 'active');
+    let quantity = +event.target.quant.value;
     if (!orders.length || !foundOrder) {
       this.props.postOrder(+user.id, superpower, quantity);
     } else {
+      const foundQuant = this.props.orderQuantities.find(quant => {
+        return quant.orderId === foundOrder.id && quant.superpowerId === superpower;
+      })
+      quantity += foundQuant.quantity;
       this.props.updateOrder(+user.id, superpower, quantity, foundOrder.id);
     }
   }
@@ -40,7 +44,6 @@ class SingleSuperpower extends Component {
       superpower => superpower.id === currentSuperpowerId
     );
     const currentUser = this.props.user;
-    console.log(currentUser);
 
     return (
       this.props.superpowers.length && (
@@ -62,8 +65,15 @@ class SingleSuperpower extends Component {
                   <Card.Content extra>
                     <a>
                       <Icon />
-                      {"$" + singlePower.price}
+                      {'$' + singlePower.price}
                     </a>
+                  </Card.Content>
+                  <Card.Content extra>
+                      {
+                        singlePower.stock > 0 ?
+                        `In Stock: ${singlePower.stock}` :
+                        'This superpower is currently unavailable.'
+                      }
                   </Card.Content>
                   <Card.Content>
                     <Input
@@ -107,7 +117,8 @@ const mapStateToProps = state => ({
   user: state.user,
   reviews: state.reviews,
   orders: state.orders,
-  users: state.users
+  users: state.users,
+  orderQuantities: state.orderQuantities
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
