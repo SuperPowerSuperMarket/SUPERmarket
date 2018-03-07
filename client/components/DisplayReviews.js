@@ -7,6 +7,7 @@ const DisplayReviews = props => {
   const reviews = props.reviews.filter(
     review => review.superpowerId === currentSuperpowerId
   );
+  const userArr = props.users
   return (
     <Card.Group>
       {reviews && reviews.length ? (
@@ -14,7 +15,7 @@ const DisplayReviews = props => {
           return (
           <div key={review.id}>
           <Card>
-            <Card.Header>{review.user.id ? review.user.fullName : null}</Card.Header>
+            <Card.Header>{review.user ? review.user.fullName : userArr.find((user) => user.id === review.userId).fullName}</Card.Header>
             <Card.Meta textAlign="left">
             <div className="star-ratings-sprite">
               <span
