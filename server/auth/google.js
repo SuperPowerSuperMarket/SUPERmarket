@@ -1,3 +1,5 @@
+// import { create } from 'domain';
+
 const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
@@ -50,7 +52,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   router.get('/', passport.authenticate('google', {scope: 'email'}))
 
   router.get('/callback', passport.authenticate('google', {
-    // successRedirect: '/home',
+    successRedirect: '/home',
     failureRedirect: '/login'
   }), (req, res, next) => {
     //combine carts here
