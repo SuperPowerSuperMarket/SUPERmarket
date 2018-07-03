@@ -55,6 +55,7 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
+  console.log(process.env.GOOGLE_CLIENT_ID)
   res.json(req.user)
 })
 

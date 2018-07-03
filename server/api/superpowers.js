@@ -20,6 +20,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+  console.log(req.body)
   Superpower.create(req.body)
   .then(superpower => res.json(superpower))
   .catch(next);
